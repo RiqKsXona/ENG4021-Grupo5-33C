@@ -37,3 +37,9 @@ def main():
 
 if __name__=="__main__":
     main()
+
+def calcula_divisao(x, y):
+    return x/y
+
+def calcula_resto(x, y):
+    return x%y
