@@ -22,9 +22,39 @@ def main():
     def choice():
         escolha = input("Escolha uma operação acima digitando-a exatamente como aparece: ")
         for i,el in enumerate(operadores):
-            if escolha.lower() == el:
-                return i
-            return None
+            if i == 0:
+                s = soma()
+                print(f"A soma é: {s}")
+                break
+
+            elif i == 1:
+                sub = subtrair()
+                print(f"A subtração resultante é: {sub}")
+                break
+
+            elif i == 2:
+                m = multiplicar()
+                print(f"O produto resultante é: {m}")
+                break        
+        
+            elif i == 3:
+                div = calcula_divisao()
+                print(f"O resultado da divisão é: {div}")
+                break   
+
+            elif i == 4:
+                rad = raiz()
+                print(f"A raiz resultante é: {rad}")
+                break
+
+            elif i == 5:
+                expo = potencia()
+                print(f"A potência resultante é: {expo}")
+                break
+            
+            else:
+
+                return None
 
     while True:
         ind = choice()
