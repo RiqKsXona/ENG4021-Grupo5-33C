@@ -69,7 +69,9 @@ if __name__=="__main__":
     main()
 
 def calcula_divisao(x, y):
-    return x/y
+    resultado=x/y
+    return resultado
 
 def calcula_resto(x, y):
-    return x%y
+    resultado=x%y
+    return resultado
