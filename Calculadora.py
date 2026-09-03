@@ -73,3 +73,12 @@ def calcula_divisao(x, y):
 
 def calcula_resto(x, y):
     return x%y
+
+def calcula_soma(x+y):
+    return x+y
+
+def calcula_exponenciacao(x,y):
+    return x**y
+
+def calcula_percentual(x,y):
+    return (x/100)*y
