@@ -1,14 +1,14 @@
 def calcula_soma(x, y): 
-    pass
+    return x + y
 
 def calcula_subtracao(x, y):
-    pass
+    return x - y
 
 def calcula_multiplicacao(x, y):
-    pass
+    return x * y
 
 def calcula_divisao(x, y):
-    pass
+    return x / y
 
 def calcula_exponenciacao(x, y):
     pass
