@@ -37,42 +37,42 @@ h4 {font-size: 16px;}
     padding: 10px;
 }
 
-.matricula {
+.Matricula {
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 10px;
 }
 
-.cpf {
+.CPF {
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 10px;
 }
 
-.curso {
+.Curso {
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 10px;
 }
 
-.perfil {
+.Perfil {
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 10px;
 }
 
-.senha {
+.Senha {
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 10px;
 }
 
-.confirmasenha {
+.confirmaSenha {
     display: flex;
     flex-direction: column;
     align-items: center;
