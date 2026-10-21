@@ -1,0 +1,149 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+
+}
+
+.logo{
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+
+.logo-texto{
+    align-self: center;
+}
+}
+
+.Menu{
+    display: flex;
+    flex-direction: row;
+    align-self: center;
+    width: 25%;
+    justify-content: space-around;
+
+.reportar_item{
+    display: flex;
+}
+}
+.linha{
+    height: 50px;
+    width: 100%;
+
+}
+
+
+.titulo_item{
+
+
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+}
+
+.foto_item{
+    align-self: center;
+}
+.nome_item{
+    align-self: center;
+}
+
+.linha_2{
+
+    justify-self: center;
+    width: 500px ;
+    height: 50px;
+
+
+}
+.linha_6{
+
+    align-self: center;
+    width: 100%;
+    height: 50px;
+    background-color: beige;
+}
+
+.descricao{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background-color: beige;
+
+}
+
+.fileira_1{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.linha_3{
+    align-self: center;
+    height: 50px;
+}
+
+.fileira_2{
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+
+.linha_4{
+
+    align-self: center;
+    height: 100px;
+
+}
+
+.final{
+
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+
+}
+
+.linha_5{
+
+    height: 50px;
+}
+.botao{
+
+    align-self: center;
+}
+
+.boton{
+    width: 500px;
+    height: 70px;
+    background-color: chocolate;
+    font-size: 20px;
+    color: aliceblue;
+}
+body{
+    font-family: "Roboto Mono", monospace;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+}
+
+header{
+    width: 100%;
+    background-color: #d1d0c9;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+main{
+    align-self: center;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: rgb(255, 253, 253);
+}

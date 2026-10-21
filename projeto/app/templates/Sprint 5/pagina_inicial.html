@@ -1,0 +1,58 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html lang="pt-br">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ELO | Página inicial</title>
+    <link href="{% static 'Sprint 5/css/pagina_inicial.css' %}" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+
+    <div class="cabecalho">
+        <div class="logo">
+            <img src="{% static 'Sprint 5/logo.ELO-removebg-preview.png' %}" alt="Logo ELO" width="200">
+        </div>
+    </div>
+
+    <div class="titulo">
+        <h1>Itens recentes</h1>
+    </div>
+
+    <div class="busca">
+        <input type="text" placeholder="Buscar por item, local ou descrição...">
+    </div>
+
+    <div class="itens">
+        {% for item in itens_achados %}
+        <div class="item">
+            <h2>{{ item.titulo }}</h2>
+            <p>{{ item.local }}</p>
+        </div>
+        {% endfor %}
+
+        {% for item in itens_perdidos %}
+        <div class="item">
+            <h2>{{ item.titulo }}</h2>
+            <p>{{ item.local }}</p>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="adicionar">
+        <input type="button" value="+">
+    </div>
+
+    <div class="menu">
+        <p class="inicio">Início</p>
+        <p>Meus itens</p>
+        <p>Conversas</p>
+        <p>Perfil</p>
+    </div>
+
+</body>
+
+</html>
