@@ -28,7 +28,17 @@
     </div>
 
     <div class="entrar">
-        <input type="button" value="ENTRAR">
+        <a href="{% url 'procurarItem' %}">
+            <button type="button">ENTRAR</button>
+        </a>
+    </div>  
+
+    <div class="criar_cadastro">
+
+        <h4>nao tem login?</h4>
+        <a href="{% url 'cadastro' %}">
+            <button type="button">CADASTRAR</button>
+        </a>
     </div>
 </body>
 
