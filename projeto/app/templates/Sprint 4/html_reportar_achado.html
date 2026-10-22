@@ -5,48 +5,79 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reportar Item Achado</title>
-    <link rel="stylesheet" href="{% static 'Sprint 4/css/css_reportar_achado.css' %}" type="text/css">
+    <title>Reportar Item Perdido</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../static/css/Sprint 4/css/css_reportar_achado.css" type="text/css">
 </head>
 <body>
-    <div class="logo">
-        <img src="{% static 'Sprint 4/logo.ELO-removebg-preview.png' %}" width="50">
-    </div>
-    <div class="titulo">
-        <h1> <b>Reportar Item Achado</b>   </h1>
-    </div>
-    <div class="foto_item_achado">
-        <input type="image" src="achado.png" width="200">
-    </div>
-    <div class="nome_objeto">
-        <input type="text" placeholder="Nome do objeto" name="nome_objeto">
-    </div>
-    <div class="categoria">
-        <input type="text" placeholder="Categoria" name="categoria">
-    </div>
-    <div class="onde_encontrou">
-        <input type="text" placeholder="Onde você encontrou?" name="onde_encontrou">
-    </div>
-    <div class="data_encontro">
-        <input type="text" placeholder="Quando você encontrou?" name="data_encontro">
-    </div>
-    <div class="contato">
-        <input type="text" placeholder="Contato" name="contato">
-    </div>
-    <div class="onde_está">
-        <input type="text" placeholder="Onde o item está agora?" name="onde_está">
-    </div>
-     <div class="descricao">
-        <input type="text" placeholder="Descrição" name="descricao">
-    </div>
-    <div class="botao_reportar">
-        <button type="submit">Reportar</button>
-    </div>
-    <div class="botao_voltar">
-        <button type="submit">Voltar</button>
-    </div>
+    <main class="pagina">
 
+        <header class="cabecalho">
+            <a href="perfil.html" class="topo_voltar" aria-label="Voltar">
+                <img src="../../static/Sprint 4/simbolo_de_menor.png" alt="" width="28" height="28">
+            </a>
+            <img class="topo_logo" src="../../static/Sprint 4/logo.ELO-removebg-preview.png" alt="ELO - Achados e Perdidos Online PUC-Rio">
+        </header>
+    
 
+        <h1 class='titulo'> Reportar Item Achado </h1>
+
+        <form action="perfil.html" method="post" enctype="multipart/form-data">
+            
+            <label class="foto_item_achado" for="foto">
+                <img class="icone_camera" src="../../static/Sprint 4/simbolo_da_camera.png" alt="" width="40" height="40">
+                <span>Adicionar foto (opcional)</span>
+                <input type="file" id="foto" name="foto" accept="image/*" hidden>
+            </label>
+ 
+            <div class="campo nome_objeto">
+                <label for="nome_objeto">Nome do objeto</label>
+                <input type="text" id="nome_objeto" name="nome_objeto" placeholder="Ex: garrafa térmica amarela" required>
+            </div>
+            
+            <div class="campo categoria">
+                <label for="categoria">Categoria</label>
+                <select id="categoria" name="categoria" required>
+                    <option value="" disabled selected>Selecione uma categoria</option>
+                    <option>Documentos</option>
+                    <option>Eletrônicos</option>
+                    <option>Roupas e acessórios</option>
+                    <option>Utensílios</option>
+                    <option>Material de estudo</option>
+                    <option>Outros</option>
+                </select>
+            </div>
+            <div class="campo onde_encontrou">
+                <label for="onde_encontrou">Onde você encontrou?</label>
+                <input type="text" id="onde_encontrou" name="onde_encontrou" placeholder="Ex: L110, sala 204" required>
+            </div>
+            <div class="campo data_encontro">
+                <label for="data_encontro">Quando você encontrou</label>
+                <input type="datetime-local" id="data_encontro" name="data_encontro" required>
+            </div>
+            <div class="campo descricao">
+                <label for="descricao">Descrição</label>
+                <input type="text" id="descricao" name="descricao" placeholder="Detalhes sobre o objeto achado" required>
+            </div>
+            <div class="campo onde_esta_agora">
+                <label for="onde_esta_agora">Onde o objeto está agora?</label>
+                <select id="onde_esta_agora" name="onde_esta_agora" required>
+                    <option value="" disabled selected>Selecione uma localização</option>
+                    <option>Comigo</option>
+                    <option>Ciclo Básico</option>
+                    <option>Prefeitura</option>
+                </select>
+            </div>
+            <div class="botoes">
+                <button type="submit" class="botao_reportar">Publicar item achado</button>
+                <a href="perfil.html" class="botao_voltar">Cancelar</a>
+            </div>
+
+        </form>
+
+    </main>
 
 
 </body>
