@@ -1,31 +1,68 @@
 
-body{ font-family: "Roboto Mono", monospace;
-  font-optical-sizing: auto;
-  font-weight: 400;
-  font-style: normal;
+body {
+    font-family: "Roboto Mono", monospace;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
 }
 
-
-.logo{
+.logo {
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 30px;
-
 }
 
-.texto_Logo{
+.texto_Logo {
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 30px;
-
+    color: #111827;
 }
 
-.texto_rec_digite{
+.texto_rec_digite {
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 30px;
+    text-align: center;
+}
 
+.campo_email {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px;
+}
+
+.campo_email input {
+    width: 300px;
+    padding: 10px;
+    font-family: "Roboto Mono", monospace;
+    border: 1px solid #111827;
+    border-radius: 5px;
+}
+
+.campo_email button {
+    margin-top: 15px;
+    width: 120px;
+    padding: 10px;
+    font-family: "Roboto Mono", monospace;
+    background-color: #111827;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.voltar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px;
+}
+
+.voltar a {
+    color: #111827;
 }
