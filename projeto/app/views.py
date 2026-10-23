@@ -59,7 +59,12 @@ def cadastro(request):
         matricula = request.POST.get("matriculaUsuario")
         perfil = request.POST.get("perfilUsuario")
 
-        usuario = Usuario(
+        if Usuario.objects.filter(email=email).exists():
+            erro = "Este e-mail já está cadastrado."
+
+        else:
+            
+            usuario = Usuario(
             nome=nome,
             email=email,
             senha=senha,
@@ -71,7 +76,7 @@ def cadastro(request):
         usuario.save()
 
         return redirect("login")
-    return render(request, "Sprint 4/cadastro.html")
+    return render(request, "Sprint 4/cadastro.html", {"erro": erro})
 
 
 def login(request):
