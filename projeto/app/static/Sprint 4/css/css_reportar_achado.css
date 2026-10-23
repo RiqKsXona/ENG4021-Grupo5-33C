@@ -68,7 +68,7 @@ body {
     color: var(--azul);
 }
  
-.foto_item_perdido {
+.foto_item_achado {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -84,7 +84,7 @@ body {
     cursor: pointer;
 }
  
-.foto_item_perdido:hover {
+.foto_item_achado:hover {
     background: #eeeeee;
 }
  
@@ -198,4 +198,11 @@ body {
  
 .botao_voltar:hover {
     background: rgba(234, 179, 8, 0.15);
+}
+
+.erro {
+    margin: -6px 0 11px;
+    padding-left: 18px;
+    font-size: 0.85rem;
+    color: #b91c1c;
 }

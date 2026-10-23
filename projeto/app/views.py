@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib import messages
 from .models import ItemAchado, ItemPerdido, Usuario
-from .forms import ItemPerdidoForm
+from .forms import ItemPerdidoForm, ItemAchadoForm
 
 
 def pag_inicial(request):
@@ -41,6 +42,19 @@ def reportar_perdido(request):
         "form": form,
         "sucesso": sucesso,
     })
+
+def reportar_achado(request):
+    if request.method == "POST":
+        form = ItemAchadoForm(request.POST, request.FILES)
+        if form.is_valid():
+            item = form.save(commit=False)
+            # item.reportado_por = request.user   # se tiver o campo no model
+            item.save()
+            messages.success(request, "Item achado publicado com sucesso!")
+            return redirect("perfil")
+    else:
+        form = ItemAchadoForm()
+    return render(request, "reportar_achado.html", {"form": form})
 
 
 def procurar_item(request):
