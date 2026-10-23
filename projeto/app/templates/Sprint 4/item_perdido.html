@@ -1,10 +1,10 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Garra termica</title>
+    <title>{{ item.titulo }}</title>
     <link rel="stylesheet" href="{% static 'Sprint 4/css/item_perdido.css' %}" type="text/css">
 </head>
 <body>
@@ -25,13 +25,12 @@
                 </div>
 
                 <div class="reportar_item">
-                <h4><a href="/reportar-achado/">Reportar item perdido</a></h4>
+                <h4><a href="/reportar-perdido/">Reportar item perdido</a></h4>
                 </div>
 
                 <div class="Perfil">
                 <h4><a href="/perfil/">Perfil</a></h4>
                 </div>
-
 
             </div>
 
@@ -43,10 +42,10 @@
 
             <div class="titulo_item">
                 <div class="foto_item">
-                    <img src="https://img.magnific.com/vetores-premium/um-termo-de-metal-azul-que-mantem-a-sua-bebida-quente_98396-148724.jpg?semt=ais_hybrid&w=740&q=80" width="250" alt="Garrafa Termica">
+                    <img src="{% static 'Sprint 4/simbolo da camera.png' %}" width="250" alt="{{ item.titulo }}">
                 </div>
                 <div class="nome_item">
-                    <h1><strong>Garrafa Termica </strong></h1>
+                    <h1><strong>{{ item.titulo }}</strong></h1>
                 </div>
                 <div class="linha_2">
                     <hr>
@@ -60,14 +59,13 @@
 
                 <div class="fileira_1">
                     <div class="categoria">
-                        <h3>Categoria:</h4>
-                        <h2>Acessório</h4>
-
+                        <h3>Categoria:</h3>
+                        <h2>{{ item.categoria }}</h2>
                     </div>
 
                     <div class="local">
-                        <h3>Localizacao:</h2>
-                        <h2>Pastoral, sala 204</h3>
+                        <h3>Onde foi perdido:</h3>
+                        <h2>{{ item.local }}</h2>
                     </div>
 
                 </div>
@@ -79,21 +77,19 @@
                 <div class="fileira_2">
 
                     <div class="data">
-                        <h3>Quando foi encontrado:</h3>
-                        <h2>12/03/2026 as 09:42</h2>
+                        <h3>Quando foi perdido:</h3>
+                        <h2>{{ item.data|date:"d/m/Y"|default:"Não informado" }}</h2>
                     </div>
 
                     <div class="onde_esta">
-                        <h3>Onde está agora:</h3>
-                        <h2>Secretaria RDC</h2>
+                        <h3>Descrição:</h3>
+                        <h2>{{ item.descricao|default:"Sem descrição" }}</h2>
                     </div>
                 </div>
 
                 <div class="linha_4">
-
                     <hr>
                 </div>
-
 
             </div>
 
@@ -104,14 +100,10 @@
                 </div>
 
                 <div class="botao">
-
-                    <input type="button" class="boton"  value="Esse objeto é meu">
+                    <input type="button" class="boton" value="Esse objeto é meu">
                 </div>
             </div>
         </main>
-
-
-
 
 </body>
 </html>

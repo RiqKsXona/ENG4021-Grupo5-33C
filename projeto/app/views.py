@@ -1,6 +1,7 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import ItemAchado, ItemPerdido, Usuario
 from .forms import ItemPerdidoForm
+
 
 def pag_inicial(request):
     itens_achados = ItemAchado.objects.all()
@@ -46,8 +47,9 @@ def procurar_item(request):
     return render(request, "Sprint 4/procurar_item.html")
 
 
-def item_perdido(request):
-    return render(request, "Sprint 4/item_perdido.html")
+def item_perdido(request, id):
+    item = get_object_or_404(ItemPerdido, id=id)
+    return render(request, "Sprint 4/item_perdido.html", {"item": item})
 
 
 def cadastro(request):
