@@ -53,6 +53,8 @@ def item_perdido(request, id):
 
 
 def cadastro(request):
+
+    erro = None
     if request.method =="POST":
         nome = request.POST.get("nomeUsuario")
         email = request.POST.get("emailUsuario")
@@ -60,6 +62,7 @@ def cadastro(request):
         curso = request.POST.get("cursoUsuario")
         matricula = request.POST.get("matriculaUsuario")
         perfil = request.POST.get("perfilUsuario")
+        
 
         if Usuario.objects.filter(email=email).exists():
             erro = "Este e-mail já está cadastrado."
