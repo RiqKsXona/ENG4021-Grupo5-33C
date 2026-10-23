@@ -1,6 +1,7 @@
-from django.shortcuts import render, get_object_or_404
-from .models import ItemAchado, ItemPerdido
+from django.shortcuts import render, redirect, get_object_or_404
+from .models import ItemAchado, ItemPerdido, Usuario
 from .forms import ItemPerdidoForm
+
 
 def pag_inicial(request):
     itens_achados = ItemAchado.objects.all()
@@ -52,6 +53,26 @@ def item_perdido(request, id):
 
 
 def cadastro(request):
+    if request.method =="POST":
+        nome = request.POST.get("nomeUsuario")
+        email = request.POST.get("emailUsuario")
+        senha = request.POST.get("senhaUsuario")
+        curso = request.POST.get("cursoUsuario")
+        matricula = request.POST.get("matriculaUsuario")
+        perfil = request.POST.get("perfilUsuario")
+
+        usuario = Usuario(
+            nome=nome,
+            email=email,
+            senha=senha,
+            curso=curso,
+            matricula = matricula,
+            perfil = perfil
+        )
+
+        usuario.save()
+
+        return redirect("login")
     return render(request, "Sprint 4/cadastro.html")
 
 

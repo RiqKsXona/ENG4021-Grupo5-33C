@@ -17,63 +17,54 @@
         <img src="{% static 'Sprint 4/logo.ELO-removebg-preview.png' %}" alt="Logo ELO" width="200">
             <h2><strong>Crie sua conta</strong></h2>
     </div>
+    <form method="POST">
+        {% csrf_token %}
 
-    <div class="nome">
-        <h4>Nome Completo</h4>
-        <input type="text" placeholder="Digite seu nome completo">
-    </div>
+        <div class="nome">
+            <h4>Nome Completo</h4>
+            <input type="text" name="nomeCompleto" placeholder="Digite seu nome completo" required>
+        </div>
 
-    <div class="usuario">
-        <h4>Novo usuário</h4>
-        <input type="text" placeholder="Digite seu usuário">
-    </div>
+        <div class="Matricula">
 
-    <div class="Matricula">
+            <h4>Matrícula</h4>
+            <input type="text" name="matriculaUsuario" placeholder="Digite sua matrícula" required>
+        </div>
 
-        <h4>Matrícula</h4>
-        <input type="text" placeholder="Digite sua matrícula">
-    </div>
+        <div class="email">
 
-    <div class="CPF">
+            <h4>Email</h4>
+            <input type="email" name="emailUsuario" placeholder="Digite seu email" required>
+        </div>
 
-        <h4>CPF</h4>
-        <input type="text" placeholder="Digite seu CPF">
-    </div>
+        <div class="Curso">
 
-    <div class="Curso">
+            <h4>Curso</h4>
+            <input type="text" name="cursoUsuario" placeholder="Digite seu curso" required>
+        </div>
 
-        <h4>Curso</h4>
-        <input type="text" placeholder="Digite seu curso">
-    </div>
+        <div class="Perfil">
+            <h4>Perfil</h4>
+            <input type="text" name="perfilUsuario" placeholder="Aluno, professor ou funcionário" required>
+        </div>
 
-    <div class="Perfil">
-        <h4>Perfil</h4>
-        <input type="text" placeholder="Aluno, professor ou funcionário">
-    </div>
+        <div class="Senha">
 
-    <div class="Senha">
+            <h4>Senha</h4>
+            <input type="password" name="senhaUsuario" placeholder="Digite sua senha" required>
+        </div>
 
-        <h4>Senha</h4>
-        <input type="password" placeholder="Digite sua senha">
-    </div>
-
-    <div class="confirmaSenha">
-
-        <h4>Confirmar senha</h4>
-        <input type="password" placeholder="Confirme sua senha">
-    </div>
-
-    <div class="cadastrar">
-        <input type="button" value="CADASTRAR">
-    </div>
-
-    <div class="cancelar">
-        <input type="button" value="Cancelar">
-        <p>
-            <small>Já possui uma conta?</small>
-            <a href="/login/"><u>Entrar</u></a>
-        </p>
-    </div>
+        <div class="cadastrar">
+            <button type="submit">CADASTRAR</button>
+        </div>
+    </form>
+        <div class="cancelar">
+            <p>
+                <small>Já possui uma conta?</small>
+                <a href="{% url 'login' %}"><u>Entrar</u></a>
+            </p>
+        </div>
+    
 </body>
 
 </html>
