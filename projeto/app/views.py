@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib import messages
+from django.db.models import Q
 from .models import ItemAchado, ItemPerdido, Usuario
-from .forms import ItemPerdidoForm
+from .forms import ItemPerdidoForm, ItemAchadoForm
 
 
 def pag_inicial(request):
@@ -42,9 +44,59 @@ def reportar_perdido(request):
         "sucesso": sucesso,
     })
 
+def reportar_achado(request):
+    if request.method == "POST":
+        form = ItemAchadoForm(request.POST, request.FILES)
+        if form.is_valid():
+            item = form.save(commit=False)
+            # item.reportado_por = request.user   # se tiver o campo no model
+            item.save()
+            messages.success(request, "Item achado publicado com sucesso!")
+            return redirect("perfil")
+    else:
+        form = ItemAchadoForm()
+    return render(request, "reportar_achado.html", {"form": form})
+
 
 def procurar_item(request):
-    return render(request, "Sprint 4/procurar_item.html")
+    q = request.GET.get("q", "").strip()
+    categoria = request.GET.get("categoria", "").strip()
+    tipo = request.GET.get("tipo", "todos")  # todos | achados | perdidos
+ 
+    achados = ItemAchado.objects.all().order_by("-id")
+    perdidos = ItemPerdido.objects.all().order_by("-id")
+ 
+    if q:
+        filtro = (
+            Q(titulo__icontains=q)
+            | Q(descricao__icontains=q)
+            | Q(local__icontains=q)
+        )
+        achados = achados.filter(filtro)
+        perdidos = perdidos.filter(filtro)
+ 
+    if categoria:
+        achados = achados.filter(categoria__iexact=categoria)
+        perdidos = perdidos.filter(categoria__iexact=categoria)
+ 
+    if tipo == "achados":
+        perdidos = perdidos.none()
+    elif tipo == "perdidos":
+        achados = achados.none()
+ 
+    categorias = sorted(
+        set(ItemAchado.objects.values_list("categoria", flat=True))
+        | set(ItemPerdido.objects.values_list("categoria", flat=True))
+    )
+ 
+    return render(request, "Sprint 4/procurar_item.html", {
+        "itens_achados": achados,
+        "itens_perdidos": perdidos,
+        "categorias": categorias,
+        "q": q,
+        "categoria_selecionada": categoria,
+        "tipo": tipo,
+    })
 
 
 def item_perdido(request, id):
