@@ -1,0 +1,47 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reportar Item Achado</title>
+    <link rel="stylesheet" href="{% static 'Sprint 4/css/css_reportar_achado.css' %}" type="text/css">
+</head>
+<body>
+    <div class="logo">
+        <img src="{% static 'Sprint 4/logo.ELO-removebg-preview.png' %}" width="50">
+    </div>
+    <div class="titulo">   
+        <h1> <b>Reportar Item Perdido</b>   </h1>
+    </div>
+    <div class="foto_item_perdido">
+        <input type="image" src="perdido.png" width="200">
+    </div>
+    <div class="nome_objeto">
+        <input type="text" placeholder="Nome do objeto" name="nome_objeto">
+    </div>
+    <div class="categoria">
+        <input type="text" placeholder="Categoria" name="categoria">
+    </div>
+    <div class="onde_perdeu">
+        <input type="text" placeholder="Onde você perdeu?" name="onde_perdeu">
+    </div>
+    <div class="data_perda">
+        <input type="text" placeholder="Quando você perdeu?" name="data_perda">
+    </div>
+    <div class="descricao">
+        <input type="text" placeholder="Descrição" name="descricao">
+    </div>
+    <div class="botao_reportar">
+        <a href="/perfil/"><button type="submit">Reportar</button></a>
+    </div>
+    <div class="botao_voltar">
+        <a href="/perfil/"><button type="submit">Voltar</button></a>
+    </div>
+
+    
+
+
+</body>
+</html>

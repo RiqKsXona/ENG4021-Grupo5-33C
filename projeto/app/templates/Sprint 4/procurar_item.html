@@ -1,0 +1,131 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Procurar Item Perdido</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{% static 'Sprint 4/css/procurar_item.css' %}" type="text/css">
+    </head>
+    <body>
+        <header>
+            <div class="logo">
+                <div class="logo-imagem">
+                    <img src="https://st2.depositphotos.com/5418844/7949/v/450/depositphotos_79494998-stock-illustration-open-box-with-the-outgoing.jpg" width="90" alt="ELO">
+                </div>
+                <div class="logo-texto">
+                    <h1>ELO</h1>
+                    <pre><h3><p>Achados e perdidos <br>PUC-RIO </p></h3></pre>
+                </div>
+            </div>
+            <div class="Menu">
+                <div class="reportar_item">
+                <h4><a href="/reportar-achado/">Reportar item perdido</a></h4>
+                </div>
+
+                <div class="Perfil">
+                <h4><a href="/perfil/">Perfil</a></h4>
+                </div>
+                
+            </div>
+        </header>
+        
+        <main>
+            <div class="linha">
+            <hr>
+            </div>
+
+            <div class="titulo">
+                <div class="itens_recentes">
+                <h1><strong><b>Itens recentes</b></strong></h1>
+                </div>
+                
+                <div class="pesquisa">
+                <input type="text" placeholder="Buscar por itens, local ou descricao" class="barra_pesquisa">
+                </div>
+                
+            </div>
+
+            <div class="central_itens">
+            
+                <div class="fileira1">
+                    
+                    <div class="item1">
+                        <div class="imagem_item1">
+                            <div class="linha2">
+                                <hr>
+                            </div>
+                            <a href="/item-perdido/"><img src="https://img.magnific.com/vetores-premium/um-termo-de-metal-azul-que-mantem-a-sua-bebida-quente_98396-148724.jpg?semt=ais_hybrid&w=740&q=80" width="200" alt="Garrafa termica"></a>
+                        </div>
+                        
+                        <div class="texto_item1">
+                            <h3>Garrafa Termica</h4>
+                            <h5>Localizacao: Pastoral</h5>
+                        </div>
+                        
+                    </div>
+
+                    <div class="item2">
+
+                        <div class="imagem_item1">
+                            <div class="linha3">
+                                <hr>
+                            </div>
+                            <img src="https://img.icons8.com/color/1200/umbrella.jpg" width="200" alt="Garrafa termica">
+                        </div>
+                        
+                        <div class="texto_item1">
+                            <h3>Guarda Chuva Azul</h4>
+                            <h5>Localizacao: bar das freiras</h5>
+                        </div>
+
+                    </div>
+                </div>
+            
+                <div class="fileira2">
+
+                    <div class="item3">
+                        
+                        <div class="imagem_item3">
+                            <div class="linha4">
+                                <hr>
+                            </div>
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQu0dEQf-MECWZAYc_IEQqCUbnw4k-TSIAtyh-DBQZkhw&s=10" width="200" alt="Garrafa termica">
+                        </div>
+                        
+                        <div class="texto_item3">
+                            <h3>Óculos Escuros</h4>
+                            <h5>Localizacao: LabGrad</h5>
+                        </div>
+                        
+                    </div>
+
+                    <div class="item4">
+
+                        
+                        <div class="imagem_item4">
+                            <div class="linha5">
+                                <hr>
+                            </div>
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSuUqdAfwd8ozYBZqk20IU1-ks5MBVZJjEH8Lb9BVbPew&s=10" width="200" alt="Garrafa termica">
+                        </div>
+                        
+                        <div class="texto_item4">
+                            <h3>Casaco Vermelho</h4>
+                            <h5>Localizacao: Lieng</h5>
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </div>
+
+
+
+        </main>
+        
+
+    </body>
+</html>
