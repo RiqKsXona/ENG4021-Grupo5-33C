@@ -12,6 +12,6 @@ urlpatterns = [
     path('reportar-perdido/', reportar_perdido, name="reportarPerdido"),
     path('procurar-item/', procurar_item, name="procurarItem"),
     path('item-perdido/<int:id>/', item_perdido, name="item_perdido"),
-    path('cadastro/', cadastro , name = "cadastro"),
-    path('', login, name="login")
+    path('', cadastro , name = "cadastro"),
+    path('login/', login, name="login")
 ]
