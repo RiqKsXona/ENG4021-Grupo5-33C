@@ -1,75 +1,191 @@
-body{
-    font-family: "Roboto Mono", monospace;
-    font-optical-sizing: auto;
-    font-weight: 400;
-    font-style: normal;
+:root {
+    --fundo: #d3d3d3;
+    --azul: #0b2a52;
+    --amarelo: #eab308;
+    --texto: #1a1a1a;
+    --placeholder: #8a8f98;
+    --branco: #ffffff;
+    --raio: 20px;
 }
-
-.logo {
+ 
+* {
+    box-sizing: border-box;
+}
+ 
+body {
+    margin: 0;
+    background: var(--fundo);
+    color: var(--texto);
+    font-family: "Inter", system-ui, sans-serif;
+}
+ 
+.pagina {
+    max-width: 420px;
+    margin: 0 auto;
+    padding: 24px 20px 32px;
+}
+ 
+.topo {
+    position: relative;
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    padding: 30px;
+    min-height: 64px;
 }
-
+ 
+.topo_voltar {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--azul);
+    display: flex;
+}
+ 
+.topo_voltar img {
+    display: block;
+    width: 28px;
+    height: 28px;
+}
+ 
+.icone_camera {
+    width: 40px;
+    height: 40px;
+    opacity: 0.7;
+}
+ 
+.topo_logo {
+    height: 60px;
+    width: auto;
+}
+ 
 .titulo {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 30px;
+    margin: 20px 0 18px;
+    font-size: 1.9rem;
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--azul);
 }
+ 
 .foto_item_perdido {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 30px;
+    justify-content: center;
+    gap: 12px;
+    height: 124px;
+    margin-bottom: 16px;
+    border: 2px dashed #a8a8a8;
+    border-radius: var(--raio);
+    background: #e8e8e8;
+    color: #4a4f57;
+    font-size: 1rem;
+    cursor: pointer;
 }
+ 
+.foto_item_perdido:hover {
+    background: #eeeeee;
+}
+ 
 
-.nome_objeto {
+.campo {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    padding: 10px;
+    gap: 2px;
+    position: relative;
+    margin-bottom: 11px;
+    padding: 12px 18px 10px;
+    border-radius: var(--raio);
+    background: var(--branco);
 }
-
-.categoria {
+ 
+.campo:focus-within {
+    outline: 2px solid var(--amarelo);
+}
+ 
+.campo label {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--azul);
+}
+ 
+.campo input,
+.campo select {
+    width: 100%;
+    border: none;
+    outline: none;
+    background: transparent;
+    padding: 0;
+    font-family: inherit;
+    font-size: 1.05rem;
+    color: var(--texto);
+}
+ 
+.campo input::placeholder {
+    color: var(--placeholder);
+}
+ 
+ 
+.campo select {
+    appearance: none;
+    -webkit-appearance: none;
+    cursor: pointer;
+    padding-right: 28px;
+}
+ 
+.campo select:invalid {
+    color: var(--placeholder);
+}
+ 
+.categoria::after {
+    content: "";
+    position: absolute;
+    right: 22px;
+    top: 50%;
+    width: 8px;
+    height: 8px;
+    border-right: 2.5px solid var(--azul);
+    border-bottom: 2.5px solid var(--azul);
+    transform: translateY(-70%) rotate(45deg);
+    pointer-events: none;
+}
+ 
+.botoes {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    padding: 10px;
+    gap: 11px;
 }
-
-.onde_perdeu {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 10px;
-}
-
-.data_perda {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 10px;
-}
-
-.descricao {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 10px;
-}
-
-.botao_reportar {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-}
-
+ 
+.botao_reportar,
 .botao_voltar {
     display: flex;
-    flex-direction: column;
     align-items: center;
-    padding: 20px;
+    justify-content: center;
+    height: 56px;
+    border-radius: var(--raio);
+    font-family: inherit;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--texto);
+    text-decoration: none;
+    cursor: pointer;
+}
+ 
+.botao_reportar {
+    border: 2px solid var(--amarelo);
+    background: var(--amarelo);
+}
+ 
+.botao_reportar:hover {
+    filter: brightness(0.95);
+}
+ 
+.botao_voltar {
+    border: 2px solid var(--amarelo);
+    background: transparent;
+}
+ 
+.botao_voltar:hover {
+    background: rgba(234, 179, 8, 0.15);
 }

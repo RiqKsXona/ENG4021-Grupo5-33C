@@ -1,3 +1,43 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+.logo{
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+
+.logo-texto{
+    align-self: center;
+}
+}
+
+.Menu{
+    display: flex;
+    flex-direction: row;
+    align-self: center;
+    width: 25%;
+    justify-content: space-around;
+
+.reportar_item{
+    display: flex;
+}
+}
+.linha{
+    height: 80px;
+    width: 100%;
+
+}
+header{
+    width: 100%;
+    background-color: #d1d0c9;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+
 body {
     font-family: Arial, sans-serif;
     color: #08364f;
@@ -66,4 +106,3 @@ h2 {
     background-color: white;
     padding: 10px;
 }
-

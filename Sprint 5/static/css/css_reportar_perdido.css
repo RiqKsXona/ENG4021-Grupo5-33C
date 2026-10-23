@@ -18,7 +18,7 @@ body{
     align-items: center;
     padding: 30px;
 }
-.foto_item_achado {
+.foto_item_perdido {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -39,28 +39,14 @@ body{
     padding: 10px;
 }
 
-.onde_encontrou {
+.onde_perdeu {
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 10px;
 }
 
-.data_encontro {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 10px;
-}
-
-.contato {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 10px;
-}
-
-.onde_está {
+.data_perda {
     display: flex;
     flex-direction: column;
     align-items: center;
