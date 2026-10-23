@@ -85,5 +85,22 @@ def cadastro(request):
 
 
 def login(request):
-    return render(request, "Sprint 4/login.html")
+    erro = None
+
+    if request.method == "POST":
+        email = request.POST.get("emailLogin", "").strip()
+        senha = request.POST.get("senhaLogin", "").strip()
+
+        usuario = Usuario.objects.filter(
+            email=email,
+            senha=senha
+        ).first()
+
+        if usuario is not None:
+            request.session["email_usuario"] = usuario.email
+            return redirect("paginaInicial")
+        else:
+            erro = "email ou senha incorretos"
+
+    return render(request, "Sprint 4/login.html", {"erro": erro})
 

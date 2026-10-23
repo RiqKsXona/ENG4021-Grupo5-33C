@@ -16,23 +16,29 @@
         <img src="{% static 'Sprint 4/logo.ELO-removebg-preview.png' %}" alt="Logo ELO" width="200">
         <h1>Achados e Perdidos Online - PUC-Rio</h1>
     </div>
+    <form method="POST">
+        
+        {% csrf_token %}
 
-    <div class="campo">
-        <h3>Email ou telemóvel</h3>
-        <input type="text">
-    </div>
+        <div class="campo">
+            <h3>Email</h3>
+            <input type="email" id="emailLogin" name="emailLogin" placeholder="Digite seu email" required>
+        </div>
 
-    <div class="senha">
-        <h3>Senha</h3>
-        <input type="password">
-    </div>
+        <div class="senha">
+            <h3>Senha</h3>
+            <input type="password" id="senhaLogin" name="senhaLogin" placeholder="Digite sua senha" required>
+        </div>
 
-    <div class="entrar">
-        <a href="{% url 'paginaInicial' %}">
-            <button type="button">ENTRAR</button>
-        </a>
-    </div>  
+        <div class="entrar">
+            <button type="submit">ENTRAR</button>
+        </div>  
 
+        {% if erro %}
+            <p>{{ erro }}</p>
+        {% endif %}
+
+    </form>
     <div class="criar_cadastro">
 
         <h4>nao tem login?</h4>
