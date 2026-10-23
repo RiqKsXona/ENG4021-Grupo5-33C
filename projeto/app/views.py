@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from .models import ItemAchado, ItemPerdido
+from .forms import ItemPerdidoForm
 
 def pag_inicial(request):
     itens_achados = ItemAchado.objects.all()
@@ -24,7 +25,21 @@ def reportar_achado(request):
 
 
 def reportar_perdido(request):
-    return render(request, "Sprint 4/html_reportar_perdido.html")
+    sucesso = False
+
+    if request.method == "POST":
+        form = ItemPerdidoForm(request.POST)
+        if form.is_valid():
+            form.save()
+            sucesso = True
+            form = ItemPerdidoForm()
+    else:
+        form = ItemPerdidoForm()
+
+    return render(request, "Sprint 4/html_reportar_perdido.html", {
+        "form": form,
+        "sucesso": sucesso,
+    })
 
 
 def procurar_item(request):
@@ -41,3 +56,4 @@ def cadastro(request):
 
 def login(request):
     return render(request, "Sprint 4/login.html")
+

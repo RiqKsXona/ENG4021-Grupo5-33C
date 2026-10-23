@@ -1,75 +1,58 @@
 {% load static %}
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reportar Item Perdido</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'Sprint 4/css/css_reportar_perdido.css' %}" type="text/css">
 </head>
+
 <body>
-    <main class="pagina">
+    <div class="logo">
+        <img src="{% static 'Sprint 4/logo.ELO-removebg-preview.png' %}" width="50" alt="Logo do Elo">
+    </div>
 
-        <header class="cabecalho">
-            <a href="perfil.html" class="topo_voltar" aria-label="Voltar">
-                <img src="{% static 'Sprint 4/simbolo_de_menor.png' %}" alt="" width="28" height="28">
-            </a>
-            <img class="topo_logo" src="{% static 'Sprint 4/logo.ELO-removebg-preview.png' %}" alt="ELO - Achados e Perdidos Online PUC-Rio">
-        </header>
-    
+    <div class="titulo">
+        <h1>Reportar Item Perdido</h1>
+    </div>
 
-        <h1 class='titulo'> Reportar Item Perdido </h1>
+    {% if sucesso %}
+    <div class="sucesso">
+        <h4>Item reportado com sucesso!</h4>
+    </div>
+    {% endif %}
 
-        <form action="perfil.html" method="post" enctype="multipart/form-data">
-            
-            <label class="foto_item_perdido" for="foto">
-                <img class="icone_camera" src="{% static 'Sprint 4/simbolo_da_camera.png' %}" alt="" width="40" height="40">
-                <span>Adicionar foto (opcional)</span>
-                <input type="file" id="foto" name="foto" accept="image/*" hidden>
-            </label>
- 
-            <div class="campo nome_objeto">
-                <label for="nome_objeto">Nome do objeto</label>
-                <input type="text" id="nome_objeto" name="nome_objeto" placeholder="Ex: garrafa térmica amarela" required>
-            </div>
-            
-            <div class="campo categoria">
-                <label for="categoria">Categoria</label>
-                <select id="categoria" name="categoria" required>
-                    <option value="" disabled selected>Selecione uma categoria</option>
-                    <option>Documentos</option>
-                    <option>Eletrônicos</option>
-                    <option>Roupas e acessórios</option>
-                    <option>Utensílios</option>
-                    <option>Material de estudo</option>
-                    <option>Outros</option>
-                </select>
-            </div>
-            <div class="campo onde_perdeu">
-                <label for="onde_perdeu">Onde você perdeu?</label>
-                <input type="text" id="onde_perdeu" name="onde_perdeu" placeholder="Ex: entre a Pastoral e o RDC" required>
-            </div>
-            <div class="campo data_perda">
-                <label for="data_perda">Quando você perdeu</label>
-                <input type="datetime-local" id="data_perda" name="data_perda" required>
-            </div>
-            <div class="campo descricao">
-                <label for="descricao">Descrição</label>
-                <input type="text" id="descricao" name="descricao" placeholder="Detalhes sobre o objeto perdido" required>
-            </div>
-            <div class="botoes">
-                <button type="submit" class="botao_reportar">Publicar item perdido</button>
-                <a href="perfil.html" class="botao_voltar">Cancelar</a>
-            </div>
+    <form method="post">
+        {% csrf_token %}
 
-        </form>
+        <div class="foto_item_perdido">
+            <img src="{% static 'Sprint 4/simbolo da camera.png' %}" width="200" alt="Foto do item">
+        </div>
+        <div class="nome_objeto">
+            <input type="text" placeholder="Nome do objeto" name="titulo" required>
+        </div>
+        <div class="categoria">
+            <input type="text" placeholder="Categoria" name="categoria" required>
+        </div>
+        <div class="onde_perdeu">
+            <input type="text" placeholder="Onde você perdeu?" name="local" required>
+        </div>
+        <div class="data_perda">
+            <input type="date" name="data">
+        </div>
+        <div class="descricao">
+            <input type="text" placeholder="Descrição" name="descricao">
+        </div>
+        <div class="botao_reportar">
+            <button type="submit">Reportar</button>
+        </div>
+    </form>
 
-    </main>
-
-
+    <div class="botao_voltar">
+        <button type="button" onclick="history.back()">Voltar</button>
+    </div>
 </body>
+
 </html>
