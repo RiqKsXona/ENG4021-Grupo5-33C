@@ -18,6 +18,8 @@
             <h2><strong>Crie sua conta</strong></h2>
     </div>
     <form method="POST">
+        {% csrf_token %}
+
         <div class="nome">
             <h4>Nome Completo</h4>
             <input type="text" name="nomeCompleto" placeholder="Digite seu nome completo" required>
@@ -31,7 +33,7 @@
 
         <div class="email">
 
-            <h4>CPF</h4>
+            <h4>Email</h4>
             <input type="email" name="emailUsuario" placeholder="Digite seu email" required>
         </div>
 
