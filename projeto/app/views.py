@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
+from django.db.models import Q
 from .models import ItemAchado, ItemPerdido, Usuario
 from .forms import ItemPerdidoForm, ItemAchadoForm
 
@@ -58,7 +59,44 @@ def reportar_achado(request):
 
 
 def procurar_item(request):
-    return render(request, "Sprint 4/procurar_item.html")
+    q = request.GET.get("q", "").strip()
+    categoria = request.GET.get("categoria", "").strip()
+    tipo = request.GET.get("tipo", "todos")  # todos | achados | perdidos
+ 
+    achados = ItemAchado.objects.all().order_by("-id")
+    perdidos = ItemPerdido.objects.all().order_by("-id")
+ 
+    if q:
+        filtro = (
+            Q(titulo__icontains=q)
+            | Q(descricao__icontains=q)
+            | Q(local__icontains=q)
+        )
+        achados = achados.filter(filtro)
+        perdidos = perdidos.filter(filtro)
+ 
+    if categoria:
+        achados = achados.filter(categoria__iexact=categoria)
+        perdidos = perdidos.filter(categoria__iexact=categoria)
+ 
+    if tipo == "achados":
+        perdidos = perdidos.none()
+    elif tipo == "perdidos":
+        achados = achados.none()
+ 
+    categorias = sorted(
+        set(ItemAchado.objects.values_list("categoria", flat=True))
+        | set(ItemPerdido.objects.values_list("categoria", flat=True))
+    )
+ 
+    return render(request, "Sprint 4/procurar_item.html", {
+        "itens_achados": achados,
+        "itens_perdidos": perdidos,
+        "categorias": categorias,
+        "q": q,
+        "categoria_selecionada": categoria,
+        "tipo": tipo,
+    })
 
 
 def item_perdido(request, id):
