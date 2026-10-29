@@ -1,7 +1,9 @@
+
+Html reportar perdido · HTML
 {% load static %}
 <!DOCTYPE html>
 <html lang="pt-BR">
-
+ 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,73 +13,71 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'Sprint 4/css/css_reportar_perdido.css' %}" type="text/css">
 </head>
-
+ 
 <body>
     <div class="logo">
         <img src="{% static 'Sprint 4/logo.ELO-removebg-preview.png' %}" width="50" alt="Logo do Elo">
     </div>
-
+ 
     <div class="titulo">
         <h1>Reportar Item Perdido</h1>
     </div>
-
+ 
     {% if sucesso %}
     <div class="sucesso">
         <h4>Item reportado com sucesso!</h4>
     </div>
     {% endif %}
-
-    <form method="post">
+ 
+    <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
-
+ 
         <label class="foto_item_perdido" for="foto">
-                <img class="icone_camera" src="{% static 'Sprint 4/simbolo_da_camera.png' %}" alt="" width="40" height="40">
-                <span>Adicionar foto (opcional)</span>
-                <input type="file" id="foto" name="foto" accept="image/*" hidden>
-            </label>
+            <img class="icone_camera" src="{% static 'Sprint 4/simbolo_da_camera.png' %}" alt="" width="40" height="40">
+            <span>Adicionar foto (opcional)</span>
+            {{ form.foto }}
+        </label>
+        {{ form.foto.errors }}
  
-            <div class="campo nome_objeto">
-                <label for="nome_objeto">Nome do objeto</label>
-                <input type="text" id="nome_objeto" name="nome_objeto" placeholder="Ex: garrafa térmica amarela" required>
-            </div>
+        <div class="campo nome_objeto">
+            <label for="{{ form.titulo.id_for_label }}">{{ form.titulo.label }}</label>
+            {{ form.titulo }}
+            {{ form.titulo.errors }}
+        </div>
  
-            <div class="campo categoria">
-                <label for="categoria">Categoria</label>
-                <select id="categoria" name="categoria" required>
-                    <option value="" disabled selected>Selecione uma categoria</option>
-                    <option>Documentos</option>
-                    <option>Eletrônicos</option>
-                    <option>Roupas e acessórios</option>
-                    <option>Utensílios</option>
-                    <option>Material de estudo</option>
-                    <option>Outros</option>
-                </select>
-            </div>
+        <div class="campo categoria">
+            <label for="{{ form.categoria.id_for_label }}">{{ form.categoria.label }}</label>
+            {{ form.categoria }}
+            {{ form.categoria.errors }}
+        </div>
  
-            <div class="campo onde_perdeu">
-                <label for="onde_perdeu">Onde você perdeu</label>
-                <input type="text" id="onde_perdeu" name="onde_perdeu" placeholder="Ex: entre a Pastoral e o RDC" required>
-            </div>
+        <div class="campo onde_perdeu">
+            <label for="{{ form.local.id_for_label }}">{{ form.local.label }}</label>
+            {{ form.local }}
+            {{ form.local.errors }}
+        </div>
  
-            <div class="campo data_perda">
-                <label for="data_perda">Quando você perdeu</label>
-                <input type="datetime-local" id="data_perda" name="data_perda" required>
-            </div>
+        <div class="campo data_perda">
+            <label for="{{ form.data.id_for_label }}">{{ form.data.label }}</label>
+            {{ form.data }}
+            {{ form.data.errors }}
+        </div>
  
-            <div class="campo descricao">
-                <label for="descricao">Características</label>
-                <textarea id="descricao" name="descricao" rows="2" placeholder="Marca, cor e sinais que só o dono saberia"></textarea>
-            </div>
+        <div class="campo descricao">
+            <label for="{{ form.descricao.id_for_label }}">{{ form.descricao.label }}</label>
+            {{ form.descricao }}
+            {{ form.descricao.errors }}
+        </div>
  
-            <div class="botoes">
+        <div class="botoes">
                 <button type="submit" class="botao_reportar">Publicar item perdido</button>
                 <a href="{% url 'perfil' %}" class="botao_voltar">Cancelar</a>
             </div>
     </form>
-
+ 
     <div class="botao_voltar">
         <button type="button" onclick="history.back()">Voltar</button>
     </div>
 </body>
-
+ 
 </html>
