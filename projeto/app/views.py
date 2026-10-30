@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import ItemAchado, ItemPerdido
 
 def pag_inicial(request):
@@ -24,7 +24,17 @@ def reportar_achado(request):
 
 
 def reportar_perdido(request):
+    if request.method == "POST":
+        ItemPerdido.objects.create(
+            titulo=request.POST.get("nome_objeto"),
+            categoria=request.POST.get("categoria"),
+            local=request.POST.get("onde_perdeu"),
+            data=request.POST.get("data_perda") or None,
+            descricao=request.POST.get("descricao", ""),
+        )
+        return redirect("/reportar-perdido/")
     return render(request, "Sprint 4/html_reportar_perdido.html")
+
 
 
 def procurar_item(request):

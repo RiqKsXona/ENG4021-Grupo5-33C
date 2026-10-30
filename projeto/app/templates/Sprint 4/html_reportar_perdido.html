@@ -1,47 +1,72 @@
 {% load static %}
 <!DOCTYPE html>
-<html>
-
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reportar Item Achado</title>
-    <link rel="stylesheet" href="{% static 'Sprint 4/css/css_reportar_achado.css' %}" type="text/css">
+    <title>Reportar item perdido</title>
+    <link rel="stylesheet" href="{% static 'Sprint 4/css/css_reportar_perdido.css' %}?v=6">
 </head>
 <body>
-    <div class="logo">
-        <img src="{% static 'Sprint 4/logo.ELO-removebg-preview.png' %}" width="50">
-    </div>
-    <div class="titulo">
-        <h1> <b>Reportar Item Perdido</b>   </h1>
-    </div>
-    <div class="foto_item_perdido">
-        <input type="image" src="perdido.png" width="200">
-    </div>
-    <div class="nome_objeto">
-        <input type="text" placeholder="Nome do objeto" name="nome_objeto">
-    </div>
-    <div class="categoria">
-        <input type="text" placeholder="Categoria" name="categoria">
-    </div>
-    <div class="onde_perdeu">
-        <input type="text" placeholder="Onde você perdeu?" name="onde_perdeu">
-    </div>
-    <div class="data_perda">
-        <input type="text" placeholder="Quando você perdeu?" name="data_perda">
-    </div>
-    <div class="descricao">
-        <input type="text" placeholder="Descrição" name="descricao">
-    </div>
-    <div class="botao_reportar">
-        <a href="/perfil/"><button type="submit">Reportar</button></a>
-    </div>
-    <div class="botao_voltar">
-        <a href="/perfil/"><button type="submit">Voltar</button></a>
-    </div>
+    <main>
+        <header>
+            <a href="/perfil/" class="voltar" aria-label="Voltar para o perfil">❮</a>
+            <img src="{% static 'Sprint 4/logo.ELO-removebg-preview.png' %}" alt="ELO - Achados e Perdidos Online - PUC-Rio">
+        </header>
 
+        <h1>Reportar item perdido</h1>
 
+        <form method="post">
+            {% csrf_token %}
 
+            <div class="campo">
+                <label for="nome_objeto">Nome do objeto</label>
+                <input type="text" id="nome_objeto" name="nome_objeto" placeholder="Ex: garrafa térmica amarela" maxlength="100" required>
+            </div>
 
+            <div class="campo">
+                <label for="categoria">Categoria</label>
+                <select id="categoria" name="categoria" required>
+                    <option value="">Selecione uma categoria</option>
+                    <option value="Acessórios">Acessórios</option>
+                    <option value="Documentos">Documentos</option>
+                    <option value="Eletrônicos">Eletrônicos</option>
+                    <option value="Material escolar">Material escolar</option>
+                    <option value="Roupas">Roupas</option>
+                    <option value="Outros">Outros</option>
+                </select>
+            </div>
+
+            <div class="campo">
+                <label for="onde_perdeu">Onde você perdeu</label>
+                <input type="text" id="onde_perdeu" name="onde_perdeu" placeholder="Ex: entre a Pastoral e o RDC" maxlength="200" required>
+            </div>
+
+            <div class="campo">
+                <label for="data_perda">Quando você perdeu</label>
+                <input type="date" id="data_perda" name="data_perda">
+            </div>
+
+            <div class="campo">
+                <label for="descricao">Características</label>
+                <textarea id="descricao" name="descricao" rows="2" placeholder="Marca, cor e sinais que só o dono saberia"></textarea>
+            </div>
+
+            <div class="opcao">
+                <input type="checkbox" id="aviso" name="aviso">
+                <label for="aviso">Notifique-me quando aparecer meu item perdido</label>
+            </div>
+
+            <div class="opcao">
+                <input type="checkbox" id="contato" name="contato" checked>
+                <label for="contato">Exibir meu contato na publicação</label>
+            </div>
+
+            <div class="botoes">
+                <button type="submit" class="publicar">Publicar item perdido</button>
+                <a href="/perfil/" class="cancelar">Cancelar</a>
+            </div>
+        </form>
+    </main>
 </body>
 </html>

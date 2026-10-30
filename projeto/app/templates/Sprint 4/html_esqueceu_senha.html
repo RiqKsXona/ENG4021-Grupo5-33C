@@ -1,35 +1,38 @@
 {% load static %}
 <!DOCTYPE html>
-<html>
-
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Esqueceu a Senha</title>
+    <title>Recuperação de senha</title>
     <link rel="stylesheet" href="{% static 'Sprint 4/css/css_esquece_a_senha.css' %}">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
 </head>
-
-
-
 <body>
-    <div class="logo">
-        <img src="https://cdn-icons-png.flaticon.com/512/309/309616.png"  width="100" >
-    </div>
-    <div class="texto_Logo">
-    <h1><b style='color : #111827'>
-        Elo
-    </div>
+    <main>
+        <div class="logo">
+            <img src="{% static 'Sprint 4/logo.ELO-removebg-preview.png' %}" alt="ELO - Achados e Perdidos Online - PUC-Rio">
+        </div>
 
+        <div class="texto">
+            <h1>Recuperação de senha</h1>
+            <p>Digite o e-mail cadastrado para receber instruções de recuperação da sua senha.</p>
+        </div>
 
-    <div class="texto_rec_digite">
-    <h2>Recuperação de Senha</h2>
-    <h3>Digite o email cadastrado para receber instruções de recuperação da sua senha</h3>
-    </div>
-    <h4> Escreva seu email:</h4>
+        <form method="post">
+            {% csrf_token %}
+
+            <div class="campo">
+                <label for="email">E-mail cadastrado</label>
+                <input type="email" id="email" name="email" placeholder="Digite seu e-mail" required>
+            </div>
+
+            <button type="submit" class="enviar">Enviar</button>
+            <a href="/login/" class="cancelar">Cancelar</a>
+        </form>
+
+        <div class="ajuda">
+            <p>Precisa de ajuda? Entre em contato com a equipe ELO.</p>
+        </div>
+    </main>
 </body>
-
-
 </html>

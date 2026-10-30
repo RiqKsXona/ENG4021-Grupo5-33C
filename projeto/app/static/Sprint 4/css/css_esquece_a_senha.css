@@ -1,31 +1,91 @@
-
-body{ font-family: "Roboto Mono", monospace;
-  font-optical-sizing: auto;
-  font-weight: 400;
-  font-style: normal;
+body {
+    font-family: Arial, sans-serif;
+    color: #08364f;
+    background-color: white;
+    margin: 0;
 }
 
-
-.logo{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 30px;
-
+main {
+    max-width: 500px;
+    margin: 60px auto;
+    padding: 20px;
 }
 
-.texto_Logo{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 30px;
-
+.logo {
+    text-align: center;
+    margin-bottom: 40px;
 }
 
-.texto_rec_digite{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 30px;
+.logo img {
+    width: 300px;
+    max-width: 100%;
+}
 
+.texto {
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+h1 {
+    font-size: 28px;
+}
+
+.texto p {
+    font-size: 18px;
+    line-height: 1.5;
+}
+
+.campo {
+    margin-bottom: 25px;
+}
+
+.campo label {
+    display: block;
+    font-size: 16px;
+    margin-bottom: 8px;
+}
+
+.campo input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 16px;
+    border: 1px solid #cccccc;
+    border-radius: 10px;
+    font-family: Arial, sans-serif;
+    font-size: 18px;
+    color: #08364f;
+    background-color: white;
+}
+
+.enviar {
+    width: 100%;
+    padding: 16px;
+    border: 2px solid #ffbe00;
+    border-radius: 10px;
+    background-color: #ffbe00;
+    font-family: Arial, sans-serif;
+    color: #08364f;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.cancelar {
+    display: block;
+    text-align: center;
+    padding: 16px;
+    margin-top: 15px;
+    border: 2px solid #ffbe00;
+    border-radius: 10px;
+    color: #08364f;
+    font-size: 20px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.ajuda {
+    text-align: center;
+    margin-top: 50px;
+    font-size: 16px;
+    line-height: 1.5;
 }
