@@ -1,5 +1,3 @@
-
-Html reportar perdido · HTML
 {% load static %}
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -15,14 +13,16 @@ Html reportar perdido · HTML
 </head>
  
 <body>
-    <div class="logo">
-        <img src="{% static 'Sprint 4/logo.ELO-removebg-preview.png' %}" width="50" alt="Logo do Elo">
-    </div>
- 
-    <div class="titulo">
-        <h1>Reportar Item Perdido</h1>
-    </div>
- 
+<main class="pagina">
+    <header class="topo">
+        <a href="#" onclick="history.back(); return false;" class="topo_voltar" aria-label="Voltar">
+            <img src="{% static 'Sprint 4/simbolo de menor.png' %}" alt="">
+        </a>
+        <img class="topo_logo" src="{% static 'Sprint 4/logo.ELO-removebg-preview.png' %}" alt="Logo do Elo">
+    </header>
+
+    <h1 class="titulo">Reportar Item Perdido</h1>
+
     {% if sucesso %}
     <div class="sucesso">
         <h4>Item reportado com sucesso!</h4>
@@ -32,8 +32,8 @@ Html reportar perdido · HTML
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
  
-        <label class="foto_item_perdido" for="foto">
-            <img class="icone_camera" src="{% static 'Sprint 4/simbolo_da_camera.png' %}" alt="" width="40" height="40">
+        <label class="foto_item_perdido" for="{{ form.foto.id_for_label }}">
+            <img class="icone_camera" src="{% static 'Sprint 4/simbolo da camera.png' %}" alt="" width="40" height="40">
             <span>Adicionar foto (opcional)</span>
             {{ form.foto }}
         </label>
@@ -74,10 +74,7 @@ Html reportar perdido · HTML
                 <a href="{% url 'perfil' %}" class="botao_voltar">Cancelar</a>
             </div>
     </form>
- 
-    <div class="botao_voltar">
-        <button type="button" onclick="history.back()">Voltar</button>
-    </div>
+</main>
 </body>
  
 </html>
