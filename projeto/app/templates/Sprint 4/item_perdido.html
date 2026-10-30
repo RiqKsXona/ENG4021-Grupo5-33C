@@ -100,7 +100,16 @@
                 </div>
 
                 <div class="botao">
-                    <input type="button" class="boton" value="Esse objeto é meu">
+                    {% if item.devolvido %}
+                        <input type="button" class="boton" value="Devolvido" disabled>
+                    {% elif e_dono %}
+                        <form method="post" action="{% url 'marcar_devolvido' item.id %}">
+                            {% csrf_token %}
+                            <input type="submit" class="boton" value="Marcar como devolvido">
+                        </form>
+                    {% else %}
+                        <input type="button" class="boton" value="Esse objeto é meu">
+                    {% endif %}
                 </div>
             </div>
         </main>
