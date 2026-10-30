@@ -3,6 +3,7 @@ from django.db.models import Q
 from django.contrib import messages
 from .models import ItemAchado, ItemPerdido, Usuario
 from .forms import ItemPerdidoForm, ItemAchadoForm
+from .notificacoes import avisar_donos
 
 
 # Página inicial
@@ -63,6 +64,8 @@ def reportar_achado(request):
             item = form.save(commit=False)
             item.usuario = usuario
             item.save()
+
+            avisar_donos(item)
 
             messages.success(request, "Item achado publicado com sucesso!")
             return redirect("perfil")
