@@ -1,46 +1,55 @@
 {% load static %}
 <!DOCTYPE html>
-
-<html>
+<html lang="pt-BR">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ELO | Login</title>
-    <link href="{% static 'Sprint 4/css/login.css' %}" rel="stylesheet" type="text/css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'Sprint 4/css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'Sprint 4/css/login.css' %}">
 </head>
 
-<body>
+<body class="pagina-login">
+    <main class="app">
 
-    <div class="logo">
-        <img src="{% static 'Sprint 4/logo.ELO-removebg-preview.png' %}" alt="Logo ELO" width="200">
-        <h1>Achados e Perdidos Online - PUC-Rio</h1>
-    </div>
+        <header class="logo">
+            <img src="{% static 'Sprint 4/logo.ELO-removebg-preview.png' %}" alt="Logo ELO">
+            <p class="slogan">Achados e Perdidos Online - PUC-Rio</p>
+        </header>
 
-    <div class="campo">
-        <h3>Email ou telemóvel</h3>
-        <input type="text">
-    </div>
+        <form method="POST">
+            {% csrf_token %}
 
-    <div class="senha">
-        <h3>Senha</h3>
-        <input type="password">
-    </div>
+            <div class="campo-simples">
+                <input type="email" id="emailLogin" name="emailLogin" placeholder="E-mail" aria-label="E-mail" autocomplete="email" required>
+            </div>
 
-    <div class="entrar">
-        <a href="{% url 'paginaInicial' %}">
-            <button type="button">ENTRAR</button>
-        </a>
-    </div>  
+            <div class="campo-simples">
+                <input type="password" id="senhaLogin" name="senhaLogin" placeholder="Senha" aria-label="Senha" autocomplete="current-password" required>
+            </div>
 
-    <div class="criar_cadastro">
+            <button type="submit" class="btn btn-primario">ENTRAR</button>
 
-        <h4>nao tem login?</h4>
-        <a href="{% url 'cadastro' %}">
-            <button type="button">CADASTRAR</button>
-        </a>
-    </div>
-    
+            {% if erro %}
+                <p class="erro" role="alert">{{ erro }}</p>
+            {% endif %}
+        </form>
+
+        <div class="links-login">
+            {# Troque o "#" pelo nome da sua rota: {% url 'esqueceu_senha' %} #}
+            <a href="{% url 'esqueceu_senha' %}">Esqueci minha senha</a>
+
+            <div class="criar-cadastro">
+                <span>Não tem login?</span>
+                <a href="{% url 'cadastro' %}" class="btn btn-contorno">Cadastrar</a>
+            </div>
+        </div>
+
+    </main>
 </body>
 
 </html>

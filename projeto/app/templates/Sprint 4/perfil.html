@@ -1,45 +1,116 @@
 {% load static %}
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>perfil</title>
-    <link rel="stylesheet" href="{% static 'Sprint 4/css/perfil.css' %}">
+    <title>ELO | Perfil</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'Sprint 4/css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'Sprint 4/css/perfil.css' %}">
 </head>
 
-<body>
-    <div class="logo">
-        <img src="https://cdn-icons-png.flaticon.com/512/309/309616.png"  width="100" >
-    </div>
-    <div class="texto_Logo">
-    <h1><b style='color : #111827'>
-        Elo
-    </div>
-    <div class="foto_perfil">
-        <img src= "https://img.magnific.com/vetores-premium/ilustracao-plana-vetorial-em-escala-de-cinza-avatar-perfil-de-usuario-icone-de-pessoa-imagem-de-perfil-de-silhueta-neutra-de-genero-adequado-para-perfis-de-midia-social-icones-protetores-de-tela-e-como-um-modelo-x9xa_719432-2210.jpg?semt=ais_hybrid&w=740&q=80" width="100">
-    </div>
+<body class="pagina-perfil">
+    <main class="app">
 
+        <header class="cabecalho-perfil">
+            <div class="logo">
+                <img src="{% static 'Sprint 4/logo.ELO-removebg-preview.png' %}" alt="Logo ELO">
+            </div>
+        </header>
 
+        <section class="dados-usuario">
+            <div class="avatar">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg>
+            </div>
+            <div class="texto">
+                <h2>{{ usuario.nome|default:"Nome do usuário" }}</h2>
+                <p>{{ usuario.perfil|default:"Aluno" }} · {{ usuario.curso|default:"Engenharia de Produção" }}</p>
+                <p>Matrícula: {{ usuario.matricula|default:"0000000" }}</p>
+            </div>
+        </section>
 
-    <h2>Nome do Usuário</h2>
+        <a href="#" class="btn btn-editar">Editar perfil</a>
 
-    <h3> Meus itens reportados</h3>
+        <h2 class="titulo-itens">Meus itens reportados</h2>
 
-    <h4> Guarda chuva </h4>
-    <div class="Guarda_Chuva">
-        <img src=" https://images.tcdn.com.br/img/img_prod/1335778/guarda_chuva_casual_72cm_gcm51013_1_20250929094353_a6e865283187.jpg" width="100">
-    </div>
-    <h5> Garrafa termica </h5>
-    <div class="Garrafa_termica">
-        <img src="https://lojaibyte.vteximg.com.br/arquivos/ids/430199-1200-1200/garrafa-termica-gt-thermos-lilas-500-ml-001-min.jpg?v=638551946307600000" width="100">
-    </div>
-    <h6> Oculos </h6>
-    <div class="Oculos">
-        <img src="https://assets.sistemawbuy.com.br/arquivos/4f1985ba74662a4afb68be49c1d7fa45/produtos/67461fe5191ec/img-20241126-wa0030-67461fe549617.jpg" width="100">
-    </div>
+        <div class="abas" role="tablist">
+            <button type="button" role="tab" id="aba-achados" aria-selected="true" aria-controls="painel-achados">Achados</button>
+            <button type="button" role="tab" id="aba-perdidos" aria-selected="false" aria-controls="painel-perdidos">Perdidos</button>
+        </div>
+
+        {# Exemplo estático — troque por {% for item in itens_achados %} quando ligar ao banco #}
+        <ul class="lista-itens" id="painel-achados" role="tabpanel" aria-labelledby="aba-achados">
+            <li class="item">
+                <img src="https://images.tcdn.com.br/img/img_prod/1335778/guarda_chuva_casual_72cm_gcm51013_1_20250929094353_a6e865283187.jpg" alt="Guarda-chuva verde">
+                <div class="info">
+                    <h3>Guarda-chuva verde</h3>
+                    <p class="meta">L110 · 15/03/2026</p>
+                </div>
+                <span class="status status-aberto">Em aberto</span>
+            </li>
+            <li class="item">
+                <img src="https://lojaibyte.vteximg.com.br/arquivos/ids/430199-1200-1200/garrafa-termica-gt-thermos-lilas-500-ml-001-min.jpg?v=638551946307600000" alt="Garrafa térmica">
+                <div class="info">
+                    <h3>Garrafa térmica</h3>
+                    <p class="meta">Pastoral · 12/03/2026</p>
+                </div>
+                <span class="status status-analise">Em análise</span>
+            </li>
+            <li class="item">
+                <img src="https://assets.sistemawbuy.com.br/arquivos/4f1985ba74662a4afb68be49c1d7fa45/produtos/67461fe5191ec/img-20241126-wa0030-67461fe549617.jpg" alt="Óculos de grau">
+                <div class="info">
+                    <h3>Óculos de grau</h3>
+                    <p class="meta">RDC · 08/03/2026</p>
+                </div>
+                <span class="status status-devolvido">Devolvido</span>
+            </li>
+        </ul>
+
+        <div class="vazio" id="painel-perdidos" role="tabpanel" aria-labelledby="aba-perdidos" hidden>
+            Você ainda não reportou nenhum item perdido.
+        </div>
+
+        <a href="#" class="ver-todos">Ver todos os itens</a>
+
+        <p class="rodape-perfil">ELO · Achados e Perdidos Online — PUC-Rio</p>
+    </main>
+
+    <nav class="nav-inferior" aria-label="Navegação principal">
+        <a href="#">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M4 11l8-7 8 7v9H4z"/></svg>
+            Início
+        </a>
+        <a href="#">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"><path d="M5 8h14l-1 12H6z"/><path d="M9 8V6a3 3 0 016 0v2"/></svg>
+            Meus Itens
+        </a>
+        <a href="#">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M4 5h16v11H9l-5 4z"/></svg>
+            Conversas
+        </a>
+        <a href="#" aria-current="page">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg>
+            Perfil
+        </a>
+    </nav>
+
+    <script>
+        // Abas Achados / Perdidos
+        var abas = document.querySelectorAll('.abas [role="tab"]');
+        abas.forEach(function (aba) {
+            aba.addEventListener('click', function () {
+                abas.forEach(function (outra) {
+                    var ativa = outra === aba;
+                    outra.setAttribute('aria-selected', ativa);
+                    document.getElementById(outra.getAttribute('aria-controls')).hidden = !ativa;
+                });
+            });
+        });
+    </script>
 </body>
+
+</html>

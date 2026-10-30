@@ -1,59 +1,30 @@
-body {
-    font-family: "Roboto Mono", monospace;
-    font-optical-sizing: auto;
-    font-weight: 400;
-    font-style: normal;
-    background-color: #d1d0c9;
-}
-
-h1 {font-size: 25px;}
-
-h2 {font-size: 20px;}
-
-h3 {font-size: 16px;}
-
-.logo {
+/* ===== ELO · login.css ===== */
+.pagina-login { padding-top: 80px; }
+ 
+.pagina-login .logo { margin-bottom: 44px; }
+.pagina-login .logo img { max-width: 260px; }
+ 
+.pagina-login form { display: flex; flex-direction: column; gap: 14px; }
+.pagina-login .btn-primario { margin-top: 6px; color: #fff; }
+ 
+.links-login {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 30px;
+    gap: 18px;
+    margin-top: 26px;
+    font-size: 17px;
 }
-
-
-.texto_Logo {
+.links-login a { text-decoration: none; }
+.links-login a:hover { text-decoration: underline; }
+ 
+.criar-cadastro {
+    width: 100%;
+    padding-top: 22px;
+    border-top: 1px solid var(--borda);
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 20px;
+    gap: 12px;
+    color: var(--azul-suave);
 }
-
-.campo {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 10px;
-}
-
-.senha {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 10px;
-}
-
-.entrar {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-}
-
-.criar_cadastro{
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-self: center;
-}
-
-p {padding: 10px;}
