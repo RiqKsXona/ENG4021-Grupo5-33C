@@ -16,40 +16,35 @@
 <body class="pagina-login">
     <main class="app">
 
-        <header class="logo">
-            <img src="{% static 'Sprint 4/logo.ELO-removebg-preview.png' %}" alt="Logo ELO">
-            <p class="slogan">Achados e Perdidos Online - PUC-Rio</p>
-        </header>
+    <div class="logo">
+        <img src="{% static 'Sprint 4/logo.ELO-removebg-preview.png' %}" alt="Logo ELO" width="200">
+        <h1>Achados e Perdidos Online - PUC-Rio</h1>
+    </div>
 
-        <form method="POST">
-            {% csrf_token %}
+    <div class="campo">
+        <h3>Email ou telemóvel</h3>
+        <input type="text">
+    </div>
 
-            <div class="campo-simples">
-                <input type="email" id="emailLogin" name="emailLogin" placeholder="E-mail" aria-label="E-mail" autocomplete="email" required>
-            </div>
+    <div class="senha">
+        <h3>Senha</h3>
+        <input type="password">
+    </div>
 
-            <div class="campo-simples">
-                <input type="password" id="senhaLogin" name="senhaLogin" placeholder="Senha" aria-label="Senha" autocomplete="current-password" required>
-            </div>
+    <div class="entrar">
+        <a href="{% url 'paginaInicial' %}">
+            <button type="button">ENTRAR</button>
+        </a>
+    </div>  
 
-            <button type="submit" class="btn btn-primario">ENTRAR</button>
+    <div class="criar_cadastro">
 
-            {% if erro %}
-                <p class="erro" role="alert">{{ erro }}</p>
-            {% endif %}
-        </form>
-
-        <div class="links-login">
-            {# Troque o "#" pelo nome da sua rota: {% url 'esqueceu_senha' %} #}
-            <a href="{% url 'esqueceu_senha' %}">Esqueci minha senha</a>
-
-            <div class="criar-cadastro">
-                <span>Não tem login?</span>
-                <a href="{% url 'cadastro' %}" class="btn btn-contorno">Cadastrar</a>
-            </div>
-        </div>
-
-    </main>
+        <h4>nao tem login?</h4>
+        <a href="{% url 'cadastro' %}">
+            <button type="button">CADASTRAR</button>
+        </a>
+    </div>
+    
 </body>
 
 </html>
