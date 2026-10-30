@@ -244,3 +244,7 @@ def login(request):
             erro = "E-mail ou senha incorretos."
 
     return render(request, "Sprint 4/login.html", {"erro": erro})
+
+def sair(request):
+    request.session.flush()
+    return redirect("login")
