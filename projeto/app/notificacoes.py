@@ -1,5 +1,6 @@
 import json
 import logging
+import urllib.error
 import urllib.request
 
 from django.conf import settings
@@ -40,6 +41,10 @@ def enviar_email(para_email, para_nome, assunto, texto):
     try:
         with urllib.request.urlopen(pedido, timeout=10) as resposta:
             return resposta.status == 201
+    except urllib.error.HTTPError as erro:
+        # O Brevo explica o motivo do erro no corpo da resposta
+        logger.warning("Erro ao mandar email para %s: %s %s", para_email, erro, erro.read().decode("utf-8", "replace"))
+        return False
     except Exception as erro:
         logger.warning("Erro ao mandar email para %s: %s", para_email, erro)
         return False
