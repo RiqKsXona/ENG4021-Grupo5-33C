@@ -184,11 +184,15 @@ def cadastro(request):
         nome = request.POST.get("nomeUsuario")
         email = request.POST.get("emailUsuario")
         senha = request.POST.get("senhaUsuario")
+        confirma_senha = request.POST.get("confirmaSenhaUsuario", "")
         curso = request.POST.get("cursoUsuario")
         matricula = request.POST.get("matriculaUsuario")
         perfil = request.POST.get("perfilUsuario")
 
-        if Usuario.objects.filter(email=email).exists():
+        if senha != confirma_senha:
+            erro = "As senhas não coincidem."
+
+        elif Usuario.objects.filter(email=email).exists():
 
             erro = "Este e-mail já está cadastrado."
 
