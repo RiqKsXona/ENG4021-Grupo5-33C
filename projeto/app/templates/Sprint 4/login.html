@@ -1,44 +1,42 @@
 {% load static %}
 <!DOCTYPE html>
-
-<html>
+<html lang="pt-BR">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ELO | Login</title>
-    <link href="{% static 'Sprint 4/css/login.css' %}" rel="stylesheet" type="text/css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'Sprint 4/css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'Sprint 4/css/login.css' %}">
 </head>
 
-<body>
+<body class="pagina-login">
+    <main class="app">
 
     <div class="logo">
         <img src="{% static 'Sprint 4/logo.ELO-removebg-preview.png' %}" alt="Logo ELO" width="200">
         <h1>Achados e Perdidos Online - PUC-Rio</h1>
     </div>
-    <form method="POST">
-        
-        {% csrf_token %}
 
-        <div class="campo">
-            <h3>Email</h3>
-            <input type="email" id="emailLogin" name="emailLogin" placeholder="Digite seu email" required>
-        </div>
+    <div class="campo">
+        <h3>Email ou telemóvel</h3>
+        <input type="text">
+    </div>
 
-        <div class="senha">
-            <h3>Senha</h3>
-            <input type="password" id="senhaLogin" name="senhaLogin" placeholder="Digite sua senha" required>
-        </div>
+    <div class="senha">
+        <h3>Senha</h3>
+        <input type="password">
+    </div>
 
-        <div class="entrar">
-            <button type="submit">ENTRAR</button>
-        </div>  
+    <div class="entrar">
+        <a href="{% url 'paginaInicial' %}">
+            <button type="button">ENTRAR</button>
+        </a>
+    </div>  
 
-        {% if erro %}
-            <p>{{ erro }}</p>
-        {% endif %}
-
-    </form>
     <div class="criar_cadastro">
 
         <h4>nao tem login?</h4>

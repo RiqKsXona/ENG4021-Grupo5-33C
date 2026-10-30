@@ -1,35 +1,61 @@
 {% load static %}
 <!DOCTYPE html>
-<html>
-
+<html lang="pt-BR">
+ 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Esqueceu a Senha</title>
-    <link rel="stylesheet" href="{% static 'Sprint 4/css/css_esquece_a_senha.css' %}">
+    <title>ELO | Recuperar senha</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'Sprint 4/css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'Sprint 4/css/css_esquece_a_senha.css' %}">
 </head>
-
-
-
-<body>
-    <div class="logo">
-        <img src="https://cdn-icons-png.flaticon.com/512/309/309616.png"  width="100" >
-    </div>
-    <div class="texto_Logo">
-    <h1><b style='color : #111827'>
-        Elo
-    </div>
-
-
-    <div class="texto_rec_digite">
-    <h2>Recuperação de Senha</h2>
-    <h3>Digite o email cadastrado para receber instruções de recuperação da sua senha</h3>
-    </div>
-    <h4> Escreva seu email:</h4>
+ 
+<body class="pagina-recuperacao">
+    <main class="app">
+ 
+        <header class="topo-recuperacao">
+            <a href="{% url 'login' %}" class="voltar" aria-label="Voltar para o login">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>
+            </a>
+            <div class="logo">
+                <img src="{% static 'Sprint 4/logo.ELO-removebg-preview.png' %}" alt="Logo ELO">
+            </div>
+        </header>
+ 
+        <section class="texto-recuperacao">
+            <h1>Recuperar senha</h1>
+            <p>Digite o e-mail cadastrado para receber as instruções de recuperação da sua senha.</p>
+        </section>
+ 
+        {% if sucesso %}
+            <p class="aviso-sucesso" role="status">{{ sucesso }}</p>
+        {% endif %}
+        {% if erro %}
+            <p class="erro" role="alert">{{ erro }}</p>
+        {% endif %}
+ 
+        <form method="POST">
+            {% csrf_token %}
+ 
+            <div class="campo-card">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+                <div class="conteudo">
+                    <label for="emailRecuperacao">E-mail</label>
+                    <input type="email" id="emailRecuperacao" name="emailRecuperacao" placeholder="Escreva seu e-mail" autocomplete="email" required>
+                </div>
+            </div>
+ 
+            <div class="acoes">
+                <button type="submit" class="btn btn-primario">Enviar instruções</button>
+                <a href="{% url 'login' %}" class="btn btn-contorno">Cancelar</a>
+            </div>
+        </form>
+ 
+    </main>
 </body>
-
-
+ 
 </html>
+ 
