@@ -8,7 +8,7 @@ from .forms import ItemPerdidoForm, ItemAchadoForm
 # Página inicial
 def pag_inicial(request):
     itens_achados = ItemAchado.objects.all()
-    itens_perdidos = ItemPerdido.objects.all()
+    itens_perdidos = ItemPerdido.objects.filter(devolvido=False)
 
     return render(request, "Sprint 5/pagina_inicial.html", {
         "itens_achados": itens_achados,
@@ -117,7 +117,7 @@ def procurar_item(request):
     tipo = request.GET.get("tipo", "todos")
 
     achados = ItemAchado.objects.all().order_by("-id")
-    perdidos = ItemPerdido.objects.all().order_by("-id")
+    perdidos = ItemPerdido.objects.filter(devolvido=False).order_by("-id")
 
     # Busca por texto
     if q:
@@ -169,9 +169,29 @@ def item_perdido(request, id):
 
     item = get_object_or_404(ItemPerdido, id=id)
 
+    e_dono = request.session.get("email_usuario") == item.usuario.email
+
     return render(request, "Sprint 4/item_perdido.html", {
-        "item": item
+        "item": item,
+        "e_dono": e_dono
     })
+
+
+# Dono marca que o item perdido foi devolvido
+def marcar_devolvido(request, id):
+
+    email = request.session.get("email_usuario")
+
+    if not email:
+        return redirect("login")
+
+    item = get_object_or_404(ItemPerdido, id=id, usuario__email=email)
+
+    if request.method == "POST":
+        item.devolvido = True
+        item.save()
+
+    return redirect("item_perdido", id=item.id)
 
 
 # Cadastro de usuário
