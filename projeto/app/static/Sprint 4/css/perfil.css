@@ -1,92 +1,152 @@
-body{ font-family: "Roboto Mono", monospace;
-  font-optical-sizing: auto;
-  font-weight: 400;
-  font-style: normal;
+/* ===== ELO · perfil.css ===== */
+.pagina-perfil .app { padding: 0 0 110px; }
+ 
+/* Cabeçalho branco com cantos arredondados */
+.cabecalho-perfil {
+    background: #fff;
+    padding: 22px 20px 70px;
+    border-radius: 0 0 36px 36px;
+    display: flex;
+    justify-content: center;
 }
-h2{
+.cabecalho-perfil .logo img { max-width: 230px; }
+ 
+/* Avatar + dados (avatar sobrepõe o cabeçalho) */
+.dados-usuario {
+    display: flex;
+    align-items: flex-end;
+    gap: 16px;
+    margin: -48px 20px 0;
+}
+.avatar {
+    flex: none;
+    width: 128px;
+    height: 128px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: #c3c4c8;
+    border: 5px solid #fff;
+    color: #6b6e75;
+    overflow: hidden;
+}
+.avatar svg { width: 56px; height: 56px; }
+.avatar img { width: 100%; height: 100%; object-fit: cover; }
+ 
+.dados-usuario .texto { padding-bottom: 6px; min-width: 0; }
+.dados-usuario h2 { font-size: 26px; font-weight: 800; line-height: 1.15; letter-spacing: -.01em; }
+.dados-usuario p { font-size: 15px; color: var(--azul-suave); line-height: 1.45; }
+ 
+.pagina-perfil .btn-editar {
+    margin: 22px 20px 0;
+    width: calc(100% - 40px);
+    background: var(--amarelo-claro);
+    color: var(--azul);
+    padding: 14px;
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 12px;
+}
+.pagina-perfil .btn-editar:hover { background: #f6d96a; }
+ 
+.titulo-itens { margin: 38px 20px 16px; font-size: 28px; font-weight: 800; letter-spacing: -.01em; }
+ 
+/* Abas Achados / Perdidos */
+.abas {
+    display: flex;
+    margin: 0 20px 18px;
+    padding: 5px;
+    background: #fff;
+    border-radius: 999px;
+}
+.abas button {
+    flex: 1;
+    padding: 14px;
+    font: inherit;
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--azul-suave);
+    background: transparent;
+    border: 0;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: background-color .15s, color .15s;
+}
+.abas button[aria-selected="true"] { background: #e9b40b; color: var(--azul); font-weight: 700; }
+ 
+/* Lista de itens */
+.lista-itens {
+    list-style: none;
+    margin: 0 20px;
+    padding: 6px 26px;
+    background: #fff;
+    border-radius: 24px;
+}
+.item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 18px 0;
+}
+.item + .item { border-top: 1px solid #e3e4e7; }
+.item img {
+    flex: none;
+    width: 108px;
+    height: 104px;
+    object-fit: cover;
+    border-radius: 14px;
+    background: #d9d8d2;
+}
+.item .info { flex: 1; min-width: 0; }
+.item h3 { font-size: 20px; font-weight: 700; line-height: 1.2; }
+.item .meta { margin-top: 4px; font-size: 15px; color: var(--azul-suave); }
+ 
+.status {
+    flex: none;
+    padding: 8px 16px;
+    font-size: 15px;
+    font-weight: 600;
+    border-radius: 999px;
+    white-space: nowrap;
+}
+.status-aberto, .status-analise { background: var(--amarelo-claro); color: #1b1b1b; }
+.status-devolvido { background: #d3d3d6; color: #333; }
+ 
+.vazio { margin: 0 20px; padding: 36px 20px; text-align: center; background: #fff; border-radius: 24px; color: var(--azul-suave); }
+ 
+.ver-todos { display: block; margin: 22px auto 0; width: fit-content; font-size: 20px; font-weight: 600; color: #111827; }
+ 
+.rodape-perfil { margin-top: 60px; text-align: center; font-size: 15px; color: var(--azul-suave); padding: 0 20px; }
+ 
+/* Navegação inferior fixa */
+.nav-inferior {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 440px;
+    display: flex;
+    justify-content: space-around;
+    padding: 18px 8px 22px;
+    background: #fff;
+    border-radius: 28px 28px 0 0;
+    z-index: 10;
+}
+.nav-inferior a {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 30px;
-
+    gap: 6px;
+    font-size: 16px;
+    color: var(--azul-suave);
+    text-decoration: none;
 }
-
-h3{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 30px;
-
-}
-
-h4{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 30px;
-
-}
-
-h5{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 100px;
-
-}
-
-h6{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 300px;
-
-}
-
-.logo{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 30px;
-
-}
-
-.texto_Logo{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 30px;
-
-}
-
-.foto_perfil{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 30px;
-
-}
-
-.Guarda_Chuva{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 30px;
-
-}
-
-.Garrafa_termica{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 30px;
-
-}
-
-.Oculos{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 30px;
-
+.nav-inferior svg { width: 30px; height: 30px; }
+.nav-inferior a[aria-current="page"] { color: #b88a00; font-weight: 600; }
+ 
+@media (max-width: 380px) {
+    .item img { width: 84px; height: 84px; }
+    .item h3 { font-size: 17px; }
+    .lista-itens { padding: 6px 16px; }
 }

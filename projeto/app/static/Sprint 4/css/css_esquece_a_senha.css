@@ -1,31 +1,40 @@
-
-body{ font-family: "Roboto Mono", monospace;
-  font-optical-sizing: auto;
-  font-weight: 400;
-  font-style: normal;
+/* ===== ELO · css_esquece_a_senha.css ===== */
+body.pagina-recuperacao { background-color: #ececee; overflow-x: hidden; }
+ 
+body.pagina-recuperacao::before,
+body.pagina-recuperacao::after {
+    content: "";
+    position: fixed;
+    z-index: 0;
+    border-radius: 50%;
+    background: var(--amarelo-claro);
+    pointer-events: none;
 }
-
-
-.logo{
-    display: flex;
-    flex-direction: column;
+body.pagina-recuperacao::before { width: 200px; height: 200px; top: -110px; left: -90px; }
+body.pagina-recuperacao::after  { width: 240px; height: 240px; bottom: -130px; right: -100px; }
+ 
+.pagina-recuperacao .app { z-index: 1; padding-top: 20px; }
+ 
+.topo-recuperacao {
+    display: grid;
+    grid-template-columns: 44px 1fr 44px;
     align-items: center;
-    padding: 30px;
-
 }
-
-.texto_Logo{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 30px;
-
-}
-
-.texto_rec_digite{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 30px;
-
+.topo-recuperacao .voltar { display: grid; place-items: center; width: 44px; height: 44px; color: var(--azul); }
+.topo-recuperacao .voltar svg { width: 26px; height: 26px; }
+.topo-recuperacao .logo img { max-width: 210px; }
+ 
+.texto-recuperacao { margin: 40px 0 26px; }
+.texto-recuperacao h1 { font-size: 30px; font-weight: 800; letter-spacing: -.01em; margin-bottom: 10px; }
+.texto-recuperacao p { font-size: 17px; line-height: 1.5; color: var(--azul-suave); max-width: 38ch; }
+ 
+.pagina-recuperacao form { display: flex; flex-direction: column; gap: 12px; }
+.pagina-recuperacao .acoes { display: flex; flex-direction: column; gap: 10px; margin-top: 12px; }
+ 
+.aviso-sucesso {
+    margin-bottom: 14px;
+    padding: 14px 16px;
+    background: var(--amarelo-claro);
+    border-radius: var(--raio);
+    font-weight: 500;
 }

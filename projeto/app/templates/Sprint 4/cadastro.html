@@ -1,75 +1,143 @@
 {% load static %}
 <!DOCTYPE html>
-
-<html>
+<html lang="pt-BR">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- para páginas que vão ser abertas em celular -->
     <title>ELO | Cadastro</title>
-    <link href="{% static 'Sprint 4/css/cadastro.css' %}" rel="stylesheet" type="text/css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'Sprint 4/css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'Sprint 4/css/cadastro.css' %}">
 </head>
 
-<body>
+<body class="pagina-cadastro">
+    <main class="app">
 
-    <div class="logo">
-        <img src="{% static 'Sprint 4/logo.ELO-removebg-preview.png' %}" alt="Logo ELO" width="200">
-            <h2><strong>Crie sua conta</strong></h2>
-    </div>
-    
-    {% if erro %}
-        <p style="color: red;">{{ erro }}</p>
-    {% endif %}
+        <header class="topo-cadastro">
+            <a href="{% url 'login' %}" class="voltar" aria-label="Voltar para o login">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>
+            </a>
+            <div class="logo">
+                <img src="{% static 'Sprint 4/logo.ELO-removebg-preview.png' %}" alt="Logo ELO">
+            </div>
+        </header>
 
-    <form method="POST">
-        {% csrf_token %}
+        <h1 class="titulo-cadastro">Criar sua conta</h1>
 
-        <div class="nome">
-            <h4>Nome Completo</h4>
-            <input type="text" name="nomeUsuario" placeholder="Digite seu nome completo" required>
-        </div>
+        {% if erro %}
+            <p class="erro" role="alert">{{ erro }}</p>
+        {% endif %}
 
-        <div class="Matricula">
+        <form method="POST">
+            {% csrf_token %}
 
-            <h4>Matrícula</h4>
-            <input type="text" name="matriculaUsuario" placeholder="Digite sua matrícula" required>
-        </div>
+            <div class="campo-card">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7z"/></svg>
+                <div class="conteudo">
+                    <label for="nomeUsuario">Nome completo</label>
+                    <input type="text" id="nomeUsuario" name="nomeUsuario" placeholder="Digite seu nome completo" autocomplete="name" required>
+                </div>
+            </div>
 
-        <div class="email">
+            <div class="campo-card">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7z"/></svg>
+                <div class="conteudo">
+                    <label for="usuarioUsuario">Novo usuário</label>
+                    <input type="text" id="usuarioUsuario" name="usuarioUsuario" placeholder="Digite seu usuário" autocomplete="username" required>
+                </div>
+            </div>
 
-            <h4>Email</h4>
-            <input type="email" name="emailUsuario" placeholder="Digite seu email" required>
-        </div>
+            <div class="campo-card">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="1.6"/><path d="M6.5 16c.4-1.6 1.4-2.3 2.5-2.3s2.1.7 2.5 2.3M14 9h4M14 12h4M14 15h4"/></svg>
+                <div class="conteudo">
+                    <label for="matriculaUsuario">Matrícula</label>
+                    <input type="text" id="matriculaUsuario" name="matriculaUsuario" placeholder="Digite sua matrícula da PUC-Rio" inputmode="numeric" required>
+                </div>
+            </div>
 
-        <div class="Curso">
+            <div class="campo-card">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="1.6"/><path d="M6.5 16c.4-1.6 1.4-2.3 2.5-2.3s2.1.7 2.5 2.3M14 9h4M14 12h4M14 15h4"/></svg>
+                <div class="conteudo">
+                    <label for="cpfUsuario">CPF</label>
+                    <input type="text" id="cpfUsuario" name="cpfUsuario" placeholder="Digite seu CPF" inputmode="numeric" maxlength="14" required>
+                </div>
+            </div>
 
-            <h4>Curso</h4>
-            <input type="text" name="cursoUsuario" placeholder="Digite seu curso" required>
-        </div>
+            <div class="campo-card">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 9l10-5 10 5-10 5z"/><path d="M6 11.5V16c0 1.5 2.7 3 6 3s6-1.5 6-3v-4.5"/></svg>
+                <div class="conteudo">
+                    <label for="cursoUsuario">Curso</label>
+                    <input type="text" id="cursoUsuario" name="cursoUsuario" placeholder="Digite seu curso" required>
+                </div>
+            </div>
 
-        <div class="Perfil">
-            <h4>Perfil</h4>
-            <input type="text" name="perfilUsuario" placeholder="Aluno, professor ou funcionário" required>
-        </div>
+            <div class="campo-card">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 3l2.7 5.6 6.1.8-4.5 4.2 1.1 6-5.4-3-5.4 3 1.1-6L3.2 9.4l6.1-.8z"/></svg>
+                <div class="conteudo">
+                    <label for="perfilUsuario">Perfil</label>
+                    <select id="perfilUsuario" name="perfilUsuario" required>
+                        <option value="" disabled selected>Selecione seu perfil</option>
+                        <option value="Aluno">Aluno</option>
+                        <option value="Professor">Professor</option>
+                        <option value="Funcionário">Funcionário</option>
+                    </select>
+                </div>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:24px;height:24px"><path d="M6 9l6 6 6-6"/></svg>
+            </div>
 
-        <div class="Senha">
+            <div class="campo-card">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 018 0v3"/><circle cx="12" cy="16" r="1"/></svg>
+                <div class="conteudo">
+                    <label for="senhaUsuario">Senha</label>
+                    <input type="password" id="senhaUsuario" name="senhaUsuario" placeholder="Digite sua senha" autocomplete="new-password" required>
+                </div>
+                <button type="button" class="btn-icone" data-alvo="senhaUsuario" aria-label="Mostrar senha">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>
+                </button>
+            </div>
 
-            <h4>Senha</h4>
-            <input type="password" name="senhaUsuario" placeholder="Digite sua senha" required>
-        </div>
+            <div class="campo-card">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 018 0v3"/><circle cx="12" cy="16" r="1"/></svg>
+                <div class="conteudo">
+                    <label for="confirmaSenhaUsuario">Confirmar senha</label>
+                    <input type="password" id="confirmaSenhaUsuario" name="confirmaSenhaUsuario" placeholder="Confirme sua senha" autocomplete="new-password" required>
+                </div>
+                <button type="button" class="btn-icone" data-alvo="confirmaSenhaUsuario" aria-label="Mostrar senha">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>
+                </button>
+            </div>
 
-        <div class="cadastrar">
-            <button type="submit">CADASTRAR</button>
-        </div>
-    </form>
-        <div class="cancelar">
-            <p>
-                <small>Já possui uma conta?</small>
-                <a href="{% url 'login' %}"><u>Entrar</u></a>
-            </p>
-        </div>
-    
+            <div class="acoes">
+                <button type="submit" class="btn btn-primario">Cadastrar</button>
+                <a href="{% url 'login' %}" class="btn btn-contorno">Cancelar</a>
+            </div>
+        </form>
+
+    </main>
+
+    <script>
+        // Mostrar / ocultar senha
+        document.querySelectorAll('.btn-icone[data-alvo]').forEach(function (botao) {
+            botao.addEventListener('click', function () {
+                var campo = document.getElementById(botao.dataset.alvo);
+                var mostrando = campo.type === 'text';
+                campo.type = mostrando ? 'password' : 'text';
+                botao.setAttribute('aria-label', mostrando ? 'Mostrar senha' : 'Ocultar senha');
+            });
+        });
+
+        // Confirmação de senha
+        var senha = document.getElementById('senhaUsuario');
+        var confirma = document.getElementById('confirmaSenhaUsuario');
+        function validar() {
+            confirma.setCustomValidity(confirma.value && confirma.value !== senha.value ? 'As senhas não coincidem.' : '');
+        }
+        senha.addEventListener('input', validar);
+        confirma.addEventListener('input', validar);
+    </script>
 </body>
 
 </html>
