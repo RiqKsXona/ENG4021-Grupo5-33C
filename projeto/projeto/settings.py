@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.1/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -126,6 +127,10 @@ MAILERS = {
         'BACKEND': 'django.core.mail.backends.console.EmailBackend',
     },
 }
+
+# API do Brevo (a chave fica numa variável de ambiente, nunca no GitHub)
+BREVO_API_KEY = os.environ.get("BREVO_API_KEY", "")
+EMAIL_REMETENTE = os.environ.get("EMAIL_REMETENTE", "")
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
