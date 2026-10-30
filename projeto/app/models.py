@@ -1,6 +1,8 @@
 from django.db import models
 from django.core.validators import FileExtensionValidator
- 
+from django.contrib.auth.hashers import make_password, check_password
+
+
 CATEGORIAS = [
     ("eletronicos", "Eletrônicos"),
     ("roupas", "Roupas e acessórios"),
@@ -15,7 +17,13 @@ EXTENSOES_FOTO = ["jpg", "jpeg", "png", "webp", "gif"]
  
 class ItemAchado(models.Model):
     CATEGORIA_CHOICES = CATEGORIAS
- 
+
+    usuario = models.ForeignKey(
+        "Usuario",
+        on_delete=models.CASCADE,
+        related_name="itens_achados"
+        )
+    
     ONDE_ESTA_CHOICES = [
         ("comigo", "Está comigo"),
         ("prefeitura", "Entreguei na prefeitura"),
@@ -45,7 +53,13 @@ class ItemAchado(models.Model):
  
 class ItemPerdido(models.Model):
     CATEGORIA_CHOICES = CATEGORIAS
- 
+
+    usuario = models.ForeignKey(
+    "Usuario",
+    on_delete=models.CASCADE,
+    related_name="itens_perdidos"
+    )
+
     foto = models.FileField(
         upload_to="itens_perdidos/",
         blank=True,
@@ -73,6 +87,12 @@ class Usuario(models.Model):
     curso = models.CharField(max_length=100)
     matricula = models.CharField(max_length=10)
     perfil = models.CharField(max_length=100)
- 
+
+    def set_senha(self, senha):
+        self.senha = make_password(senha)
+
+    def verificar_senha(self, senha):
+        return check_password(senha, self.senha)
+    
     def __str__(self):
         return self.nome
