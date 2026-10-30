@@ -28,7 +28,7 @@ def esqueceu_senha(request):
 
 # Página de perfil
 def perfil(request):
-
+    print("SESSÃO RECEBIDA:", request.session.get("email_usuario"))
     email = request.session.get("email_usuario")
 
     if not email:
@@ -48,7 +48,7 @@ def perfil(request):
 
 # Reportar item achado
 def reportar_achado(request):
-
+    print("SESSÃO RECEBIDA:", request.session.get("email_usuario"))
     email = request.session.get("email_usuario")
 
     if not email:
@@ -65,7 +65,7 @@ def reportar_achado(request):
             item.save()
 
             messages.success(request, "Item achado publicado com sucesso!")
-            return redirect("perfil")
+            return redirect("paginaInicial")
 
     else:
         form = ItemAchadoForm()
@@ -77,7 +77,7 @@ def reportar_achado(request):
 
 # Reportar item perdido
 def reportar_perdido(request):
-
+    print("SESSÃO RECEBIDA:", request.session.get("email_usuario"))
     email = request.session.get("email_usuario")
 
     if not email:
@@ -98,7 +98,7 @@ def reportar_perdido(request):
             sucesso = True
             messages.success(request, "Item perdido publicado com sucesso!")
 
-            return redirect("perfil")
+            return redirect("paginaInicial")
 
     else:
         form = ItemPerdidoForm()
@@ -218,26 +218,29 @@ def cadastro(request):
 
 # Login
 def login(request):
-
     erro = None
 
-    if request.method == "POST":
+    print("LOGIN FOI ACESSADO")
+    print("MÉTODO:", request.method)
 
-        email = request.POST.get("emailLogin", "").strip()
+    if request.method == "POST":
+        email = request.POST.get("emailLogin", "").strip().lower()
         senha = request.POST.get("senhaLogin", "")
+
+        print("EMAIL RECEBIDO:", email)
 
         usuario = Usuario.objects.filter(email=email).first()
 
         if usuario is not None and usuario.verificar_senha(senha):
-
             request.session["email_usuario"] = usuario.email
+            request.session.save()
+
+            print("SESSÃO CRIADA:", request.session.get("email_usuario"))
 
             return redirect("paginaInicial")
 
         else:
-
+            print("FALHA NA AUTENTICAÇÃO")
             erro = "E-mail ou senha incorretos."
 
-    return render(request, "Sprint 4/login.html", {
-        "erro": erro
-    })
+    return render(request, "Sprint 4/login.html", {"erro": erro})
