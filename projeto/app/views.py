@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.db.models import Q
 from django.contrib import messages
-from .models import ItemAchado, ItemPerdido, Usuario
+from .models import ItemAchado, ItemPerdido, Usuario, Conversa, Mensagem
 from .forms import ItemPerdidoForm, ItemAchadoForm
+from django.http import Http404
 
 
 # Página inicial
@@ -248,3 +249,73 @@ def login(request):
 def sair(request):
     request.session.flush()
     return redirect("login")
+
+def conversa(request, id):
+    email = request.session.get("email_usuario")
+
+    if not email:
+        return redirect("login")
+
+    usuario = get_object_or_404(Usuario, email=email)
+
+    conversa = get_object_or_404(Conversa, id=id)
+
+    if usuario == conversa.participante1:
+        outra_pessoa = conversa.participante2
+    elif usuario == conversa.participante2:
+        outra_pessoa = conversa.participante1
+    else:
+        raise Http404("Conversa não encontrada.")
+
+    erro = None
+    texto_digitado = ""
+
+    if request.method == "POST":
+        texto_digitado = request.POST.get("mensagem", "").strip()
+
+        if texto_digitado:
+            Mensagem.objects.create(
+                conversa=conversa,
+                remetente=usuario,
+                texto=texto_digitado
+            )
+
+            return redirect("conversa", id=conversa.id)
+        else:
+            erro = "Digite uma mensagem antes de enviar."
+
+    mensagens = conversa.mensagens.all().order_by("criada_em", "id")
+
+    return render(request, "conversa.html", {
+        "conversa": conversa,
+        "item": conversa.item,
+        "usuario": usuario,
+        "outra_pessoa": outra_pessoa,
+        "mensagens": mensagens,
+        "erro": erro,
+        "texto_digitado": texto_digitado
+    })
+
+def iniciar_conversa(request, id):
+    email = request.session.get("email_usuario")
+
+    if not email:
+        return redirect("login")
+
+    usuario = get_object_or_404(Usuario, email=email)
+
+    item = get_object_or_404(ItemPerdido, id=id)
+
+    if request.method != "POST":
+        return redirect("item_perdido", id=item.id)
+
+    if usuario == item.usuario:
+        return redirect("item_perdido", id=item.id)
+
+    conversa, criada = Conversa.objects.get_or_create(
+        item=item,
+        participante1=item.usuario,
+        participante2=usuario
+    )
+
+    return redirect("conversa", id=conversa.id)

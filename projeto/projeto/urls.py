@@ -16,7 +16,9 @@ urlpatterns = [
     path('item-perdido/<int:id>/', item_perdido, name="item_perdido"),
     path('', cadastro , name = "cadastro"),
     path('login/', login, name="login"),
-    path('sair/', sair, name="sair")
+    path('sair/', sair, name="sair"),
+    path('conversas/<int:id>/', conversa, name="conversa"),
+    path('item-perdido/<int:id>/conversar/', iniciar_conversa, name="iniciar_conversa"),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

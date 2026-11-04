@@ -96,3 +96,45 @@ class Usuario(models.Model):
     
     def __str__(self):
         return self.nome
+
+class Conversa(models.Model):
+    item = models.ForeignKey(
+        ItemPerdido,
+        on_delete=models.CASCADE,
+        related_name="conversas"
+    )
+
+    participante1 = models.ForeignKey(
+        Usuario,
+        on_delete=models.CASCADE,
+        related_name="conversas_participante1"
+    )
+
+    participante2 = models.ForeignKey(
+        Usuario,
+        on_delete=models.CASCADE,
+        related_name="conversas_participante2"
+    )
+
+    def __str__(self):
+        return f"{self.item.titulo} - {self.participante1.nome} e {self.participante2.nome}"
+
+class Mensagem(models.Model):
+    conversa = models.ForeignKey(
+        Conversa,
+        on_delete=models.CASCADE,
+        related_name="mensagens"
+    )
+
+    remetente = models.ForeignKey(
+        Usuario,
+        on_delete=models.CASCADE,
+        related_name="mensagens_enviadas"
+    )
+
+    texto = models.TextField()
+
+    criada_em = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Mensagem de {self.remetente.nome}"
