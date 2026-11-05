@@ -71,7 +71,8 @@ class ItemPerdido(models.Model):
     local = models.CharField("Onde perdeu", max_length=200)
     data = models.DateTimeField("Quando perdeu", blank=True, null=True)
     descricao = models.TextField("Características", blank=True)
- 
+    devolvido = models.BooleanField(default=False)
+
     class Meta:
         verbose_name = "Item perdido"
         verbose_name_plural = "Itens perdidos"
