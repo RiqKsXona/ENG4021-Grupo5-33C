@@ -102,7 +102,17 @@ class Conversa(models.Model):
     item = models.ForeignKey(
         ItemPerdido,
         on_delete=models.CASCADE,
-        related_name="conversas"
+        related_name="conversas",
+        null=True,
+        blank=True
+    )
+
+    item_achado = models.ForeignKey(
+        ItemAchado,
+        on_delete=models.CASCADE,
+        related_name="conversas",
+        null=True,
+        blank=True
     )
 
     participante1 = models.ForeignKey(
@@ -118,8 +128,13 @@ class Conversa(models.Model):
     )
 
     def __str__(self):
-        return f"{self.item.titulo} - {self.participante1.nome} e {self.participante2.nome}"
+        if self.item:
+            nome_item = self.item.titulo
+        else:
+            nome_item = self.item_achado.nome_objeto
 
+        return f"{nome_item} - {self.participante1.nome} e {self.participante2.nome}"
+    
 class Mensagem(models.Model):
     conversa = models.ForeignKey(
         Conversa,

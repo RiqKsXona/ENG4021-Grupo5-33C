@@ -323,7 +323,8 @@ def conversa(request, id):
         "texto_digitado": texto_digitado
     })
 
-def iniciar_conversa(request, id):
+def iniciar_conversa(request, id, tipo="perdido"):
+
     email = request.session.get("email_usuario")
 
     if not email:
@@ -331,18 +332,25 @@ def iniciar_conversa(request, id):
 
     usuario = get_object_or_404(Usuario, email=email)
 
-    item = get_object_or_404(ItemPerdido, id=id)
+    if tipo == "achado":
+        item = get_object_or_404(ItemAchado, id=id)
+        campo_item = {"item_achado": item}
+    else:
+        item = get_object_or_404(ItemPerdido, id=id)
+        campo_item = {"item": item}
 
-    if request.method != "POST":
-        return redirect("item_perdido", id=item.id)
+    
+    if item.usuario == usuario:
+        return redirect("item_achado" if tipo == "achado" else "item_perdido", id=id)
 
-    if usuario == item.usuario:
-        return redirect("item_perdido", id=item.id)
+    if request.method == "POST":
 
-    conversa, criada = Conversa.objects.get_or_create(
-        item=item,
-        participante1=item.usuario,
-        participante2=usuario
-    )
+        conversa, criada = Conversa.objects.get_or_create(
+            **campo_item,
+            participante1=item.usuario,
+            participante2=usuario
+        )
 
-    return redirect("conversa", id=conversa.id)
+        return redirect("conversa", id=conversa.id)
+
+    return redirect("item_achado" if tipo == "achado" else "item_perdido", id=id)

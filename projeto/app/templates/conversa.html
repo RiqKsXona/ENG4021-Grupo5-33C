@@ -21,7 +21,11 @@
         <h2>Conversa</h2>
 
         <div class="informacoes">
-            <h3>{{ item.titulo }}</h3>
+            <h3>{% if conversa.item %}
+                    {{ conversa.item.titulo }}
+                {% elif conversa.item_achado %}
+                    {{ conversa.item_achado.nome_objeto }}
+                {% endif %}</h3>
             <p>Conversa com {{ outra_pessoa.nome }}</p>
         </div>
 
