@@ -66,7 +66,7 @@
             <div class="abas">
 
                 <button type="button"
-                        class="aba ativa"
+                        class="aba {% if aba == 'perdidos' %}ativa{% endif %}"
                         id="botao-perdidos"
                         onclick="mostrarAba('perdidos')">
 
@@ -75,7 +75,7 @@
                 </button>
 
                 <button type="button"
-                        class="aba"
+                        class="aba {% if aba == 'achados' %}ativa{% endif %}"
                         id="botao-achados"
                         onclick="mostrarAba('achados')">
 
@@ -87,7 +87,15 @@
 
 
             <!-- ABA DE ITENS PERDIDOS -->
-            <div class="conteudo-aba ativo" id="perdidos">
+            <div class="conteudo-aba {% if aba == 'perdidos' %}ativo{% endif %}" id="perdidos">
+
+                <form method="get" class="barra-pesquisa">
+                    <input type="text"
+                           name="busca_perdidos"
+                           value="{{ busca_perdidos }}"
+                           placeholder="Pesquisar item perdido pelo nome">
+                    <button type="submit">Pesquisar</button>
+                </form>
 
                 <div class="lista-itens">
 
@@ -140,7 +148,11 @@
                     {% empty %}
 
                         <div class="mensagem-vazia">
-                            <p>Nenhum item perdido cadastrado no momento.</p>
+                            {% if busca_perdidos %}
+                                <p>Nenhum item perdido encontrado com "{{ busca_perdidos }}".</p>
+                            {% else %}
+                                <p>Nenhum item perdido cadastrado no momento.</p>
+                            {% endif %}
                         </div>
 
                     {% endfor %}
@@ -151,7 +163,15 @@
 
 
             <!-- ABA DE ITENS ACHADOS -->
-            <div class="conteudo-aba" id="achados">
+            <div class="conteudo-aba {% if aba == 'achados' %}ativo{% endif %}" id="achados">
+
+                <form method="get" class="barra-pesquisa">
+                    <input type="text"
+                           name="busca_achados"
+                           value="{{ busca_achados }}"
+                           placeholder="Pesquisar item achado pelo nome">
+                    <button type="submit">Pesquisar</button>
+                </form>
 
                 <div class="lista-itens">
 
@@ -204,7 +224,11 @@
                     {% empty %}
 
                         <div class="mensagem-vazia">
-                            <p>Nenhum item achado cadastrado no momento.</p>
+                            {% if busca_achados %}
+                                <p>Nenhum item achado encontrado com "{{ busca_achados }}".</p>
+                            {% else %}
+                                <p>Nenhum item achado cadastrado no momento.</p>
+                            {% endif %}
                         </div>
 
                     {% endfor %}
