@@ -22,7 +22,7 @@
         </header>
     
 
-        <h1 class='titulo'> Reportar Item Achado </h1>
+        <h1 class='titulo'>{% if editando %}Editar Item Achado{% else %}Reportar Item Achado{% endif %}</h1>
 
         <form method="post" enctype="multipart/form-data" novalidate>
             {% csrf_token %}
@@ -75,7 +75,7 @@
             {% for e in form.onde_esta_agora.errors %}<p class="erro">{{ e }}</p>{% endfor %}
 
             <div class="botoes">
-                <button type="submit" class="botao_reportar">Publicar item achado</button>
+                <button type="submit" class="botao_reportar">{% if editando %}Salvar alterações{% else %}Publicar item achado{% endif %}</button>
                 <a href="{% url 'perfil' %}" class="botao_voltar">Cancelar</a>
             </div>
 

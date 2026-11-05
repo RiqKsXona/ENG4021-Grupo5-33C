@@ -22,6 +22,10 @@ urlpatterns = [
     path('item-perdido/<int:id>/conversar/', iniciar_conversa, name="iniciar_conversa"),
     path('item-achado/<int:id>/',item_perdido,{'tipo': 'achado'},name="item_achado"),
     path('item-achado/<int:id>/conversar/',iniciar_conversa,{'tipo': 'achado'},name="iniciar_conversa_achado"),
+    path('item-perdido/<int:id>/editar/', editar_item, name="editar_perdido"),
+    path('item-perdido/<int:id>/excluir/', excluir_item, name="excluir_perdido"),
+    path('item-achado/<int:id>/editar/', editar_item, {'tipo': 'achado'}, name="editar_achado"),
+    path('item-achado/<int:id>/excluir/', excluir_item, {'tipo': 'achado'}, name="excluir_achado"),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
