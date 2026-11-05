@@ -1,0 +1,78 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversa - ELO</title>
+    <link rel="stylesheet" href="{% static 'css/conversa.css' %}">
+</head>
+<body>
+    <main>
+        <header>
+            <a href="{% url 'paginaInicial' %}" class="voltar" aria-label="Voltar">←</a>
+
+            <div class="logo">
+                <img src="{% static 'Sprint 4/logo.ELO-removebg-preview.png' %}" alt="Logo ELO">
+            </div>
+        </header>
+
+        <h2>Conversa</h2>
+
+        <div class="informacoes">
+            <h3>{% if conversa.item %}
+                    {{ conversa.item.titulo }}
+                {% elif conversa.item_achado %}
+                    {{ conversa.item_achado.nome_objeto }}
+                {% endif %}</h3>
+            <p>Conversa com {{ outra_pessoa.nome }}</p>
+        </div>
+
+        <div class="mensagens">
+            {% for mensagem in mensagens %}
+                <div class="{% if mensagem.remetente == usuario %}enviada{% else %}recebida{% endif %}">
+                    <p>{{ mensagem.texto }}</p>
+
+                    <span>
+                        {% if mensagem.remetente == usuario %}
+                            Você
+                        {% else %}
+                            {{ mensagem.remetente.nome }}
+                        {% endif %}
+                        · {{ mensagem.criada_em|date:"H:i" }}
+                    </span>
+                </div>
+            {% empty %}
+                <p>Nenhuma mensagem ainda. Comece a conversa!</p>
+            {% endfor %}
+        </div>
+
+        <form method="post" class="envio">
+            {% csrf_token %}
+
+            {% if erro %}
+                <p role="alert">{{ erro }}</p>
+            {% endif %}
+
+            <label for="mensagem">Sua mensagem</label>
+
+            <textarea
+                id="mensagem"
+                name="mensagem"
+                rows="2"
+                placeholder="Digite sua mensagem"
+                required
+            >{{ texto_digitado|default:"" }}</textarea>
+
+            <button type="submit">Enviar mensagem</button>
+        </form>
+
+        <nav class="menu">
+            <a href="{% url 'paginaInicial' %}">Página inicial</a>
+            <a href="#">Conversas</a>
+            <a href="{% url 'perfil' %}">Perfil</a>
+        </nav>
+    </main>
+</body>
+</html>

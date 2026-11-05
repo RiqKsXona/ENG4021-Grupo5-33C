@@ -1,116 +1,228 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="pt-BR">
 
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ELO | Perfil</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'Sprint 4/css/base.css' %}">
+
     <link rel="stylesheet" href="{% static 'Sprint 4/css/perfil.css' %}">
 </head>
 
-<body class="pagina-perfil">
-    <main class="app">
+<body>
 
-        <header class="cabecalho-perfil">
-            <div class="logo">
-                <img src="{% static 'Sprint 4/logo.ELO-removebg-preview.png' %}" alt="Logo ELO">
+    <!-- CABEÇALHO -->
+    <header>
+        <div class="logo">
+            <div class="logo-imagem">
+                <img src="{% static 'Sprint 5/logo.ELO-removebg-preview.png' %}"
+                    width="200"
+                    alt="Logo ELO">
             </div>
-        </header>
+        </div>
 
+        <nav class="Menu">
+            <div class="sair">
+                <h4><a href="{% url 'sair' %}">SAIR DA CONTA</a></h4>
+            </div>
+            
+            <div class="pagina_inicial">
+                <h4><a href="{% url 'reportar_achado' %}">Reportar item achado</a></h4>
+            </div>
+
+            <div class="reportar_item">
+                <h4><a href="{% url 'reportarPerdido' %}">Reportar item perdido</a></h4>
+            </div>
+
+            <div class="Perfil">
+                <h4><a href="{% url 'paginaInicial' %}">Pagina inicial</a></h4>
+            </div>
+        </nav>
+    </header>
+
+
+    <!-- CONTEÚDO PRINCIPAL -->
+    <main class="container">
+
+        <h1>Perfil</h1>
+
+        <!-- INFORMAÇÕES DO USUÁRIO -->
         <section class="dados-usuario">
-            <div class="avatar">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg>
+
+            <div class="icone-usuario">
+                <span>♙</span>
             </div>
-            <div class="texto">
-                <h2>{{ usuario.nome|default:"Nome do usuário" }}</h2>
-                <p>{{ usuario.perfil|default:"Aluno" }} · {{ usuario.curso|default:"Engenharia de Produção" }}</p>
-                <p>Matrícula: {{ usuario.matricula|default:"0000000" }}</p>
+
+            <div class="informacoes-usuario">
+                <h2>{{ usuario.nome }}</h2>
+
+                <p>
+                    {{ usuario.perfil }}
+                    {% if usuario.curso %}
+                        · {{ usuario.curso }}
+                    {% endif %}
+                </p>
+
+                <p>
+                    Matrícula: {{ usuario.matricula }}
+                </p>
+
+                <p>
+                    E-mail: {{ usuario.email }}
+                </p>
             </div>
+
         </section>
 
-        <a href="#" class="btn btn-editar">Editar perfil</a>
 
-        <h2 class="titulo-itens">Meus itens reportados</h2>
+        <!-- ITENS REPORTADOS -->
+        <section class="secao-itens">
 
-        <div class="abas" role="tablist">
-            <button type="button" role="tab" id="aba-achados" aria-selected="true" aria-controls="painel-achados">Achados</button>
-            <button type="button" role="tab" id="aba-perdidos" aria-selected="false" aria-controls="painel-perdidos">Perdidos</button>
+            <h2 class="titulo-itens">Meus itens reportados</h2>
+
+            <!-- ABAS -->
+            <div class="abas">
+
+                <button class="aba ativa"
+                        id="botao-achados"
+                        onclick="mostrarAba('achados')">
+                    Achados
+                </button>
+
+                <button class="aba"
+                        id="botao-perdidos"
+                        onclick="mostrarAba('perdidos')">
+                    Perdidos
+                </button>
+
+            </div>
+
+
+            <!-- ITENS ACHADOS -->
+            <div class="conteudo-aba ativo" id="achados">
+
+                <div class="lista-itens">
+
+                    {% for item in itens_achados %}
+
+                        <article class="item">
+
+                            <div class="foto-item">
+                                {% if item.foto %}
+                                    <img src="{{ item.foto.url }}" alt="{{ item.nome_objeto }}">
+                                {% else %}
+                                    <span>📦</span>
+                                {% endif %}
+                            </div>
+
+                            <div class="descricao-item">
+                                <h3>{{ item.nome_objeto }}</h3>
+
+                                <p>
+                                    {{ item.onde_encontrou }}
+                                    {% if item.data_encontro %}
+                                        · {{ item.data_encontro|date:"d/m/Y" }}
+                                    {% endif %}
+                                </p>
+                            </div>
+
+                            <span class="categoria-item">
+                                {{ item.get_categoria_display }}
+                            </span>
+
+                        </article>
+
+                    {% empty %}
+
+                        <div class="mensagem-vazia">
+                            <p>Você ainda não publicou nenhum item achado.</p>
+                        </div>
+
+                    {% endfor %}
+
+                </div>
+
+            </div>
+
+
+            <!-- ITENS PERDIDOS -->
+            <div class="conteudo-aba" id="perdidos">
+
+                <div class="lista-itens">
+
+                    {% for item in itens_perdidos %}
+
+                        <article class="item">
+
+                            <div class="foto-item">
+                                {% if item.foto %}
+                                    <img src="{{ item.foto.url }}" alt="{{ item.titulo }}">
+                                {% else %}
+                                    <span>📦</span>
+                                {% endif %}
+                            </div>
+
+                            <div class="descricao-item">
+                                <h3>{{ item.titulo }}</h3>
+
+                                <p>
+                                    {{ item.local }}
+                                    {% if item.data %}
+                                        · {{ item.data|date:"d/m/Y" }}
+                                    {% endif %}
+                                </p>
+                            </div>
+
+                            <span class="categoria-item">
+                                {{ item.get_categoria_display }}
+                            </span>
+
+                        </article>
+
+                    {% empty %}
+
+                        <div class="mensagem-vazia">
+                            <p>Você ainda não publicou nenhum item perdido.</p>
+                        </div>
+
+                    {% endfor %}
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <div class="link-itens">
+            <a href="{% url 'paginaInicial' %}">Ver todos os itens</a>
         </div>
 
-        {# Exemplo estático — troque por {% for item in itens_achados %} quando ligar ao banco #}
-        <ul class="lista-itens" id="painel-achados" role="tabpanel" aria-labelledby="aba-achados">
-            <li class="item">
-                <img src="https://images.tcdn.com.br/img/img_prod/1335778/guarda_chuva_casual_72cm_gcm51013_1_20250929094353_a6e865283187.jpg" alt="Guarda-chuva verde">
-                <div class="info">
-                    <h3>Guarda-chuva verde</h3>
-                    <p class="meta">L110 · 15/03/2026</p>
-                </div>
-                <span class="status status-aberto">Em aberto</span>
-            </li>
-            <li class="item">
-                <img src="https://lojaibyte.vteximg.com.br/arquivos/ids/430199-1200-1200/garrafa-termica-gt-thermos-lilas-500-ml-001-min.jpg?v=638551946307600000" alt="Garrafa térmica">
-                <div class="info">
-                    <h3>Garrafa térmica</h3>
-                    <p class="meta">Pastoral · 12/03/2026</p>
-                </div>
-                <span class="status status-analise">Em análise</span>
-            </li>
-            <li class="item">
-                <img src="https://assets.sistemawbuy.com.br/arquivos/4f1985ba74662a4afb68be49c1d7fa45/produtos/67461fe5191ec/img-20241126-wa0030-67461fe549617.jpg" alt="Óculos de grau">
-                <div class="info">
-                    <h3>Óculos de grau</h3>
-                    <p class="meta">RDC · 08/03/2026</p>
-                </div>
-                <span class="status status-devolvido">Devolvido</span>
-            </li>
-        </ul>
-
-        <div class="vazio" id="painel-perdidos" role="tabpanel" aria-labelledby="aba-perdidos" hidden>
-            Você ainda não reportou nenhum item perdido.
-        </div>
-
-        <a href="#" class="ver-todos">Ver todos os itens</a>
-
-        <p class="rodape-perfil">ELO · Achados e Perdidos Online — PUC-Rio</p>
     </main>
 
-    <nav class="nav-inferior" aria-label="Navegação principal">
-        <a href="#">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M4 11l8-7 8 7v9H4z"/></svg>
-            Início
-        </a>
-        <a href="#">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"><path d="M5 8h14l-1 12H6z"/><path d="M9 8V6a3 3 0 016 0v2"/></svg>
-            Meus Itens
-        </a>
-        <a href="#">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M4 5h16v11H9l-5 4z"/></svg>
-            Conversas
-        </a>
-        <a href="#" aria-current="page">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg>
-            Perfil
-        </a>
-    </nav>
 
+    <!-- ALTERNÂNCIA ENTRE AS ABAS -->
     <script>
-        // Abas Achados / Perdidos
-        var abas = document.querySelectorAll('.abas [role="tab"]');
-        abas.forEach(function (aba) {
-            aba.addEventListener('click', function () {
-                abas.forEach(function (outra) {
-                    var ativa = outra === aba;
-                    outra.setAttribute('aria-selected', ativa);
-                    document.getElementById(outra.getAttribute('aria-controls')).hidden = !ativa;
-                });
-            });
-        });
-    </script>
-</body>
+        function mostrarAba(abaSelecionada) {
 
+            const conteudos = document.querySelectorAll(".conteudo-aba");
+            const botoes = document.querySelectorAll(".aba");
+
+            conteudos.forEach(function(conteudo) {
+                conteudo.classList.remove("ativo");
+            });
+
+            botoes.forEach(function(botao) {
+                botao.classList.remove("ativa");
+            });
+
+            document.getElementById(abaSelecionada).classList.add("ativo");
+
+            document.getElementById("botao-" + abaSelecionada)
+                    .classList.add("ativa");
+        }
+    </script>
+
+</body>
 </html>
