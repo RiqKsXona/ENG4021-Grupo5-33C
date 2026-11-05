@@ -25,7 +25,8 @@ body {
     padding: 24px 20px 32px;
 }
  
-.topo {
+.topo,
+.cabecalho {
     position: relative;
     display: flex;
     justify-content: center;
@@ -163,7 +164,7 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: stretch;
     gap: 11px;
 }
  

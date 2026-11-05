@@ -343,3 +343,24 @@ header {
         min-width: 0;
     }
 }
+
+/* Celular */
+@media (max-width: 600px) {
+    header {
+        flex-direction: column;
+        align-items: center;
+    }
+    .Menu {
+        width: 100%;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+    .linha_2,
+    .boton {
+        width: 100%;
+    }
+}
