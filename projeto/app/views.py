@@ -219,6 +219,60 @@ def marcar_devolvido(request, id):
     return redirect("item_perdido", id=item.id)
 
 
+# Dono edita um item que reportou
+def editar_item(request, id, tipo="perdido"):
+
+    email = request.session.get("email_usuario")
+
+    if not email:
+        return redirect("login")
+
+    if tipo == "achado":
+        item = get_object_or_404(ItemAchado, id=id, usuario__email=email)
+        Formulario = ItemAchadoForm
+        template = "Sprint 4/html_reportar_achado.html"
+        pagina_item = "item_achado"
+    else:
+        item = get_object_or_404(ItemPerdido, id=id, usuario__email=email)
+        Formulario = ItemPerdidoForm
+        template = "Sprint 4/html_reportar_perdido.html"
+        pagina_item = "item_perdido"
+
+    if request.method == "POST":
+        form = Formulario(request.POST, request.FILES, instance=item)
+
+        if form.is_valid():
+            form.save()
+            return redirect(pagina_item, id=item.id)
+
+    else:
+        form = Formulario(instance=item)
+
+    return render(request, template, {
+        "form": form,
+        "editando": True
+    })
+
+
+# Dono exclui um item que reportou
+def excluir_item(request, id, tipo="perdido"):
+
+    email = request.session.get("email_usuario")
+
+    if not email:
+        return redirect("login")
+
+    if tipo == "achado":
+        item = get_object_or_404(ItemAchado, id=id, usuario__email=email)
+    else:
+        item = get_object_or_404(ItemPerdido, id=id, usuario__email=email)
+
+    if request.method == "POST":
+        item.delete()
+
+    return redirect("paginaInicial")
+
+
 # Cadastro de usuário
 def cadastro(request):
 

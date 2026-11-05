@@ -271,6 +271,40 @@ header {
     cursor: not-allowed;
 }
 
+.acoes-dono {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 15px;
+}
+
+.botao-editar,
+.botao-excluir {
+    min-width: 134px;
+    padding: 12px 20px;
+
+    border-radius: 8px;
+
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+
+    cursor: pointer;
+}
+
+.botao-editar {
+    border: 2px solid #dfb333;
+    background-color: transparent;
+    color: #08364f;
+}
+
+.botao-excluir {
+    border: 2px solid #b3261e;
+    background-color: transparent;
+    color: #b3261e;
+}
+
 
 /* VOLTAR */
 
