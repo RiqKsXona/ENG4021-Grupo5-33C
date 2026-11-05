@@ -163,6 +163,43 @@ CONTEÚDO DAS ABAS
 
 
 /* =====================================
+BARRA DE PESQUISA
+===================================== */
+
+.barra-pesquisa {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 15px;
+}
+
+.barra-pesquisa input {
+    flex: 1;
+    min-width: 0;
+    padding: 12px 16px;
+
+    border: 1px solid #d8dcd6;
+    border-radius: 30px;
+
+    background-color: #ffffff;
+    color: #08364f;
+    font-size: 14px;
+}
+
+.barra-pesquisa button {
+    padding: 12px 18px;
+
+    border: none;
+    border-radius: 30px;
+
+    background-color: #dfb333;
+    color: #08364f;
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+
+/* =====================================
 LISTA DE ITENS
 ===================================== */
 

@@ -9,14 +9,28 @@ from django.http import Http404
 
 # Página inicial
 def pag_inicial(request):
+    busca_perdidos = request.GET.get("busca_perdidos", "").strip()
+    busca_achados = request.GET.get("busca_achados", "").strip()
+
     itens_achados = ItemAchado.objects.all().order_by("-id")
     itens_perdidos = ItemPerdido.objects.filter(
         devolvido=False
     ).order_by("-id")
 
+    if busca_perdidos:
+        itens_perdidos = itens_perdidos.filter(titulo__icontains=busca_perdidos)
+
+    if busca_achados:
+        itens_achados = itens_achados.filter(nome_objeto__icontains=busca_achados)
+
+    aba = "achados" if "busca_achados" in request.GET else "perdidos"
+
     return render(request, "Sprint 5/pagina_inicial.html", {
         "itens_achados": itens_achados,
-        "itens_perdidos": itens_perdidos
+        "itens_perdidos": itens_perdidos,
+        "busca_perdidos": busca_perdidos,
+        "busca_achados": busca_achados,
+        "aba": aba
     })
 
 
