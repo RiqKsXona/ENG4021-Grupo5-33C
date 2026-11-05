@@ -45,18 +45,10 @@
             {% for e in form.nome_objeto.errors %}<p class="erro">{{ e }}</p>{% endfor %}
             
             <div class="campo categoria">
-                <label for="{{ form.categoria.id_for_label }}">Categoria</label>
-                <select id="categoria" name="categoria" required>
-                    <option value="" disabled selected>Selecione uma categoria</option>
-                    <option>Documentos</option>
-                    <option>Eletrônicos</option>
-                    <option>Roupas e acessórios</option>
-                    <option>Utensílios</option>
-                    <option>Material de estudo</option>
-                    <option>Outros</option>
-                </select>
+                <label for="{{ form.categoria.id_for_label }}">{{ form.categoria.label }}</label>
+                {{ form.categoria }}
+                {{ form.categoria.errors }}
             </div>
-            {% for e in form.categoria.errors %}<p class="erro">{{ e }}</p>{% endfor %}
 
             <div class="campo onde_encontrou">
                 <label for="{{ form.onde_encontrou.id_for_label }}">Onde você encontrou?</label>

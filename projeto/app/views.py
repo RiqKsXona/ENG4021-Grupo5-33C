@@ -70,7 +70,7 @@ def reportar_achado(request):
     else:
         form = ItemAchadoForm()
 
-    return render(request, "reportar_achado.html", {
+    return render(request, "Sprint 4/html_reportar_achado.html", {
         "form": form
     })
 
