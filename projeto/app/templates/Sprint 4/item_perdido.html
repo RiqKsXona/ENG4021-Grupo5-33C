@@ -1,118 +1,294 @@
+
 {% load static %}
+
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ item.titulo }}</title>
-    <link rel="stylesheet" href="{% static 'Sprint 4/css/item_perdido.css' %}" type="text/css">
+
+    <title>ELO | Detalhes do item</title>
+
+    <link rel="stylesheet" href="{% static 'Sprint 4/css/item_perdido.css' %}">
 </head>
+
 <body>
+
+    <!-- CABEÇALHO -->
     <header>
-            <div class="logo">
-                <div class="logo-imagem">
-                    <img src="https://st2.depositphotos.com/5418844/7949/v/450/depositphotos_79494998-stock-illustration-open-box-with-the-outgoing.jpg" width="90" alt="ELO">
-                </div>
-                <div class="logo-texto">
-                    <h1>ELO</h1>
-                    <pre><h3><p>Achados e perdidos <br>PUC-RIO </p></h3></pre>
-                </div>
-            </div>
-            <div class="Menu">
 
-                <div class="pagina_inicial">
-                    <h4><a href="/procurar-item/">Pagina inical</a></h4>
-                </div>
+        <div class="logo">
+            <img
+                src="{% static 'Sprint 5/logo.ELO-removebg-preview.png' %}"
+                alt="Logo ELO"
+            >
+        </div>
 
-                <div class="reportar_item">
-                <h4><a href="/reportar-perdido/">Reportar item perdido</a></h4>
-                </div>
+        <nav class="Menu">
 
-                <div class="Perfil">
-                <h4><a href="/perfil/">Perfil</a></h4>
-                </div>
+            <a href="{% url 'reportar_achado' %}">
+                Reportar item achado
+            </a>
 
-            </div>
+            <a href="{% url 'reportarPerdido' %}">
+                Reportar item perdido
+            </a>
 
-        </header>
-        <main>
-            <div class="linha">
-            <hr>
-            </div>
+            <a href="{% url 'paginaInicial' %}">
+                Página inicial
+            </a>
 
-            <div class="titulo_item">
-                <div class="foto_item">
-                    <img src="{% static 'Sprint 4/simbolo da camera.png' %}" width="250" alt="{{ item.titulo }}">
-                </div>
-                <div class="nome_item">
-                    <h1><strong>{{ item.titulo }}</strong></h1>
-                </div>
-                <div class="linha_2">
-                    <hr>
-                </div>
+            <a href="{% url 'perfil' %}">
+                Perfil
+            </a>
 
-            </div>
-            <div class="linha_6">
-                    <hr>
-                </div>
-            <div class="descricao">
+        </nav>
 
-                <div class="fileira_1">
-                    <div class="categoria">
-                        <h3>Categoria:</h3>
-                        <h2>{{ item.categoria }}</h2>
-                    </div>
+    </header>
 
-                    <div class="local">
-                        <h3>Onde foi perdido:</h3>
-                        <h2>{{ item.local }}</h2>
-                    </div>
 
-                </div>
+    <main class="container">
 
-                <div class="linha_3">
-                    <hr>
-                </div>
+        <section class="titulo-pagina">
 
-                <div class="fileira_2">
+            <h1>Detalhes do item</h1>
 
-                    <div class="data">
-                        <h3>Quando foi perdido:</h3>
-                        <h2>{{ item.data|date:"d/m/Y"|default:"Não informado" }}</h2>
-                    </div>
+            <p>
+                Confira todas as informações sobre este objeto.
+            </p>
 
-                    <div class="onde_esta">
-                        <h3>Descrição:</h3>
-                        <h2>{{ item.descricao|default:"Sem descrição" }}</h2>
-                    </div>
-                </div>
+        </section>
 
-                <div class="linha_4">
-                    <hr>
-                </div>
 
-            </div>
+        <section class="card-item">
 
-            <div class="final">
+            <!-- FOTO E NOME -->
+            <div class="apresentacao-item">
 
-                <div class="linha_5">
-                    <hr>
-                </div>
+                <div class="foto-item">
 
-                <div class="botao">
-                    {% if item.devolvido %}
-                        <input type="button" class="boton" value="Devolvido" disabled>
-                    {% elif e_dono %}
-                        <form method="post" action="{% url 'marcar_devolvido' item.id %}">
-                            {% csrf_token %}
-                            <input type="submit" class="boton" value="Marcar como devolvido">
-                        </form>
+                    {% if item.foto %}
+
+                        <img
+                            src="{{ item.foto.url }}"
+                            alt="{% if tipo == 'achado' %}{{ item.nome_objeto }}{% else %}{{ item.titulo }}{% endif %}"
+                        >
+
                     {% else %}
-                        <input type="button" class="boton" value="Esse objeto é meu">
+
+                        <span>📦</span>
+
                     {% endif %}
+
                 </div>
+
+
+                <div class="nome-item">
+
+                    {% if tipo == "achado" %}
+
+                        <h2>{{ item.nome_objeto }}</h2>
+
+                        <span class="status achado">
+                            Item encontrado
+                        </span>
+
+                    {% else %}
+
+                        <h2>{{ item.titulo }}</h2>
+
+                        {% if item.devolvido %}
+
+                            <span class="status devolvido">
+                                Item devolvido
+                            </span>
+
+                        {% else %}
+
+                            <span class="status disponivel">
+                                Item ainda não devolvido
+                            </span>
+
+                        {% endif %}
+
+                    {% endif %}
+
+                    <span class="categoria-item">
+                        {{ item.get_categoria_display }}
+                    </span>
+
+                </div>
+
             </div>
-        </main>
+
+
+            <div class="divisor"></div>
+
+
+            <!-- INFORMAÇÕES DO OBJETO -->
+            <section class="informacoes-item">
+
+                <h2>Informações do objeto</h2>
+
+                <div class="grade-informacoes">
+
+                    <div class="informacao">
+
+                        <h3>Categoria</h3>
+
+                        <p>{{ item.get_categoria_display }}</p>
+
+                    </div>
+
+
+                    {% if tipo == "achado" %}
+
+                        <div class="informacao">
+
+                            <h3>Onde foi encontrado?</h3>
+
+                            <p>{{ item.onde_encontrou }}</p>
+
+                        </div>
+
+
+                        <div class="informacao">
+
+                            <h3>Data em que foi encontrado</h3>
+
+                            <p>
+                                {{ item.data_encontro|date:"d/m/Y"|default:"Não informada" }}
+                            </p>
+
+                        </div>
+
+
+                        <div class="informacao">
+
+                            <h3>Onde o objeto está agora?</h3>
+
+                            <p>{{ item.get_onde_esta_agora_display }}</p>
+
+                        </div>
+
+                    {% else %}
+
+                        <div class="informacao">
+
+                            <h3>Onde foi perdido?</h3>
+
+                            <p>{{ item.local }}</p>
+
+                        </div>
+
+
+                        <div class="informacao">
+
+                            <h3>Quando foi perdido?</h3>
+
+                            <p>
+                                {{ item.data|date:"d/m/Y"|default:"Não informada" }}
+                            </p>
+
+                        </div>
+
+                    {% endif %}
+
+
+                    <div class="informacao descricao">
+
+                        <h3>Descrição</h3>
+
+                        <p>
+                            {{ item.descricao|default:"Nenhuma descrição foi informada." }}
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <div class="divisor"></div>
+
+
+            <!-- RESPONSÁVEL PELO CADASTRO -->
+            <section class="responsavel">
+
+                <h2>Informações de quem cadastrou</h2>
+
+                <p>
+                    <strong>Nome:</strong>
+                    {{ item.usuario.nome }}
+                </p>
+
+                <p>
+                    <strong>Perfil:</strong>
+                    {{ item.usuario.perfil }}
+                </p>
+
+            </section>
+
+
+            <!-- AÇÕES -->
+            <div class="area-botao">
+
+            {% if tipo == "achado" %}
+
+                {% if e_dono %}
+                    <p>Você cadastrou este item.</p>
+                {% else %}
+                    <form method="POST" action="{% url 'reivindicar_item' item.id %}">
+                        {% csrf_token %}
+                        <button type="submit" class="botao">
+                            Esse item é meu
+                        </button>
+                    </form>
+                {% endif %}
+
+            {% else %}
+
+                {% if item.devolvido %}
+                    <button class="botao" disabled>
+                        Item já devolvido
+                    </button>
+
+                {% elif e_dono %}
+                    <form method="POST" action="{% url 'marcar_devolvido' item.id %}">
+                        {% csrf_token %}
+                        <button type="submit" class="botao">
+                            Marcar como devolvido
+                        </button>
+                    </form>
+
+                {% else %}
+                    <form method="POST" action="{% url 'iniciar_conversa' item.id %}">
+                        {% csrf_token %}
+                        <button type="submit" class="botao">
+                            Iniciar conversa
+                        </button>
+                    </form>
+                {% endif %}
+
+            {% endif %}
+
+        </div>
+
+
+        </section>
+
+
+        <div class="voltar">
+
+            <a href="{% url 'paginaInicial' %}">
+                ← Voltar para a página inicial
+            </a>
+
+        </div>
+
+    </main>
 
 </body>
 </html>

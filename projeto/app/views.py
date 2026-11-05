@@ -8,8 +8,10 @@ from django.http import Http404
 
 # Página inicial
 def pag_inicial(request):
-    itens_achados = ItemAchado.objects.all()
-    itens_perdidos = ItemPerdido.objects.filter(devolvido=False)
+    itens_achados = ItemAchado.objects.all().order_by("-id")
+    itens_perdidos = ItemPerdido.objects.filter(
+        devolvido=False
+    ).order_by("-id")
 
     return render(request, "Sprint 5/pagina_inicial.html", {
         "itens_achados": itens_achados,
@@ -166,15 +168,20 @@ def procurar_item(request):
 
 
 # Detalhes de um item perdido
-def item_perdido(request, id):
+def item_perdido(request, id, tipo="perdido"):
 
-    item = get_object_or_404(ItemPerdido, id=id)
+    if tipo == "achado":
+        item = get_object_or_404(ItemAchado, id=id)
+    else:
+        item = get_object_or_404(ItemPerdido, id=id)
 
-    e_dono = request.session.get("email_usuario") == item.usuario.email
+    email = request.session.get("email_usuario")
+    e_dono = email == item.usuario.email if email else False
 
     return render(request, "Sprint 4/item_perdido.html", {
         "item": item,
-        "e_dono": e_dono
+        "e_dono": e_dono,
+        "tipo": tipo
     })
 
 
