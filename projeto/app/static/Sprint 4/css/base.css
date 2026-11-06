@@ -1,0 +1,129 @@
+/* ===== ELO · base.css — estilos compartilhados por todas as telas ===== */
+:root {
+    --azul: #0f2a4f;
+    --azul-suave: #5b6b82;
+    --amarelo: #fdb913;
+    --amarelo-escuro: #e8b00a;
+    --amarelo-claro: #fbe38b;
+    --fundo: #d3d3d3;
+    --card: #fafafa;
+    --borda: #c4c6cc;
+    --erro: #b3261e;
+    --raio: 14px;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-weight: 400;
+    color: var(--azul);
+    background-color: var(--fundo);
+    -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, p { margin: 0; }
+
+a { color: var(--azul); }
+
+/* Coluna central estilo "celular" (também funciona bem no desktop) */
+.app {
+    width: 100%;
+    max-width: 440px;
+    min-height: 100vh;
+    margin: 0 auto;
+    padding: 32px 20px 40px;
+    position: relative;
+}
+
+/* ===== Logo ===== */
+.logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    text-align: center;
+}
+.logo img { max-width: 220px; height: auto; }
+.logo .slogan { font-size: 17px; color: var(--azul); }
+
+/* ===== Botões ===== */
+.btn {
+    display: block;
+    width: 100%;
+    padding: 16px;
+    font: inherit;
+    font-size: 17px;
+    font-weight: 700;
+    text-align: center;
+    text-decoration: none;
+    border-radius: var(--raio);
+    border: 1.5px solid transparent;
+    cursor: pointer;
+    transition: background-color .15s, box-shadow .15s;
+}
+.btn-primario { background: var(--amarelo); color: var(--azul); }
+.btn-primario:hover { background: var(--amarelo-escuro); }
+.btn-contorno { background: transparent; color: var(--azul); border-color: var(--amarelo); }
+.btn-contorno:hover { background: rgba(253, 185, 19, .15); }
+
+:focus-visible { outline: 3px solid var(--azul); outline-offset: 2px; }
+
+/* ===== Campos ===== */
+input, select {
+    width: 100%;
+    font: inherit;
+    color: var(--azul);
+}
+
+.campo-simples input {
+    padding: 15px 16px;
+    font-size: 17px;
+    background: var(--card);
+    border: 1px solid var(--borda);
+    border-radius: 10px;
+}
+.campo-simples input::placeholder { color: #8a8d94; }
+
+/* Campo em "card" com ícone (usado no cadastro e recuperação) */
+.campo-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 14px 18px;
+    background: var(--card);
+    border-radius: var(--raio);
+    box-shadow: 0 1px 2px rgba(15, 42, 79, .06);
+}
+.campo-card:focus-within { box-shadow: 0 0 0 2px var(--amarelo); }
+.campo-card > svg { flex: none; width: 28px; height: 28px; }
+.campo-card .conteudo { flex: 1; min-width: 0; }
+.campo-card label { display: block; font-size: 16px; font-weight: 500; }
+.campo-card input,
+.campo-card select {
+    padding: 4px 0 0;
+    font-size: 18px;
+    background: transparent;
+    border: 0;
+    outline: none;
+}
+.campo-card input::placeholder { color: #8a8d94; }
+.campo-card select { appearance: none; cursor: pointer; }
+.campo-card select:invalid { color: #8a8d94; }
+
+.btn-icone {
+    flex: none;
+    padding: 6px;
+    background: none;
+    border: 0;
+    color: var(--azul);
+    cursor: pointer;
+    line-height: 0;
+}
+.btn-icone svg { width: 26px; height: 26px; }
+
+.erro { margin-top: 14px; color: var(--erro); font-weight: 500; text-align: center; }
+
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }

@@ -222,3 +222,27 @@ main{
     justify-content: space-between;
     background-color: rgb(255, 254, 254);
 }
+
+/* Celular */
+@media (max-width: 600px) {
+    header {
+        flex-direction: column;
+        align-items: center;
+    }
+    .Menu {
+        width: 100%;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+    .barra_pesquisa,
+    .fileira1 .item1 .linha2,
+    .fileira1 .item2 .linha3,
+    .fileira2 .item3 .linha4,
+    .fileira2 .item4 .linha5 {
+        width: 100%;
+    }
+}

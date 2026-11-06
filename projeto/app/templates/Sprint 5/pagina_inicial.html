@@ -1,58 +1,276 @@
-{% load static %}
-<!DOCTYPE html>
 
+{% load static %}
+
+<!DOCTYPE html>
 <html lang="pt-br">
 
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>ELO | Página inicial</title>
-    <link href="{% static 'Sprint 5/css/pagina_inicial.css' %}" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet"
+        href="{% static 'Sprint 5/css/pagina_inicial.css' %}">
 </head>
 
 <body>
 
-    <div class="cabecalho">
+    <!-- CABEÇALHO -->
+    <header>
+
         <div class="logo">
-            <img src="{% static 'Sprint 5/logo.ELO-removebg-preview.png' %}" alt="Logo ELO" width="200">
+            <img src="{% static 'Sprint 5/logo.ELO-removebg-preview.png' %}"
+                alt="Logo ELO">
         </div>
-    </div>
 
-    <div class="titulo">
-        <h1>Itens recentes</h1>
-    </div>
+        <nav class="Menu">
 
-    <div class="busca">
-        <input type="text" placeholder="Buscar por item, local ou descrição...">
-    </div>
+            <a href="{% url 'reportar_achado' %}">
+                Reportar item achado
+            </a>
 
-    <div class="itens">
-        {% for item in itens_achados %}
-        <div class="item">
-            <h2>{{ item.titulo }}</h2>
-            <p>{{ item.local }}</p>
-        </div>
-        {% endfor %}
+            <a href="{% url 'reportarPerdido' %}">
+                Reportar item perdido
+            </a>
 
-        {% for item in itens_perdidos %}
-        <div class="item">
-            <h2>{{ item.titulo }}</h2>
-            <p>{{ item.local }}</p>
-        </div>
-        {% endfor %}
-    </div>
+            <a href="{% url 'perfil' %}">
+                Perfil
+            </a>
 
-    <div class="adicionar">
-        <input type="button" value="+">
-    </div>
+        </nav>
 
-    <div class="menu">
-        <p class="inicio">Início</p>
-        <p>Meus itens</p>
-        <p>Conversas</p>
-        <p>Perfil</p>
-    </div>
+    </header>
+
+
+    <!-- CONTEÚDO PRINCIPAL -->
+    <main class="container">
+
+        <section class="titulo">
+
+            <h1>Achados e perdidos</h1>
+
+            <p>
+                Encontre objetos perdidos ou ajude alguém a recuperar
+                aquilo que perdeu.
+            </p>
+
+        </section>
+
+
+        <section class="secao-itens">
+
+            <h2 class="titulo-itens">Explore os itens cadastrados</h2>
+
+            <!-- ABAS -->
+            <div class="abas">
+
+                <button type="button"
+                        class="aba {% if aba == 'perdidos' %}ativa{% endif %}"
+                        id="botao-perdidos"
+                        onclick="mostrarAba('perdidos')">
+
+                    Itens perdidos
+
+                </button>
+
+                <button type="button"
+                        class="aba {% if aba == 'achados' %}ativa{% endif %}"
+                        id="botao-achados"
+                        onclick="mostrarAba('achados')">
+
+                    Itens achados
+
+                </button>
+
+            </div>
+
+
+            <!-- ABA DE ITENS PERDIDOS -->
+            <div class="conteudo-aba {% if aba == 'perdidos' %}ativo{% endif %}" id="perdidos">
+
+                <form method="get" class="barra-pesquisa">
+                    <input type="text"
+                           name="busca_perdidos"
+                           value="{{ busca_perdidos }}"
+                           placeholder="Pesquisar item perdido pelo nome">
+                    <button type="submit">Pesquisar</button>
+                </form>
+
+                <div class="lista-itens">
+
+                    {% for item in itens_perdidos %}
+
+                        <a href="{% url 'item_perdido' item.id %}"
+                        class="item">
+
+                            <div class="foto-item">
+
+                                {% if item.foto %}
+
+                                    <img src="{{ item.foto.url }}"
+                                        alt="{{ item.titulo }}">
+
+                                {% else %}
+
+                                    <span>📦</span>
+
+                                {% endif %}
+
+                            </div>
+
+
+                            <div class="descricao-item">
+
+                                <h3>{{ item.titulo }}</h3>
+
+                                <p>
+                                    <strong>Local:</strong>
+                                    {{ item.local }}
+                                </p>
+
+                                <p>
+                                    <strong>Data:</strong>
+                                    {{ item.data|date:"d/m/Y"|default:"Não informada" }}
+                                </p>
+
+                            </div>
+
+
+                            <span class="categoria-item">
+                                {{ item.get_categoria_display }}
+                            </span>
+
+                            <span class="seta">›</span>
+
+                        </a>
+
+                    {% empty %}
+
+                        <div class="mensagem-vazia">
+                            {% if busca_perdidos %}
+                                <p>Nenhum item perdido encontrado com "{{ busca_perdidos }}".</p>
+                            {% else %}
+                                <p>Nenhum item perdido cadastrado no momento.</p>
+                            {% endif %}
+                        </div>
+
+                    {% endfor %}
+
+                </div>
+
+            </div>
+
+
+            <!-- ABA DE ITENS ACHADOS -->
+            <div class="conteudo-aba {% if aba == 'achados' %}ativo{% endif %}" id="achados">
+
+                <form method="get" class="barra-pesquisa">
+                    <input type="text"
+                           name="busca_achados"
+                           value="{{ busca_achados }}"
+                           placeholder="Pesquisar item achado pelo nome">
+                    <button type="submit">Pesquisar</button>
+                </form>
+
+                <div class="lista-itens">
+
+                    {% for item in itens_achados %}
+
+                        <a href="{% url 'item_achado' item.id %}"
+                        class="item">
+
+                            <div class="foto-item">
+
+                                {% if item.foto %}
+
+                                    <img src="{{ item.foto.url }}"
+                                        alt="{{ item.nome_objeto }}">
+
+                                {% else %}
+
+                                    <span>📦</span>
+
+                                {% endif %}
+
+                            </div>
+
+
+                            <div class="descricao-item">
+
+                                <h3>{{ item.nome_objeto }}</h3>
+
+                                <p>
+                                    <strong>Encontrado em:</strong>
+                                    {{ item.onde_encontrou }}
+                                </p>
+
+                                <p>
+                                    <strong>Situação:</strong>
+                                    {{ item.get_onde_esta_agora_display }}
+                                </p>
+
+                            </div>
+
+
+                            <span class="categoria-item">
+                                {{ item.get_categoria_display }}
+                            </span>
+
+                            <span class="seta">›</span>
+
+                        </a>
+
+                    {% empty %}
+
+                        <div class="mensagem-vazia">
+                            {% if busca_achados %}
+                                <p>Nenhum item achado encontrado com "{{ busca_achados }}".</p>
+                            {% else %}
+                                <p>Nenhum item achado cadastrado no momento.</p>
+                            {% endif %}
+                        </div>
+
+                    {% endfor %}
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- ALTERNÂNCIA DAS ABAS -->
+    <script>
+
+        function mostrarAba(abaSelecionada) {
+
+            const conteudos = document.querySelectorAll(".conteudo-aba");
+            const botoes = document.querySelectorAll(".aba");
+
+            // Esconde todos os conteúdos
+            conteudos.forEach(function(conteudo) {
+                conteudo.classList.remove("ativo");
+            });
+
+            // Desativa todos os botões
+            botoes.forEach(function(botao) {
+                botao.classList.remove("ativa");
+            });
+
+            // Mostra a aba escolhida
+            document.getElementById(abaSelecionada)
+                    .classList.add("ativo");
+
+            // Ativa o botão correspondente
+            document.getElementById("botao-" + abaSelecionada)
+                    .classList.add("ativa");
+
+        }
+
+    </script>
 
 </body>
-
 </html>
