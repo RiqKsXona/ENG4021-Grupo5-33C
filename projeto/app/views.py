@@ -41,7 +41,49 @@ def paginas(request):
 
 # Esqueceu a senha
 def esqueceu_senha(request):
-    return render(request, "Sprint 4/html_esqueceu_senha.html")
+
+    erro = None
+    sucesso = None
+
+    if request.method == "POST":
+
+        email = request.POST.get("emailRecuperacao", "").strip()
+        matricula = request.POST.get("matriculaRecuperacao", "").strip()
+
+        senha = request.POST.get("novaSenha", "")
+        confirma_senha = request.POST.get("confirmaNovaSenha", "")
+
+        
+        if not email or not matricula or not senha or not confirma_senha:
+            erro = "Preencha todos os campos."
+
+        
+        elif senha != confirma_senha:
+            erro = "As senhas não coincidem."
+
+        else:
+
+            
+            usuario = Usuario.objects.filter(
+                email__iexact=email,
+                matricula=matricula
+            ).first()
+
+            if usuario:
+
+                
+                usuario.set_senha(senha)
+                usuario.save()
+
+                sucesso = "Senha alterada com sucesso!"
+
+            else:
+                erro = "Não foi possível validar os dados informados."
+
+    return render(request, "Sprint 4/html_esqueceu_senha.html", {
+        "erro": erro,
+        "sucesso": sucesso
+    })
 
 
 # Página de perfil

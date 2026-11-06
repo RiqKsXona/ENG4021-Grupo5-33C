@@ -8,7 +8,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('pagina-inicial/', pag_inicial, name="paginaInicial"),
     path('paginas/', paginas),
-    path('esqueceu-senha/', esqueceu_senha),
+    path('esqueceu-senha/',esqueceu_senha,name="esqueceu_senha"),
     path('perfil/', perfil, name="perfil"),
     path('reportar-achado/', reportar_achado, name="reportar_achado"),
     path('reportar-perdido/', reportar_perdido, name="reportarPerdido"),

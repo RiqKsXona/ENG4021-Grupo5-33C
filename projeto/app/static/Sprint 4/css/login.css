@@ -1,30 +1,140 @@
+
 /* ===== ELO · login.css ===== */
-.pagina-login { padding-top: 80px; }
- 
-.pagina-login .logo { margin-bottom: 44px; }
-.pagina-login .logo img { max-width: 260px; }
- 
-.pagina-login form { display: flex; flex-direction: column; gap: 14px; }
-.pagina-login .btn-primario { margin-top: 6px; color: #fff; }
- 
-.links-login {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 18px;
-    margin-top: 26px;
-    font-size: 17px;
+
+body.pagina-login {
+    background-color: #ececee;
+    overflow-x: hidden;
 }
-.links-login a { text-decoration: none; }
-.links-login a:hover { text-decoration: underline; }
- 
-.criar-cadastro {
+
+/* Círculos decorativos dos cantos */
+body.pagina-login::before,
+body.pagina-login::after {
+    content: "";
+    position: fixed;
+    z-index: 0;
+    border-radius: 50%;
+    background: var(--amarelo-claro);
+    pointer-events: none;
+}
+
+body.pagina-login::before {
+    width: 200px;
+    height: 200px;
+    top: -110px;
+    left: -90px;
+}
+
+body.pagina-login::after {
+    width: 240px;
+    height: 240px;
+    bottom: -130px;
+    right: -100px;
+}
+
+/* Área principal */
+.pagina-login .app {
+    position: relative;
+    z-index: 1;
+    padding-top: 20px;
+}
+
+/* Cabeçalho e logo */
+.topo-login {
+    display: grid;
+    grid-template-columns: 44px 1fr 44px;
+    align-items: center;
+}
+
+.topo-login .logo {
+    display: flex;
+    justify-content: center;
+}
+
+.topo-login .logo img {
+    max-width: 210px;
     width: 100%;
-    padding-top: 22px;
-    border-top: 1px solid var(--borda);
+    height: auto;
+}
+
+/* Título */
+.titulo-login {
+    margin: 26px 0 24px;
+    font-size: 30px;
+    font-weight: 800;
+    letter-spacing: -.01em;
+    text-align: center;
+}
+
+/* Formulário */
+.pagina-login form {
     display: flex;
     flex-direction: column;
-    align-items: center;
     gap: 12px;
+}
+
+/* Recuperação de senha */
+.esqueceu-senha {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 2px;
+}
+
+.esqueceu-senha a {
+    color: var(--azul);
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.esqueceu-senha a:hover {
+    text-decoration: underline;
+}
+
+/* Botões e cadastro */
+.pagina-login .acoes {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 12px;
+}
+
+.texto-cadastro {
+    text-align: center;
     color: var(--azul-suave);
+    font-size: 14px;
+    margin-top: 8px;
+}
+
+/* Mensagem de erro */
+.pagina-login .erro {
+    text-align: left;
+    margin: 0 0 6px;
+}
+
+/* Responsividade */
+@media (max-width: 480px) {
+
+    .pagina-login .app {
+        padding-top: 16px;
+    }
+
+    .topo-login .logo img {
+        max-width: 180px;
+    }
+
+    .titulo-login {
+        font-size: 25px;
+        margin: 22px 0;
+    }
+
+    body.pagina-login::before {
+        width: 140px;
+        height: 140px;
+    }
+
+    body.pagina-login::after {
+        width: 170px;
+        height: 170px;
+    }
+
 }
