@@ -9,14 +9,28 @@ from django.http import Http404
 
 # Página inicial
 def pag_inicial(request):
+    busca_perdidos = request.GET.get("busca_perdidos", "").strip()
+    busca_achados = request.GET.get("busca_achados", "").strip()
+
     itens_achados = ItemAchado.objects.all().order_by("-id")
     itens_perdidos = ItemPerdido.objects.filter(
         devolvido=False
     ).order_by("-id")
 
+    if busca_perdidos:
+        itens_perdidos = itens_perdidos.filter(titulo__icontains=busca_perdidos)
+
+    if busca_achados:
+        itens_achados = itens_achados.filter(nome_objeto__icontains=busca_achados)
+
+    aba = "achados" if "busca_achados" in request.GET else "perdidos"
+
     return render(request, "Sprint 5/pagina_inicial.html", {
         "itens_achados": itens_achados,
-        "itens_perdidos": itens_perdidos
+        "itens_perdidos": itens_perdidos,
+        "busca_perdidos": busca_perdidos,
+        "busca_achados": busca_achados,
+        "aba": aba
     })
 
 
@@ -27,7 +41,49 @@ def paginas(request):
 
 # Esqueceu a senha
 def esqueceu_senha(request):
-    return render(request, "Sprint 4/html_esqueceu_senha.html")
+
+    erro = None
+    sucesso = None
+
+    if request.method == "POST":
+
+        email = request.POST.get("emailRecuperacao", "").strip()
+        matricula = request.POST.get("matriculaRecuperacao", "").strip()
+
+        senha = request.POST.get("novaSenha", "")
+        confirma_senha = request.POST.get("confirmaNovaSenha", "")
+
+        
+        if not email or not matricula or not senha or not confirma_senha:
+            erro = "Preencha todos os campos."
+
+        
+        elif senha != confirma_senha:
+            erro = "As senhas não coincidem."
+
+        else:
+
+            
+            usuario = Usuario.objects.filter(
+                email__iexact=email,
+                matricula=matricula
+            ).first()
+
+            if usuario:
+
+                
+                usuario.set_senha(senha)
+                usuario.save()
+
+                sucesso = "Senha alterada com sucesso!"
+
+            else:
+                erro = "Não foi possível validar os dados informados."
+
+    return render(request, "Sprint 4/html_esqueceu_senha.html", {
+        "erro": erro,
+        "sucesso": sucesso
+    })
 
 
 # Página de perfil
