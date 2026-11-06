@@ -426,7 +426,7 @@ def contatos(request):
     conversas = (
         Conversa.objects
         .filter(Q(participante1=usuario) | Q(participante2=usuario))
-        .select_related("item", "participante1", "participante2")
+        .select_related("item", "item_achado", "participante1", "participante2")
         .annotate(ultima=Max("mensagens__criada_em"))
         .order_by(F("ultima").desc(nulls_last=True), "-id")
     )
@@ -437,7 +437,7 @@ def contatos(request):
         lista.append({
             "conversa_id": c.id,
             "nome": outra.nome,
-            "item": c.item.titulo,
+            "item": c.item.titulo if c.item else c.item_achado.nome_objeto,
         })
  
     if q:

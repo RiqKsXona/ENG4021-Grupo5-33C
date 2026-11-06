@@ -24,15 +24,6 @@
                 <a href="#busca" class="icon-btn" aria-label="Buscar contato">
                     <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.8-3.8"/></svg>
                 </a>
-                <!-- Menu "⋮" sem JavaScript -->
-                <details class="menu">
-                    <summary class="icon-btn" aria-label="Mais opções">
-                        <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor" aria-hidden="true"><circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/></svg>
-                    </summary>
-                    <div class="menu__panel">
-                        <a href="{% url 'paginaInicial' %}">Novo contato</a>
-                    </div>
-                </details>
             </div>
         </div>
  
@@ -46,15 +37,6 @@
  
         <!-- Lista -->
         <nav class="list" aria-label="Lista de contatos">
-            <!-- Novas conversas começam na página de um item (ou na página inicial) -->
-            <a href="{% url 'paginaInicial' %}" class="row row--new">
-                <span class="avatar">
-                    <svg viewBox="0 0 24 24" width="30" height="30" fill="#14213D" aria-hidden="true"><circle cx="9" cy="9" r="3.8"/><path d="M2.5 20c0-3.8 3-6 6.5-6s6.5 2.2 6.5 6z"/><path d="M19 5v6M16 8h6" stroke="#14213D" stroke-width="2" stroke-linecap="round" fill="none"/></svg>
-                </span>
-                <span class="row__body"><strong class="row__name">Novo contato</strong></span>
-                <svg class="row__end" viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="#14213D" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>
-            </a>
- 
             {% for c in contatos %}
                 <a href="{% url 'conversa' id=c.conversa_id %}" class="row">
                     <span class="avatar">
@@ -71,7 +53,7 @@
                     {% if q %}
                         Nenhum contato encontrado para “{{ q }}”.
                     {% else %}
-                        Você ainda não tem conversas. Abra um item perdido e fale com o dono!
+                        Você ainda não tem conversas. Abra um item e toque em “Entrar em contato”!
                     {% endif %}
                 </p>
             {% endfor %}
@@ -95,4 +77,5 @@
     </div>
 </body>
 </html>
+ 
  
