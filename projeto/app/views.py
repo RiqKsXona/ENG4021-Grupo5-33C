@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.db.models import Q
+from django.db.models import F, Max, Q
 from django.contrib import messages
 from .models import ItemAchado, ItemPerdido, Usuario, Conversa, Mensagem
 from .forms import ItemPerdidoForm, ItemAchadoForm
@@ -357,3 +357,38 @@ def iniciar_conversa(request, id, tipo="perdido"):
         return redirect("conversa", id=conversa.id)
 
     return redirect("item_achado" if tipo == "achado" else "item_perdido", id=id)
+
+def contatos(request):
+    email = request.session.get("email_usuario")
+ 
+    if not email:
+        return redirect("login")
+ 
+    usuario = get_object_or_404(Usuario, email=email)
+    q = request.GET.get("q", "").strip()
+ 
+    conversas = (
+        Conversa.objects
+        .filter(Q(participante1=usuario) | Q(participante2=usuario))
+        .select_related("item", "participante1", "participante2")
+        .annotate(ultima=Max("mensagens__criada_em"))
+        .order_by(F("ultima").desc(nulls_last=True), "-id")
+    )
+ 
+    lista = []
+    for c in conversas:
+        outra = c.participante2 if c.participante1 == usuario else c.participante1
+        lista.append({
+            "conversa_id": c.id,
+            "nome": outra.nome,
+            "item": c.item.titulo,
+        })
+ 
+    if q:
+        termo = q.lower()
+        lista = [c for c in lista if termo in c["nome"].lower() or termo in c["item"].lower()]
+ 
+    return render(request, "Sprint 4/contatos.html", {
+        "contatos": lista,
+        "q": q,
+    })
