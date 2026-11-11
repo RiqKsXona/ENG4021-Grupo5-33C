@@ -1,25 +1,21 @@
+{% extends "cabecalho.html" %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="pt-BR">
- 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reportar Item Perdido</title>
+
+{% block titulo %}Reportar Item Perdido{% endblock %}
+
+{% block estilos %}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'Sprint 4/css/css_reportar_perdido.css' %}" type="text/css">
-</head>
- 
-<body>
+{% endblock %}
+
+{% block voltar %}
+    <a class="elo-cabecalho__voltar" href="{% url 'paginaInicial' %}" onclick="if (document.referrer) { history.back(); return false; }">← Voltar</a>
+{% endblock %}
+
+{% block conteudo %}
 <main class="pagina">
-    <header class="topo">
-        <a href="#" onclick="history.back(); return false;" class="topo_voltar" aria-label="Voltar">
-            <img src="{% static 'Sprint 4/simbolo de menor.png' %}" alt="">
-        </a>
-        <img class="topo_logo" src="{% static 'Sprint 4/logo.ELO-removebg-preview.png' %}" alt="Logo do Elo">
-    </header>
 
     <h1 class="titulo">Reportar Item Perdido</h1>
 
@@ -75,6 +71,4 @@
             </div>
     </form>
 </main>
-</body>
- 
-</html>
+{% endblock %}

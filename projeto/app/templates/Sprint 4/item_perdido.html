@@ -1,53 +1,13 @@
-
+{% extends "cabecalho.html" %}
 {% load static %}
 
-<!DOCTYPE html>
-<html lang="pt-br">
+{% block titulo %}ELO | Detalhes do item{% endblock %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>ELO | Detalhes do item</title>
-
+{% block estilos %}
     <link rel="stylesheet" href="{% static 'Sprint 4/css/item_perdido.css' %}">
-</head>
+{% endblock %}
 
-<body>
-
-    <!-- CABEÇALHO -->
-    <header>
-
-        <div class="logo">
-            <img
-                src="{% static 'Sprint 5/logo.ELO-removebg-preview.png' %}"
-                alt="Logo ELO"
-            >
-        </div>
-
-        <nav class="Menu">
-
-            <a href="{% url 'reportar_achado' %}">
-                Reportar item achado
-            </a>
-
-            <a href="{% url 'reportarPerdido' %}">
-                Reportar item perdido
-            </a>
-
-            <a href="{% url 'paginaInicial' %}">
-                Página inicial
-            </a>
-
-            <a href="{% url 'perfil' %}">
-                Perfil
-            </a>
-
-        </nav>
-
-    </header>
-
-
+{% block conteudo %}
     <main class="container">
 
         <section class="titulo-pagina">
@@ -299,6 +259,4 @@
         </div>
 
     </main>
-
-</body>
-</html>
+{% endblock %}

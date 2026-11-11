@@ -1,51 +1,13 @@
-
+{% extends "cabecalho.html" %}
 {% load static %}
 
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ELO | Perfil</title>
+{% block titulo %}ELO | Perfil{% endblock %}
 
+{% block estilos %}
     <link rel="stylesheet" href="{% static 'Sprint 4/css/perfil.css' %}">
-</head>
+{% endblock %}
 
-<body>
-
-    <!-- CABEÇALHO -->
-    <header>
-        <div class="logo">
-            <div class="logo-imagem">
-                <img src="{% static 'Sprint 5/logo.ELO-removebg-preview.png' %}"
-                    width="200"
-                    alt="Logo ELO">
-            </div>
-        </div>
-
-        <nav class="Menu">
-            <div class="sair">
-                <h4><a href="{% url 'sair' %}">SAIR DA CONTA</a></h4>
-            </div>
-            
-            <div class="pagina_inicial">
-                <h4><a href="{% url 'reportar_achado' %}">Reportar item achado</a></h4>
-            </div>
-
-            <div class="reportar_item">
-                <h4><a href="{% url 'reportarPerdido' %}">Reportar item perdido</a></h4>
-            </div>
-
-            <div class="Perfil">
-                <h4><a href="{% url 'paginaInicial' %}">Pagina inicial</a></h4>
-            </div>
-            <div class="contatos">
-                <h4><a href="{% url 'contatos' %}">Contatos</a></h4>
-            </div>
-        </nav>
-    </header>
-
-
+{% block conteudo %}
     <!-- CONTEÚDO PRINCIPAL -->
     <main class="container">
 
@@ -226,6 +188,4 @@
                     .classList.add("ativa");
         }
     </script>
-
-</body>
-</html>
+{% endblock %}

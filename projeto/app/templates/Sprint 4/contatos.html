@@ -1,21 +1,20 @@
-{% load static %}<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-    <title>Contatos - ELO</title>
+{% extends "cabecalho.html" %}
+{% load static %}
+
+{% block titulo %}Contatos - ELO{% endblock %}
+
+{% block estilos %}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'Sprint 4/css/contatos.css' %}">
-</head>
-<body>
+{% endblock %}
+
+{% block classe_body %}pagina-contatos{% endblock %}
+
+{% block conteudo %}
     <div class="app">
  
-        <!-- Logo -->
-        <header class="brand">
-            <img src="{% static 'Sprint 4/logo.ELO-removebg-preview.png' %}" alt="ELO - Achados e Perdidos">
-        </header>
  
         <!-- Título + ações -->
         <div class="title-row">
@@ -75,7 +74,4 @@
             </a>
         </nav>
     </div>
-</body>
-</html>
- 
- 
+{% endblock %}
