@@ -29,7 +29,6 @@ body {
     overflow: hidden;
 }
 
-/* A imagem original tem margens transparentes ao redor do desenho. */
 .elo-cabecalho__marca img {
     position: absolute;
     display: block;
@@ -71,7 +70,6 @@ body {
     }
 }
 
-/* Mantém a lista de contatos rolável abaixo do cabeçalho. */
 body.pagina-contatos {
     display: flex;
     flex-direction: column;
