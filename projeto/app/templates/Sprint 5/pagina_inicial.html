@@ -10,7 +10,7 @@
 {% block conteudo %}
 
 
-    <!-- CONTEÚDO PRINCIPAL -->
+
     <main class="container">
 
         <section class="titulo">
@@ -29,7 +29,7 @@
 
             <h2 class="titulo-itens">Explore os itens cadastrados</h2>
 
-            <!-- ABAS -->
+
             <div class="abas">
 
                 <button type="button"
@@ -53,7 +53,7 @@
             </div>
 
 
-            <!-- ABA DE ITENS PERDIDOS -->
+
             <div class="conteudo-aba {% if aba == 'perdidos' %}ativo{% endif %}" id="perdidos">
 
                 <form method="get" class="barra-pesquisa">
@@ -129,7 +129,7 @@
             </div>
 
 
-            <!-- ABA DE ITENS ACHADOS -->
+
             <div class="conteudo-aba {% if aba == 'achados' %}ativo{% endif %}" id="achados">
 
                 <form method="get" class="barra-pesquisa">
@@ -209,7 +209,7 @@
     </main>
 
 
-    <!-- ALTERNÂNCIA DAS ABAS -->
+
     <script>
 
         function mostrarAba(abaSelecionada) {
