@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.db.models import F, Max, Q
 from django.contrib import messages
 from .models import ItemAchado, ItemPerdido, Usuario, Conversa, Mensagem
-from .forms import ItemPerdidoForm, ItemAchadoForm
+from .forms import ItemPerdidoForm, ItemAchadoForm, UsuarioForm
 from .notificacoes import avisar_donos
 from django.http import Http404
 
@@ -103,6 +103,31 @@ def perfil(request):
         "usuario": usuario,
         "itens_achados": itens_achados,
         "itens_perdidos": itens_perdidos
+    })
+
+
+# Editar perfil
+def editar_perfil(request):
+
+    email = request.session.get("email_usuario")
+
+    if not email:
+        return redirect("login")
+
+    usuario = get_object_or_404(Usuario, email=email)
+
+    if request.method == "POST":
+        form = UsuarioForm(request.POST, instance=usuario)
+
+        if form.is_valid():
+            form.save()
+            return redirect("perfil")
+
+    else:
+        form = UsuarioForm(instance=usuario)
+
+    return render(request, "Sprint 4/editar_perfil.html", {
+        "form": form
     })
 
 

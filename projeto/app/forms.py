@@ -1,5 +1,5 @@
 from django import forms
-from .models import ItemPerdido, ItemAchado
+from .models import ItemPerdido, ItemAchado, Usuario
 
 class ItemPerdidoForm(forms.ModelForm):
 
@@ -91,3 +91,30 @@ class ItemAchadoForm(forms.ModelForm):
         self.fields["onde_esta_agora"].choices = [
             ("", "Selecione uma localização")
         ] + list(ItemAchado.ONDE_ESTA_CHOICES)
+
+
+class UsuarioForm(forms.ModelForm):
+
+    PERFIS = [
+        ("Aluno", "Aluno"),
+        ("Professor", "Professor"),
+        ("Funcionário", "Funcionário"),
+    ]
+
+    perfil = forms.ChoiceField(choices=PERFIS)
+
+    class Meta:
+        model = Usuario
+
+        fields = [
+            "nome",
+            "curso",
+            "matricula",
+            "perfil"
+        ]
+
+        labels = {
+            "nome": "Nome completo",
+            "curso": "Curso",
+            "matricula": "Matrícula",
+        }
