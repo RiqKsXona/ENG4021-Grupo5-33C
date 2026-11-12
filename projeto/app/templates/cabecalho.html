@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block titulo %}ELO{% endblock %}</title>
+    {% block estilos %}{% endblock %}
+    <link rel="stylesheet" href="{% static 'css/cabecalho.css' %}?v=5">
+</head>
+<body class="{% block classe_body %}{% endblock %}">
+    <header class="elo-cabecalho">
+        {% block voltar %}{% endblock %}
+
+        <a class="elo-cabecalho__marca" href="{% url 'paginaInicial' %}">
+            <img src="{% static 'Sprint 4/logo.ELO-removebg-preview.png' %}"
+                 alt="ELO — Página inicial">
+        </a>
+
+        {% if request.session.email_usuario %}
+            <nav class="elo-cabecalho__menu" aria-label="Navegação principal">
+                <a href="{% url 'reportar_achado' %}">Reportar achado</a>
+                <a href="{% url 'reportarPerdido' %}">Reportar perdido</a>
+                <a href="{% url 'contatos' %}">Contatos</a>
+                <a href="{% url 'perfil' %}">Perfil</a>
+                <a href="{% url 'sair' %}">Sair</a>
+            </nav>
+        {% endif %}
+    </header>
+
+    {% block conteudo %}{% endblock %}
+</body>
+</html>

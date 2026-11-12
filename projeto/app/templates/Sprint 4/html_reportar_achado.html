@@ -1,25 +1,22 @@
+{% extends "cabecalho.html" %}
 {% load static %}
-<!DOCTYPE html>
-<html>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reportar Item Perdido</title>
+{% block titulo %}ELO | Reportar item achado{% endblock %}
+
+{% block estilos %}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'Sprint 4/css/css_reportar_achado.css' %}" type="text/css">
-</head>
-<body>
+{% endblock %}
+
+{% block voltar %}
+    <a class="elo-cabecalho__voltar" href="{% url 'perfil' %}">← Voltar</a>
+{% endblock %}
+
+{% block conteudo %}
     <main class="pagina">
 
-        <header class="cabecalho">
-            <a href="{% url 'perfil' %}" class="topo_voltar" aria-label="Voltar">
-                <img src="{% static 'Sprint 4/simbolo de menor.png' %}" alt="" width="28" height="28">
-            </a>
-            <img class="topo_logo" src="{% static 'Sprint 4/logo.ELO-removebg-preview.png' %}" alt="ELO - Achados e Perdidos Online PUC-Rio">
-        </header>
     
 
         <h1 class='titulo'> Reportar Item Achado </h1>
@@ -82,7 +79,4 @@
         </form>
 
     </main>
-
-
-</body>
-</html>
+{% endblock %}
