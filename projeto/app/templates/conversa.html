@@ -1,18 +1,22 @@
-{% extends "cabecalho.html" %}
 {% load static %}
 
-{% block titulo %}Conversa - ELO{% endblock %}
-
-{% block estilos %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversa - ELO</title>
     <link rel="stylesheet" href="{% static 'css/conversa.css' %}">
-{% endblock %}
-
-{% block voltar %}
-    <a class="elo-cabecalho__voltar" href="{% url 'paginaInicial' %}">← Voltar</a>
-{% endblock %}
-
-{% block conteudo %}
+</head>
+<body>
     <main>
+        <header>
+            <a href="{% url 'paginaInicial' %}" class="voltar" aria-label="Voltar">←</a>
+
+            <div class="logo">
+                <img src="{% static 'Sprint 4/logo.ELO-removebg-preview.png' %}" alt="Logo ELO">
+            </div>
+        </header>
 
         <h2>Conversa</h2>
 
@@ -70,4 +74,5 @@
             <a href="{% url 'perfil' %}">Perfil</a>
         </nav>
     </main>
-{% endblock %}
+</body>
+</html>

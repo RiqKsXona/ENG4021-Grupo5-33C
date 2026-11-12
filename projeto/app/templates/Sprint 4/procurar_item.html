@@ -1,13 +1,36 @@
-{% extends "cabecalho.html" %}
 {% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Procurar Item Perdido</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{% static 'Sprint 4/css/procurar_item.css' %}" type="text/css">
+    </head>
+    <body>
+        <header>
+            <div class="logo">
+                <div class="logo-imagem">
+                    <img src="https://st2.depositphotos.com/5418844/7949/v/450/depositphotos_79494998-stock-illustration-open-box-with-the-outgoing.jpg" width="90" alt="ELO">
+                </div>
+                <div class="logo-texto">
+                    <h1>ELO</h1>
+                    <pre><h3><p>Achados e perdidos <br>PUC-RIO </p></h3></pre>
+                </div>
+            </div>
+            <div class="Menu">
+                <div class="reportar_item">
+                <h4><a href="/reportar-achado/">Reportar item perdido</a></h4>
+                </div>
 
-{% block titulo %}Procurar Item Perdido{% endblock %}
+                <div class="Perfil">
+                <h4><a href="/perfil/">Perfil</a></h4>
+                </div>
 
-{% block estilos %}
-    <link rel="stylesheet" href="{% static 'Sprint 4/css/procurar_item.css' %}" type="text/css">
-{% endblock %}
+            </div>
+        </header>
 
-{% block conteudo %}
         <main>
             <div class="linha">
             <hr>
@@ -102,4 +125,7 @@
 
 
         </main>
-{% endblock %}
+
+
+    </body>
+</html>
