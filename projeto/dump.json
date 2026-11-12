@@ -1,0 +1,514 @@
+[
+  {
+    "model": "app.itemachado",
+    "pk": 1001,
+    "fields": {
+      "usuario": 1004,
+      "foto": "",
+      "nome_objeto": "Carteirinha de estudante",
+      "categoria": "documentos",
+      "onde_encontrou": "Pilotis, perto da escada",
+      "data_encontro": "2026-11-05T23:19:53.029Z",
+      "descricao": "Carteirinha em nome de Beatriz R. Deixei na prefeitura.",
+      "onde_esta_agora": "prefeitura"
+    }
+  },
+  {
+    "model": "app.itemachado",
+    "pk": 1002,
+    "fields": {
+      "usuario": 1001,
+      "foto": "",
+      "nome_objeto": "Óculos com estojo vermelho",
+      "categoria": "roupas",
+      "onde_encontrou": "Ed. Cardeal Leme, sala 102",
+      "data_encontro": "2026-11-11T21:19:53.029Z",
+      "descricao": "Achei embaixo de uma carteira no fim da aula. Armação preta.",
+      "onde_esta_agora": "coordenacao"
+    }
+  },
+  {
+    "model": "app.itemachado",
+    "pk": 1003,
+    "fields": {
+      "usuario": 1006,
+      "foto": "",
+      "nome_objeto": "Garrafa térmica azul",
+      "categoria": "utensilios",
+      "onde_encontrou": "Bandejão",
+      "data_encontro": "2026-11-09T17:19:53.029Z",
+      "descricao": "Garrafa azul cheia de adesivos de banda. Tá comigo, é só me chamar.",
+      "onde_esta_agora": "comigo"
+    }
+  },
+  {
+    "model": "app.itemachado",
+    "pk": 1004,
+    "fields": {
+      "usuario": 1010,
+      "foto": "",
+      "nome_objeto": "Chave com chaveiro de ursinho",
+      "categoria": "outros",
+      "onde_encontrou": "Estacionamento do Ed. Leme",
+      "data_encontro": "2026-11-08T22:19:53.029Z",
+      "descricao": "Uma chave só, presa num chaveiro de pelúcia.",
+      "onde_esta_agora": "prefeitura"
+    }
+  },
+  {
+    "model": "app.itemachado",
+    "pk": 1005,
+    "fields": {
+      "usuario": 1003,
+      "foto": "",
+      "nome_objeto": "Fone com fio Samsung",
+      "categoria": "eletronicos",
+      "onde_encontrou": "Biblioteca Central, 3º andar",
+      "data_encontro": "2026-11-10T19:19:53.029Z",
+      "descricao": "Fone branco com fio, estava em cima da mesa de estudo.",
+      "onde_esta_agora": "comigo"
+    }
+  },
+  {
+    "model": "app.itemachado",
+    "pk": 1006,
+    "fields": {
+      "usuario": 1007,
+      "foto": "",
+      "nome_objeto": "Casaco preto da Adidas",
+      "categoria": "roupas",
+      "onde_encontrou": "RDC, auditório",
+      "data_encontro": "2026-11-07T20:19:53.029Z",
+      "descricao": "Tamanho G, ficou na cadeira depois da palestra de quinta.",
+      "onde_esta_agora": "coordenacao"
+    }
+  },
+  {
+    "model": "app.itemachado",
+    "pk": 1007,
+    "fields": {
+      "usuario": 1002,
+      "foto": "",
+      "nome_objeto": "Apostila de Química Geral",
+      "categoria": "material_estudo",
+      "onde_encontrou": "Ed. Frings, sala 301",
+      "data_encontro": "2026-11-06T18:19:53.029Z",
+      "descricao": "Apostila encadernada com várias anotações de caneta azul.",
+      "onde_esta_agora": "comigo"
+    }
+  },
+  {
+    "model": "app.itemachado",
+    "pk": 1008,
+    "fields": {
+      "usuario": 1010,
+      "foto": "",
+      "nome_objeto": "Guarda-chuva de bolinhas",
+      "categoria": "utensilios",
+      "onde_encontrou": "Ed. da Amizade, entrada",
+      "data_encontro": "2026-10-31T20:19:53.029Z",
+      "descricao": "Guarda-chuva dobrável de bolinhas. Está guardado na prefeitura.",
+      "onde_esta_agora": "prefeitura"
+    }
+  },
+  {
+    "model": "app.itemperdido",
+    "pk": 1001,
+    "fields": {
+      "usuario": 1004,
+      "foto": "",
+      "titulo": "Fone JBL Tune preto",
+      "categoria": "eletronicos",
+      "local": "Ed. Kennedy, sala 512",
+      "data": "2026-11-10T17:19:53.029Z",
+      "descricao": "Fone sem fio preto, com um adesivo do Botafogo no case. Acho que esqueci na mesa depois da prova de Cálculo II.",
+      "devolvido": false
+    }
+  },
+  {
+    "model": "app.itemperdido",
+    "pk": 1002,
+    "fields": {
+      "usuario": 1002,
+      "foto": "",
+      "titulo": "Carteira marrom de couro",
+      "categoria": "documentos",
+      "local": "Bandejão",
+      "data": "2026-11-11T20:19:53.029Z",
+      "descricao": "Tem minha identidade, um cartão do Bradesco e o RioCard. Se alguém achar me chama por favor!!",
+      "devolvido": false
+    }
+  },
+  {
+    "model": "app.itemperdido",
+    "pk": 1003,
+    "fields": {
+      "usuario": 1005,
+      "foto": "",
+      "titulo": "Garrafa Stanley verde",
+      "categoria": "utensilios",
+      "local": "Ginásio",
+      "data": "2026-11-03T23:19:53.029Z",
+      "descricao": "Verde-musgo, de 1 litro, com um arranhado na tampa e meu nome escrito embaixo de caneta.",
+      "devolvido": true
+    }
+  },
+  {
+    "model": "app.itemperdido",
+    "pk": 1004,
+    "fields": {
+      "usuario": 1001,
+      "foto": "",
+      "titulo": "Moletom cinza da PUC",
+      "categoria": "roupas",
+      "local": "Pilotis, perto da cantina",
+      "data": "2026-11-09T23:19:53.029Z",
+      "descricao": "Moletom cinza com o logo da PUC, tamanho M. Deixei no banco e quando voltei já não tava mais lá.",
+      "devolvido": false
+    }
+  },
+  {
+    "model": "app.itemperdido",
+    "pk": 1005,
+    "fields": {
+      "usuario": 1006,
+      "foto": "",
+      "titulo": "Calculadora HP 12C",
+      "categoria": "eletronicos",
+      "local": "Ed. Frings, 3º andar",
+      "data": "2026-11-08T20:19:53.029Z",
+      "descricao": "Tem meu nome gravado atrás. Preciso dela pra prova de Matemática Financeira semana que vem :(",
+      "devolvido": false
+    }
+  },
+  {
+    "model": "app.itemperdido",
+    "pk": 1006,
+    "fields": {
+      "usuario": 1001,
+      "foto": "",
+      "titulo": "Caderno azul de 10 matérias",
+      "categoria": "material_estudo",
+      "local": "Biblioteca Central",
+      "data": "2026-11-06T23:19:53.029Z",
+      "descricao": "Capa azul com um post-it amarelo. Tem todas as minhas anotações de Fenômenos de Transporte.",
+      "devolvido": false
+    }
+  },
+  {
+    "model": "app.itemperdido",
+    "pk": 1007,
+    "fields": {
+      "usuario": 1007,
+      "foto": "",
+      "titulo": "Óculos de grau",
+      "categoria": "roupas",
+      "local": "Ed. Cardeal Leme, sala 102",
+      "data": "2026-11-10T17:19:53.029Z",
+      "descricao": "Armação preta quadrada, dentro de um estojo vermelho. Sem eles eu não enxergo o quadro.",
+      "devolvido": false
+    }
+  },
+  {
+    "model": "app.itemperdido",
+    "pk": 1008,
+    "fields": {
+      "usuario": 1008,
+      "foto": "",
+      "titulo": "Chave do carro com chaveiro do Flamengo",
+      "categoria": "outros",
+      "local": "Estacionamento",
+      "data": "2026-11-07T17:19:53.029Z",
+      "descricao": "Duas chaves de casa e a chave do carro (Fiat), presas num chaveirinho do Flamengo.",
+      "devolvido": false
+    }
+  },
+  {
+    "model": "app.itemperdido",
+    "pk": 1009,
+    "fields": {
+      "usuario": 1004,
+      "foto": "",
+      "titulo": "Carregador de notebook Dell",
+      "categoria": "eletronicos",
+      "local": "RDC, laboratório de informática",
+      "data": "2026-11-04T17:19:53.029Z",
+      "descricao": "Carregador Dell de 65W. Ficou na tomada do lab depois da aula de Programação.",
+      "devolvido": false
+    }
+  },
+  {
+    "model": "app.itemperdido",
+    "pk": 1010,
+    "fields": {
+      "usuario": 1003,
+      "foto": "",
+      "titulo": "Guarda-chuva preto",
+      "categoria": "utensilios",
+      "local": "Ed. da Amizade",
+      "data": "2026-10-31T23:19:53.029Z",
+      "descricao": "Guarda-chuva preto automático, o cabo tá meio quebrado. Esqueci na entrada no dia que choveu muito.",
+      "devolvido": false
+    }
+  },
+  {
+    "model": "app.itemperdido",
+    "pk": 1011,
+    "fields": {
+      "usuario": 1003,
+      "foto": "",
+      "titulo": "Case de AirPods com capinha rosa",
+      "categoria": "eletronicos",
+      "local": "Vila dos Diretórios",
+      "data": "2026-11-11T20:19:53.029Z",
+      "descricao": "Case branco com uma capinha de silicone rosa. Os dois fones estão dentro.",
+      "devolvido": false
+    }
+  },
+  {
+    "model": "app.itemperdido",
+    "pk": 1012,
+    "fields": {
+      "usuario": 1002,
+      "foto": "",
+      "titulo": "Livro Cálculo Vol. 1 (Stewart)",
+      "categoria": "material_estudo",
+      "local": "Biblioteca Central, 4º andar",
+      "data": "2026-10-28T23:19:53.029Z",
+      "descricao": "8ª edição, com várias páginas marcadas a lápis. Meu nome está na primeira folha.",
+      "devolvido": false
+    }
+  },
+  {
+    "model": "app.itemperdido",
+    "pk": 1013,
+    "fields": {
+      "usuario": 1005,
+      "foto": "",
+      "titulo": "Carteirinha da PUC",
+      "categoria": "documentos",
+      "local": "Pilotis",
+      "data": "2026-11-05T20:19:53.029Z",
+      "descricao": "Carteirinha de estudante no meu nome. Caiu do bolso enquanto eu corria pra aula.",
+      "devolvido": true
+    }
+  },
+  {
+    "model": "app.itemperdido",
+    "pk": 1014,
+    "fields": {
+      "usuario": 1007,
+      "foto": "",
+      "titulo": "Jaqueta jeans clara",
+      "categoria": "roupas",
+      "local": "Bosque",
+      "data": "2026-11-02T20:19:53.029Z",
+      "descricao": "Jaqueta jeans clara com um broche de margarida no bolso da frente.",
+      "devolvido": false
+    }
+  },
+  {
+    "model": "app.itemperdido",
+    "pk": 1015,
+    "fields": {
+      "usuario": 1006,
+      "foto": "",
+      "titulo": "Pen drive SanDisk vermelho",
+      "categoria": "eletronicos",
+      "local": "Ed. Leme, sala de estudos",
+      "data": "2026-11-09T23:19:53.029Z",
+      "descricao": "Pen drive de 32GB, tem a versão final do meu TCC!!! Se acharem me avisem pelo amor de Deus.",
+      "devolvido": false
+    }
+  },
+  {
+    "model": "app.itemperdido",
+    "pk": 1016,
+    "fields": {
+      "usuario": 1003,
+      "foto": "",
+      "titulo": "Estojo de pano rosa",
+      "categoria": "material_estudo",
+      "local": "Ed. Kennedy, 2º andar",
+      "data": "2026-11-08T20:19:53.029Z",
+      "descricao": "Estojo rosa com canetas coloridas, marca-texto e uma borracha em forma de gato.",
+      "devolvido": false
+    }
+  },
+  {
+    "model": "app.itemperdido",
+    "pk": 1017,
+    "fields": {
+      "usuario": 1002,
+      "foto": "",
+      "titulo": "Mochila preta da Nike",
+      "categoria": "outros",
+      "local": "Ginásio, vestiário",
+      "data": "2026-11-01T17:19:53.029Z",
+      "descricao": "Mochila preta com uma toalha e roupa de treino dentro. Nada de valor, mas gosto muito dela.",
+      "devolvido": false
+    }
+  },
+  {
+    "model": "app.itemperdido",
+    "pk": 1018,
+    "fields": {
+      "usuario": 1009,
+      "foto": "",
+      "titulo": "Pasta azul com provas corrigidas",
+      "categoria": "material_estudo",
+      "local": "Ed. Cardeal Leme, sala dos professores",
+      "data": "2026-11-10T17:19:53.029Z",
+      "descricao": "Pasta plástica azul com as provas da turma 3VA já corrigidas. Preciso devolver para os alunos na sexta.",
+      "devolvido": false
+    }
+  },
+  {
+    "model": "app.itemperdido",
+    "pk": 1019,
+    "fields": {
+      "usuario": 1007,
+      "foto": "",
+      "titulo": "Kindle com capa marrom",
+      "categoria": "eletronicos",
+      "local": "Gramado do Solar",
+      "data": "2026-11-06T23:19:53.029Z",
+      "descricao": "Kindle Paperwhite com capa de couro marrom. Estava lendo no gramado e acabei esquecendo.",
+      "devolvido": false
+    }
+  },
+  {
+    "model": "app.itemperdido",
+    "pk": 1020,
+    "fields": {
+      "usuario": 1008,
+      "foto": "",
+      "titulo": "Crachá do estágio",
+      "categoria": "documentos",
+      "local": "Bandejão",
+      "data": "2026-11-11T20:19:53.029Z",
+      "descricao": "Crachá com cordão verde. Preciso dele pra entrar no estágio amanhã cedo.",
+      "devolvido": false
+    }
+  },
+  {
+    "model": "app.usuario",
+    "pk": 1001,
+    "fields": {
+      "nome": "Mariana Costa",
+      "email": "mariana.costa@example.com",
+      "senha": "pbkdf2_sha256$1000000$7SNOuT5HdmiPvP6gNT0rNI$j34Vo9NnQ/li/yNU+MtCnn9HxZiX8uvYAtSlUcMASrY=",
+      "curso": "Engenharia de Produção",
+      "matricula": "2210345",
+      "perfil": "Aluno"
+    }
+  },
+  {
+    "model": "app.usuario",
+    "pk": 1002,
+    "fields": {
+      "nome": "Pedro Henrique Almeida",
+      "email": "pedro.almeida@example.com",
+      "senha": "pbkdf2_sha256$1000000$tKcFHxmiMwmC4Jol83v3c2$aydU/QcDx2TojtP96UM2m5dZcq23ZcB6LRgmnZ2EeCE=",
+      "curso": "Administração",
+      "matricula": "2311872",
+      "perfil": "Aluno"
+    }
+  },
+  {
+    "model": "app.usuario",
+    "pk": 1003,
+    "fields": {
+      "nome": "Júlia Fernandes",
+      "email": "julia.fernandes@example.com",
+      "senha": "pbkdf2_sha256$1000000$p2zTNA8aw4kLCbQZuF7tCu$vDlWF+YCXL2FLSOMfgF8vaRhWo9AXk8LfLqR6ysuZ8o=",
+      "curso": "Design",
+      "matricula": "2120456",
+      "perfil": "Aluno"
+    }
+  },
+  {
+    "model": "app.usuario",
+    "pk": 1004,
+    "fields": {
+      "nome": "Lucas Oliveira",
+      "email": "lucas.oliveira@example.com",
+      "senha": "pbkdf2_sha256$1000000$Qn8akOrpkbXhFZVE9kY3Iq$+Ayq0NPBgfzxbzym/MqDw4iKuUSf+1fcbKWckebRUKU=",
+      "curso": "Engenharia de Computação",
+      "matricula": "2310991",
+      "perfil": "Aluno"
+    }
+  },
+  {
+    "model": "app.usuario",
+    "pk": 1005,
+    "fields": {
+      "nome": "Beatriz Rocha",
+      "email": "beatriz.rocha@example.com",
+      "senha": "pbkdf2_sha256$1000000$A99XmwkLxdhS7chGZ26Vhz$JcR/aj0LLMTCjePOzP8jRaEJ/G+lR1rsFtppH90Y22Q=",
+      "curso": "Direito",
+      "matricula": "2220178",
+      "perfil": "Aluno"
+    }
+  },
+  {
+    "model": "app.usuario",
+    "pk": 1006,
+    "fields": {
+      "nome": "Rafael Monteiro",
+      "email": "rafael.monteiro@example.com",
+      "senha": "pbkdf2_sha256$1000000$LHBY82KABrcHBe8eb0PdUT$nHFAwyLWs/Cha0e3fIkVmnAk4vhoPPtGq+1Jl575pDI=",
+      "curso": "Economia",
+      "matricula": "2010563",
+      "perfil": "Aluno"
+    }
+  },
+  {
+    "model": "app.usuario",
+    "pk": 1007,
+    "fields": {
+      "nome": "Camila Duarte",
+      "email": "camila.duarte@example.com",
+      "senha": "pbkdf2_sha256$1000000$qijbLE89W7FMNOHi8hrGji$zNaZlw80OBJks4pg+MXpZ322GCF94VUnDQHe9MsYVUY=",
+      "curso": "Psicologia",
+      "matricula": "2410237",
+      "perfil": "Aluno"
+    }
+  },
+  {
+    "model": "app.usuario",
+    "pk": 1008,
+    "fields": {
+      "nome": "Thiago Barros",
+      "email": "thiago.barros@example.com",
+      "senha": "pbkdf2_sha256$1000000$Y7VIQNNYWV7KGz1TZyE5Ws$5fdg2KE14KONw3X5lyuXraF3gVIm0m4/FjsLx+YgQd0=",
+      "curso": "Engenharia Civil",
+      "matricula": "2110784",
+      "perfil": "Aluno"
+    }
+  },
+  {
+    "model": "app.usuario",
+    "pk": 1009,
+    "fields": {
+      "nome": "Ricardo Lemos",
+      "email": "ricardo.lemos@example.com",
+      "senha": "pbkdf2_sha256$1000000$Xw1sneg679KCQoNunwSyIJ$kfubDqOvPD2+3sJ07BLLWg7ZSTSRy5EQ0VqfJj+GksQ=",
+      "curso": "Física",
+      "matricula": "0098123",
+      "perfil": "Professor"
+    }
+  },
+  {
+    "model": "app.usuario",
+    "pk": 1010,
+    "fields": {
+      "nome": "Sônia Ribeiro",
+      "email": "sonia.ribeiro@example.com",
+      "senha": "pbkdf2_sha256$1000000$P4JWVhwLnN46VjbiccvY4P$xiHjDU0TN5uimDZE+kxXal1mJ7v08LBbluoPaSKh9Lc=",
+      "curso": "Prefeitura do campus",
+      "matricula": "0076451",
+      "perfil": "Funcionário"
+    }
+  }
+]
