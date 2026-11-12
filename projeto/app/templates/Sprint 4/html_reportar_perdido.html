@@ -21,7 +21,7 @@
         <img class="topo_logo" src="{% static 'Sprint 4/logo.ELO-removebg-preview.png' %}" alt="Logo do Elo">
     </header>
 
-    <h1 class="titulo">Reportar Item Perdido</h1>
+    <h1 class="titulo">{% if editando %}Editar Item Perdido{% else %}Reportar Item Perdido{% endif %}</h1>
 
     {% if sucesso %}
     <div class="sucesso">
@@ -70,7 +70,7 @@
         </div>
  
         <div class="botoes">
-                <button type="submit" class="botao_reportar">Publicar item perdido</button>
+                <button type="submit" class="botao_reportar">{% if editando %}Salvar alterações{% else %}Publicar item perdido{% endif %}</button>
                 <a href="{% url 'perfil' %}" class="botao_voltar">Cancelar</a>
             </div>
     </form>

@@ -286,6 +286,23 @@
             {% endif %}
         </div>
 
+        {% if e_dono %}
+            <div class="acoes-dono">
+
+                {% if tipo == "achado" %}
+                    <a href="{% url 'editar_achado' item.id %}" class="botao-editar">Editar</a>
+                    <form method="POST" action="{% url 'excluir_achado' item.id %}" onsubmit="return confirm('Tem certeza que quer excluir este item?');">
+                {% else %}
+                    <a href="{% url 'editar_perdido' item.id %}" class="botao-editar">Editar</a>
+                    <form method="POST" action="{% url 'excluir_perdido' item.id %}" onsubmit="return confirm('Tem certeza que quer excluir este item?');">
+                {% endif %}
+                        {% csrf_token %}
+                        <button type="submit" class="botao-excluir">Excluir</button>
+                    </form>
+
+            </div>
+        {% endif %}
+
 
         </section>
 
