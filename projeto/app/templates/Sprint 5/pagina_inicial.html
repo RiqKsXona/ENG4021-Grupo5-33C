@@ -1,49 +1,16 @@
-
+{% extends "cabecalho.html" %}
 {% load static %}
 
-<!DOCTYPE html>
-<html lang="pt-br">
+{% block titulo %}ELO | Página inicial{% endblock %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% block estilos %}
+    <link rel="stylesheet" href="{% static 'Sprint 5/css/pagina_inicial.css' %}">
+{% endblock %}
 
-    <title>ELO | Página inicial</title>
-
-    <link rel="stylesheet"
-        href="{% static 'Sprint 5/css/pagina_inicial.css' %}">
-</head>
-
-<body>
-
-    <!-- CABEÇALHO -->
-    <header>
-
-        <div class="logo">
-            <img src="{% static 'Sprint 5/logo.ELO-removebg-preview.png' %}"
-                alt="Logo ELO">
-        </div>
-
-        <nav class="Menu">
-
-            <a href="{% url 'reportar_achado' %}">
-                Reportar item achado
-            </a>
-
-            <a href="{% url 'reportarPerdido' %}">
-                Reportar item perdido
-            </a>
-
-            <a href="{% url 'perfil' %}">
-                Perfil
-            </a>
-
-        </nav>
-
-    </header>
+{% block conteudo %}
 
 
-    <!-- CONTEÚDO PRINCIPAL -->
+
     <main class="container">
 
         <section class="titulo">
@@ -62,7 +29,7 @@
 
             <h2 class="titulo-itens">Explore os itens cadastrados</h2>
 
-            <!-- ABAS -->
+
             <div class="abas">
 
                 <button type="button"
@@ -86,7 +53,7 @@
             </div>
 
 
-            <!-- ABA DE ITENS PERDIDOS -->
+
             <div class="conteudo-aba {% if aba == 'perdidos' %}ativo{% endif %}" id="perdidos">
 
                 <form method="get" class="barra-pesquisa">
@@ -162,7 +129,7 @@
             </div>
 
 
-            <!-- ABA DE ITENS ACHADOS -->
+
             <div class="conteudo-aba {% if aba == 'achados' %}ativo{% endif %}" id="achados">
 
                 <form method="get" class="barra-pesquisa">
@@ -242,7 +209,7 @@
     </main>
 
 
-    <!-- ALTERNÂNCIA DAS ABAS -->
+
     <script>
 
         function mostrarAba(abaSelecionada) {
@@ -272,5 +239,4 @@
 
     </script>
 
-</body>
-</html>
+{% endblock %}

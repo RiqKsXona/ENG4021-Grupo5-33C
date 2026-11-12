@@ -2,6 +2,7 @@ from django.contrib import admin
 from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
+from django.views.generic import RedirectView
 from app.views import *
 
 urlpatterns = [
@@ -16,7 +17,8 @@ urlpatterns = [
     path('procurar-item/', procurar_item, name="procurarItem"),
     path('item-perdido/<int:id>/', item_perdido, name="item_perdido"),
     path('item-perdido/<int:id>/devolvido/', marcar_devolvido, name="marcar_devolvido"),
-    path('', cadastro , name = "cadastro"),
+    path('', RedirectView.as_view(pattern_name="login")),
+    path('cadastro/', cadastro, name="cadastro"),
     path('login/', login, name="login"),
     path('sair/', sair, name="sair"),
     path('conversas/<int:id>/', conversa, name="conversa"),

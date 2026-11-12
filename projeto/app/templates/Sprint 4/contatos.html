@@ -1,23 +1,22 @@
-{% load static %}<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-    <title>Contatos - ELO</title>
+{% extends "cabecalho.html" %}
+{% load static %}
+
+{% block titulo %}Contatos - ELO{% endblock %}
+
+{% block estilos %}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'Sprint 4/css/contatos.css' %}">
-</head>
-<body>
+{% endblock %}
+
+{% block classe_body %}pagina-contatos{% endblock %}
+
+{% block conteudo %}
     <div class="app">
- 
-        <!-- Logo -->
-        <header class="brand">
-            <img src="{% static 'Sprint 4/logo.ELO-removebg-preview.png' %}" alt="ELO - Achados e Perdidos">
-        </header>
- 
-        <!-- Título + ações -->
+
+
+
         <div class="title-row">
             <h1 class="title">Contatos</h1>
             <div class="actions">
@@ -26,16 +25,16 @@
                 </a>
             </div>
         </div>
- 
-        <!-- Busca (GET: filtra no servidor por nome ou item) -->
+
+
         <form class="search" method="get" action="{% url 'contatos' %}" role="search">
             <button type="submit" class="search__btn" aria-label="Buscar">
                 <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.8-3.8"/></svg>
             </button>
             <input id="busca" type="search" name="q" value="{{ q }}" placeholder="Buscar contato" aria-label="Buscar contato">
         </form>
- 
-        <!-- Lista -->
+
+
         <nav class="list" aria-label="Lista de contatos">
             {% for c in contatos %}
                 <a href="{% url 'conversa' id=c.conversa_id %}" class="row">
@@ -58,8 +57,8 @@
                 </p>
             {% endfor %}
         </nav>
- 
-        <!-- Navegação inferior -->
+
+
         <nav class="tabs" aria-label="Navegação principal">
             <a href="{% url 'paginaInicial' %}" class="tab">
                 <svg viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" aria-hidden="true"><path d="M4 11l8-7 8 7v9H4z"/><path d="M10 20v-6h4v6"/></svg>
@@ -75,7 +74,4 @@
             </a>
         </nav>
     </div>
-</body>
-</html>
- 
- 
+{% endblock %}
