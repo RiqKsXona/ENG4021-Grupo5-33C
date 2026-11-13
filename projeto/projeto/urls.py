@@ -12,6 +12,7 @@ urlpatterns = [
     path('esqueceu-senha/',esqueceu_senha,name="esqueceu_senha"),
     path('perfil/', perfil, name="perfil"),
     path('perfil/editar/', editar_perfil, name="editar_perfil"),
+    path('perfil/senha/', trocar_senha, name="trocar_senha"),
     path('reportar-achado/', reportar_achado, name="reportar_achado"),
     path('reportar-perdido/', reportar_perdido, name="reportarPerdido"),
     path('procurar-item/', procurar_item, name="procurarItem"),

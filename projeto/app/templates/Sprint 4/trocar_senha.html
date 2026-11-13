@@ -1,0 +1,127 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ELO | Trocar senha</title>
+
+    <link rel="stylesheet" href="{% static 'Sprint 4/css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'Sprint 4/css/css_esquece_a_senha.css' %}">
+</head>
+
+<body class="pagina-recuperacao">
+
+    <main class="app">
+
+        <header class="topo-recuperacao">
+
+            <a href="{% url 'perfil' %}" class="voltar">
+                Voltar
+            </a>
+
+            <div class="logo">
+                <img src="{% static 'Sprint 4/logo.ELO-removebg-preview.png' %}"
+                    alt="Logo ELO">
+            </div>
+
+        </header>
+
+        <section class="texto-recuperacao">
+
+            <h1>Trocar senha</h1>
+
+            <p>
+                Digite sua senha atual e escolha uma nova.
+            </p>
+
+        </section>
+
+        {% if sucesso %}
+
+            <p class="aviso-sucesso" role="status">
+                {{ sucesso }}
+            </p>
+
+            <div class="acoes">
+                <a href="{% url 'perfil' %}" class="btn btn-primario">
+                    Voltar para o perfil
+                </a>
+            </div>
+
+        {% else %}
+
+            {% if erro %}
+                <p class="erro" role="alert">{{ erro }}</p>
+            {% endif %}
+
+            <form method="POST">
+
+                {% csrf_token %}
+
+                <div class="campo-card">
+                    <div class="conteudo">
+                        <label for="senhaAtual">Senha atual</label>
+
+                        <input
+                            type="password"
+                            id="senhaAtual"
+                            name="senhaAtual"
+                            placeholder="Digite sua senha atual"
+                            required
+                        >
+                    </div>
+                </div>
+
+                <div class="campo-card">
+                    <div class="conteudo">
+                        <label for="novaSenha">Nova senha</label>
+
+                        <input
+                            type="password"
+                            id="novaSenha"
+                            name="novaSenha"
+                            placeholder="Digite sua nova senha"
+                            minlength="6"
+                            required
+                        >
+                    </div>
+                </div>
+
+                <div class="campo-card">
+                    <div class="conteudo">
+                        <label for="confirmaNovaSenha">Confirmar nova senha</label>
+
+                        <input
+                            type="password"
+                            id="confirmaNovaSenha"
+                            name="confirmaNovaSenha"
+                            placeholder="Confirme sua nova senha"
+                            minlength="6"
+                            required
+                        >
+                    </div>
+                </div>
+
+                <div class="acoes">
+
+                    <button type="submit" class="btn btn-primario">
+                        Trocar senha
+                    </button>
+
+                    <a href="{% url 'perfil' %}" class="btn btn-contorno">
+                        Cancelar
+                    </a>
+
+                </div>
+
+            </form>
+
+        {% endif %}
+
+    </main>
+
+</body>
+</html>

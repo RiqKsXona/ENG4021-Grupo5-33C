@@ -105,6 +105,48 @@ def esqueceu_senha(request):
     })
 
 
+# Trocar senha pelo perfil
+def trocar_senha(request):
+
+    email = request.session.get("email_usuario")
+
+    if not email:
+        return redirect("login")
+
+    usuario = get_object_or_404(Usuario, email=email)
+
+    erro = None
+    sucesso = None
+
+    if request.method == "POST":
+
+        senha_atual = request.POST.get("senhaAtual", "")
+        nova_senha = request.POST.get("novaSenha", "")
+        confirma_senha = request.POST.get("confirmaNovaSenha", "")
+
+        if not usuario.verificar_senha(senha_atual):
+            erro = "A senha atual está errada."
+
+        elif len(nova_senha) < 6:
+            erro = "A nova senha precisa ter pelo menos 6 caracteres."
+
+        elif nova_senha != confirma_senha:
+            erro = "As senhas não coincidem."
+
+        elif nova_senha == senha_atual:
+            erro = "A nova senha tem que ser diferente da atual."
+
+        else:
+            usuario.set_senha(nova_senha)
+            usuario.save()
+            sucesso = "Senha trocada com sucesso!"
+
+    return render(request, "Sprint 4/trocar_senha.html", {
+        "erro": erro,
+        "sucesso": sucesso
+    })
+
+
 # Página de perfil
 def perfil(request):
 
