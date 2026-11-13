@@ -7,6 +7,10 @@
     <link rel="stylesheet" href="{% static 'Sprint 4/css/perfil.css' %}">
 {% endblock %}
 
+{% block voltar %}
+    <a class="elo-cabecalho__voltar" href="{% url 'paginaInicial' %}" aria-label="Voltar para a tela inicial">← Voltar</a>
+{% endblock %}
+
 {% block conteudo %}
 
     <main class="container">

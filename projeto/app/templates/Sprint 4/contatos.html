@@ -12,6 +12,10 @@
  
 {% block classe_body %}pagina-contatos{% endblock %}
  
+{% block voltar %}
+    <a class="elo-cabecalho__voltar" href="{% url 'paginaInicial' %}" aria-label="Voltar para a tela inicial">← Voltar</a>
+{% endblock %}
+
 {% block conteudo %}
     <div class="app">
  
