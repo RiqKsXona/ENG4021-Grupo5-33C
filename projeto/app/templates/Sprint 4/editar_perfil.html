@@ -1,0 +1,77 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ELO | Editar perfil</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{% static 'Sprint 4/css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'Sprint 4/css/cadastro.css' %}">
+</head>
+
+<body class="pagina-cadastro">
+
+    <main class="app">
+
+        <header class="topo-cadastro">
+
+            <a href="{% url 'perfil' %}" class="voltar" aria-label="Voltar para o perfil">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M15 5l-7 7 7 7"/>
+                </svg>
+            </a>
+
+            <div class="logo">
+                <img src="{% static 'Sprint 5/logo.ELO-removebg-preview.png' %}"
+                    alt="Logo ELO">
+            </div>
+
+        </header>
+
+        <h1 class="titulo-cadastro">Editar perfil</h1>
+
+        {% if form.errors %}
+            <p class="erro" role="alert">Confira os campos abaixo.</p>
+        {% endif %}
+
+        <form method="POST">
+            {% csrf_token %}
+
+            {% for campo in form %}
+                <div class="campo-card">
+                    <div class="conteudo">
+                        <label for="{{ campo.id_for_label }}">{{ campo.label }}</label>
+                        {{ campo }}
+                        {% for erro in campo.errors %}
+                            <p class="erro">{{ erro }}</p>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endfor %}
+
+            <div class="acoes">
+
+                <button type="submit" class="btn btn-primario">
+                    Salvar alterações
+                </button>
+
+                <a href="{% url 'perfil' %}" class="btn btn-contorno">
+                    Cancelar
+                </a>
+
+            </div>
+
+        </form>
+
+    </main>
+
+</body>
+
+</html>

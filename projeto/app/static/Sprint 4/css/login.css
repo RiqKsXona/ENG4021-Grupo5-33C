@@ -1,49 +1,140 @@
-body {
-    font-family: "Roboto Mono", monospace;
-    font-optical-sizing: auto;
-    font-weight: 400;
-    font-style: normal;
+
+/* ===== ELO · login.css ===== */
+
+body.pagina-login {
+    background-color: #ececee;
+    overflow-x: hidden;
 }
 
-h1 {font-size: 25px;}
+/* Círculos decorativos dos cantos */
+body.pagina-login::before,
+body.pagina-login::after {
+    content: "";
+    position: fixed;
+    z-index: 0;
+    border-radius: 50%;
+    background: var(--amarelo-claro);
+    pointer-events: none;
+}
 
-h2 {font-size: 20px;}
+body.pagina-login::before {
+    width: 200px;
+    height: 200px;
+    top: -110px;
+    left: -90px;
+}
 
-h3 {font-size: 16px;}
+body.pagina-login::after {
+    width: 240px;
+    height: 240px;
+    bottom: -130px;
+    right: -100px;
+}
 
-.logo {
+/* Área principal */
+.pagina-login .app {
+    position: relative;
+    z-index: 1;
+    padding-top: 20px;
+}
+
+/* Cabeçalho e logo */
+.topo-login {
+    display: grid;
+    grid-template-columns: 44px 1fr 44px;
+    align-items: center;
+}
+
+.topo-login .logo {
+    display: flex;
+    justify-content: center;
+}
+
+.topo-login .logo img {
+    max-width: 210px;
+    width: 100%;
+    height: auto;
+}
+
+/* Título */
+.titulo-login {
+    margin: 26px 0 24px;
+    font-size: 30px;
+    font-weight: 800;
+    letter-spacing: -.01em;
+    text-align: center;
+}
+
+/* Formulário */
+.pagina-login form {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    padding: 30px;
+    gap: 12px;
 }
 
-.texto_Logo {
+/* Recuperação de senha */
+.esqueceu-senha {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 2px;
+}
+
+.esqueceu-senha a {
+    color: var(--azul);
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.esqueceu-senha a:hover {
+    text-decoration: underline;
+}
+
+/* Botões e cadastro */
+.pagina-login .acoes {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    padding: 20px;
+    gap: 10px;
+    margin-top: 12px;
 }
 
-.campo {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 10px;
+.texto-cadastro {
+    text-align: center;
+    color: var(--azul-suave);
+    font-size: 14px;
+    margin-top: 8px;
 }
 
-.senha {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 10px;
+/* Mensagem de erro */
+.pagina-login .erro {
+    text-align: left;
+    margin: 0 0 6px;
 }
 
-.entrar {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-}
+/* Responsividade */
+@media (max-width: 480px) {
 
-p {padding: 10px;}
+    .pagina-login .app {
+        padding-top: 16px;
+    }
+
+    .topo-login .logo img {
+        max-width: 180px;
+    }
+
+    .titulo-login {
+        font-size: 25px;
+        margin: 22px 0;
+    }
+
+    body.pagina-login::before {
+        width: 140px;
+        height: 140px;
+    }
+
+    body.pagina-login::after {
+        width: 170px;
+        height: 170px;
+    }
+
+}

@@ -1,0 +1,114 @@
+body {
+    font-family: Arial, sans-serif;
+    color: #08364f;
+    background-color: white;
+    margin: 0;
+}
+main {
+    max-width: 500px;
+    margin: 45px auto;
+    padding: 20px;
+}
+header {
+    position: relative;
+    text-align: center;
+    margin-bottom: 30px;
+}
+.logo img {
+    width: 200px;
+    max-width: 70%;
+}
+.voltar {
+    position: absolute;
+    left: 0;
+    top: 40%;
+    font-size: 28px;
+}
+a {
+    color: #08364f;
+    text-decoration: none;
+}
+h2 {
+    text-align: center;
+    font-size: 28px;
+    margin-bottom: 25px;
+}
+.informacoes,
+.mensagens,
+.recebida,
+.enviada,
+textarea {
+    border: 1px solid #cccccc;
+    border-radius: 15px;
+    padding: 15px;
+}
+.informacoes {
+    margin-bottom: 20px;
+}
+.informacoes h3 {
+    font-size: 20px;
+    margin: 0 0 8px;
+}
+.informacoes p {
+    margin: 0;
+}
+.mensagens {
+    height: 420px;
+    overflow-y: auto;
+}
+.recebida,
+.enviada {
+    max-width: 80%;
+    margin-bottom: 15px;
+    overflow-wrap: break-word;
+}
+.recebida {
+    margin-right: auto;
+}
+.enviada {
+    margin-left: auto;
+    background-color: #ffbe00;
+    border-color: #ffbe00;
+}
+.mensagens p {
+    margin: 0 0 8px;
+    line-height: 1.4;
+}
+.mensagens span {
+    display: block;
+    font-size: 12px;
+    text-align: right;
+}
+.envio {
+    margin-top: 20px;
+}
+.envio label {
+    display: block;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+textarea,
+button {
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    color: #08364f;
+    box-sizing: border-box;
+    width: 100%;
+}
+textarea {
+    background-color: white;
+}
+button {
+    display: block;
+    max-width: 360px;
+    margin: 20px auto 0;
+    padding: 12px 15px;
+    border: 2px solid #ffbe00;
+    border-radius: 10px;
+    background-color: #ffbe00;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+}
+ 

@@ -1,0 +1,68 @@
+{% extends "cabecalho.html" %}
+{% load static %}
+
+{% block titulo %}Conversa - ELO{% endblock %}
+
+{% block estilos %}
+    <link rel="stylesheet" href="{% static 'css/conversa.css' %}">
+{% endblock %}
+
+{% block voltar %}
+    <a class="elo-cabecalho__voltar" href="{% url 'paginaInicial' %}">← Voltar</a>
+{% endblock %}
+
+{% block conteudo %}
+    <main>
+
+        <h2>Conversa</h2>
+
+        <div class="informacoes">
+            <h3>{% if conversa.item %}
+                    {{ conversa.item.titulo }}
+                {% elif conversa.item_achado %}
+                    {{ conversa.item_achado.nome_objeto }}
+                {% endif %}</h3>
+            <p>Conversa com {{ outra_pessoa.nome }}</p>
+        </div>
+
+        <div class="mensagens">
+            {% for mensagem in mensagens %}
+                <div class="{% if mensagem.remetente == usuario %}enviada{% else %}recebida{% endif %}">
+                    <p>{{ mensagem.texto }}</p>
+
+                    <span>
+                        {% if mensagem.remetente == usuario %}
+                            Você
+                        {% else %}
+                            {{ mensagem.remetente.nome }}
+                        {% endif %}
+                        · {{ mensagem.criada_em|date:"H:i" }}
+                    </span>
+                </div>
+            {% empty %}
+                <p>Nenhuma mensagem ainda. Comece a conversa!</p>
+            {% endfor %}
+        </div>
+
+        <form method="post" class="envio">
+            {% csrf_token %}
+
+            {% if erro %}
+                <p role="alert">{{ erro }}</p>
+            {% endif %}
+
+            <label for="mensagem">Sua mensagem</label>
+
+            <textarea
+                id="mensagem"
+                name="mensagem"
+                rows="2"
+                placeholder="Digite sua mensagem"
+                required
+            >{{ texto_digitado|default:"" }}</textarea>
+
+            <button type="submit">Enviar mensagem</button>
+        </form>
+
+    </main>
+{% endblock %}

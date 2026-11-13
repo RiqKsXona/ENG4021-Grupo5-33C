@@ -1,35 +1,145 @@
+
 {% load static %}
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Esqueceu a Senha</title>
+
+    <title>ELO | Recuperar senha</title>
+
+    <link rel="stylesheet" href="{% static 'Sprint 4/css/base.css' %}">
     <link rel="stylesheet" href="{% static 'Sprint 4/css/css_esquece_a_senha.css' %}">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
 </head>
 
+<body class="pagina-recuperacao">
 
+    <main class="app">
 
-<body>
-    <div class="logo">
-        <img src="https://cdn-icons-png.flaticon.com/512/309/309616.png"  width="100" >
-    </div>
-    <div class="texto_Logo">
-    <h1><b style='color : #111827'>
-        Elo
-    </div>
+        <header class="topo-recuperacao">
 
+            <a href="{% url 'login' %}" class="voltar">
+                Voltar
+            </a>
 
-    <div class="texto_rec_digite">
-    <h2>Recuperação de Senha</h2>
-    <h3>Digite o email cadastrado para receber instruções de recuperação da sua senha</h3>
-    </div>
-    <h4> Escreva seu email:</h4>
+            <div class="logo">
+                <img src="{% static 'Sprint 4/logo.ELO-removebg-preview.png' %}"
+                    alt="Logo ELO">
+            </div>
+
+        </header>
+
+        <section class="texto-recuperacao">
+
+            <h1>Recuperar senha</h1>
+
+            <p>
+                Informe seu e-mail e sua matrícula cadastrados
+                para criar uma nova senha.
+            </p>
+
+        </section>
+
+        {% if sucesso %}
+
+            <p class="aviso-sucesso" role="status">
+                {{ sucesso }}
+            </p>
+
+            <div class="acoes">
+                <a href="{% url 'login' %}" class="btn btn-primario">
+                    Voltar para o login
+                </a>
+            </div>
+
+        {% else %}
+
+            {% if erro %}
+                <p class="erro" role="alert">{{ erro }}</p>
+            {% endif %}
+
+            <form method="POST">
+
+                {% csrf_token %}
+
+                <div class="campo-card">
+                    <div class="conteudo">
+                        <label for="emailRecuperacao">E-mail cadastrado</label>
+
+                        <input
+                            type="email"
+                            id="emailRecuperacao"
+                            name="emailRecuperacao"
+                            placeholder="Digite seu e-mail"
+                            required
+                        >
+                    </div>
+                </div>
+
+                <div class="campo-card">
+                    <div class="conteudo">
+                        <label for="matriculaRecuperacao">Matrícula</label>
+
+                        <input
+                            type="text"
+                            id="matriculaRecuperacao"
+                            name="matriculaRecuperacao"
+                            placeholder="Digite sua matrícula"
+                            required
+                        >
+                    </div>
+                </div>
+
+                <div class="campo-card">
+                    <div class="conteudo">
+                        <label for="novaSenha">Nova senha</label>
+
+                        <input
+                            type="password"
+                            id="novaSenha"
+                            name="novaSenha"
+                            placeholder="Digite sua nova senha"
+                            minlength="3"
+                            required
+                        >
+                    </div>
+                </div>
+
+                <div class="campo-card">
+                    <div class="conteudo">
+                        <label for="confirmaNovaSenha">
+                            Confirmar nova senha
+                        </label>
+
+                        <input
+                            type="password"
+                            id="confirmaNovaSenha"
+                            name="confirmaNovaSenha"
+                            placeholder="Confirme sua nova senha"
+                            minlength="3"
+                            required
+                        >
+                    </div>
+                </div>
+
+                <div class="acoes">
+
+                    <button type="submit" class="btn btn-primario">
+                        Alterar senha
+                    </button>
+
+                    <a href="{% url 'login' %}" class="btn btn-contorno">
+                        Cancelar
+                    </a>
+
+                </div>
+
+            </form>
+
+        {% endif %}
+
+    </main>
+
 </body>
-
-
 </html>

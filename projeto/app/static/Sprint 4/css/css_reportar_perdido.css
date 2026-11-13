@@ -1,75 +1,229 @@
-body{
-    font-family: "Roboto Mono", monospace;
-    font-optical-sizing: auto;
-    font-weight: 400;
-    font-style: normal;
+/* ===== ELO · Reportar item perdido — layout alargado para web ===== */
+:root {
+    --fundo: #d3d3d3;
+    --azul: #0b2a52;
+    --amarelo: #eab308;
+    --texto: #1a1a1a;
+    --placeholder: #8a8f98;
+    --branco: #ffffff;
+    --raio: 22px;
 }
-
-.logo {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 30px;
+ 
+* {
+    box-sizing: border-box;
 }
-
+ 
+body {
+    margin: 0;
+    background: var(--fundo);
+    color: var(--texto);
+    font-family: "Inter", system-ui, sans-serif;
+}
+ 
+/* ---------- Página: coluna larga e centralizada ---------- */
+.pagina {
+    width: 100%;
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 36px 32px 64px;
+}
+ 
 .titulo {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 30px;
+    margin: 8px 0 26px;
+    font-size: 2.4rem;
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--azul);
 }
+ 
+/* ---------- Foto ---------- */
 .foto_item_perdido {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 30px;
-}
-
-.nome_objeto {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 10px;
-}
-
-.categoria {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 10px;
-}
-
-.onde_perdeu {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 10px;
-}
-
-.data_perda {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 10px;
-}
-
-.descricao {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 10px;
-}
-
-.botao_reportar {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    min-height: 190px;
+    margin-bottom: 20px;
     padding: 20px;
+    border: 2px dashed #a8a8a8;
+    border-radius: var(--raio);
+    background: #e8e8e8;
+    color: #4a4f57;
+    font-size: 1.1rem;
+    text-align: center;
+    cursor: pointer;
 }
-
+ 
+.foto_item_perdido:hover {
+    background: #eeeeee;
+}
+ 
+.foto_item_perdido input[type="file"] {
+    max-width: 100%;
+    font-size: 0.9rem;
+}
+ 
+.icone_camera {
+    width: 56px;
+    height: 56px;
+    opacity: 0.7;
+}
+ 
+/* ---------- Campos ---------- */
+.campo {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    position: relative;
+    margin-bottom: 16px;
+    padding: 16px 26px 14px;
+    border-radius: var(--raio);
+    background: var(--branco);
+}
+ 
+.campo:focus-within {
+    outline: 2px solid var(--amarelo);
+}
+ 
+.campo label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--azul);
+}
+ 
+.campo input,
+.campo select,
+.campo textarea {
+    width: 100%;
+    border: none;
+    outline: none;
+    background: transparent;
+    padding: 0;
+    font-family: inherit;
+    font-size: 1.15rem;
+    color: var(--texto);
+}
+ 
+.campo input::placeholder,
+.campo textarea::placeholder {
+    color: var(--placeholder);
+}
+ 
+.campo textarea {
+    resize: vertical;
+    min-height: 110px;
+}
+ 
+.campo select {
+    appearance: none;
+    -webkit-appearance: none;
+    cursor: pointer;
+    padding-right: 32px;
+}
+ 
+.campo select:invalid {
+    color: var(--placeholder);
+}
+ 
+.categoria::after,
+.onde_esta_agora::after {
+    content: "";
+    position: absolute;
+    right: 28px;
+    top: 50%;
+    width: 9px;
+    height: 9px;
+    border-right: 2.5px solid var(--azul);
+    border-bottom: 2.5px solid var(--azul);
+    transform: translateY(-70%) rotate(45deg);
+    pointer-events: none;
+}
+ 
+/* ---------- Botões: lado a lado ---------- */
+.botoes {
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+    margin-top: 8px;
+}
+ 
+.botao_reportar,
 .botao_voltar {
     display: flex;
-    flex-direction: column;
     align-items: center;
-    padding: 20px;
+    justify-content: center;
+    height: 62px;
+    border-radius: var(--raio);
+    font-family: inherit;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--texto);
+    text-decoration: none;
+    cursor: pointer;
 }
+ 
+.botao_reportar {
+    flex: 2;
+    border: 2px solid var(--amarelo);
+    background: var(--amarelo);
+}
+ 
+.botao_reportar:hover {
+    filter: brightness(0.95);
+}
+ 
+.botao_voltar {
+    flex: 1;
+    border: 2px solid var(--amarelo);
+    background: transparent;
+}
+ 
+.botao_voltar:hover {
+    background: rgba(234, 179, 8, 0.15);
+}
+ 
+/* ---------- Mensagens ---------- */
+.sucesso {
+    margin: 0 0 20px;
+    padding: 14px 18px;
+    border-radius: 14px;
+    background: #d9f2dd;
+    color: #17602a;
+    text-align: center;
+}
+ 
+.sucesso h4 {
+    margin: 0;
+}
+ 
+.erro {
+    margin: -8px 0 16px;
+    padding-left: 26px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #b91c1c;
+}
+ 
+.errorlist {
+    list-style: none;
+    margin: 4px 0 0;
+    padding: 0;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #b91c1c;
+}
+ 
+/* ---------- Celular: tamanhos compactos ---------- */
+@media (max-width: 560px) {
+    .pagina { padding: 24px 20px 32px; }
+    .titulo { font-size: 1.9rem; margin: 4px 0 18px; }
+    .foto_item_perdido { min-height: 124px; margin-bottom: 16px; }
+    .icone_camera { width: 40px; height: 40px; }
+    .campo { margin-bottom: 11px; padding: 12px 18px 10px; }
+    .campo input, .campo select, .campo textarea { font-size: 1.05rem; }
+    .botoes { flex-direction: column; gap: 11px; }
+    .botao_reportar, .botao_voltar { flex: none; height: 56px; }
+}
+ 

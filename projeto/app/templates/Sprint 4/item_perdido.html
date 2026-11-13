@@ -1,117 +1,279 @@
+{% extends "cabecalho.html" %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Garra termica</title>
-    <link rel="stylesheet" href="{% static 'Sprint 4/css/item_perdido.css' %}" type="text/css">
-</head>
-<body>
-    <header>
-            <div class="logo">
-                <div class="logo-imagem">
-                    <img src="https://st2.depositphotos.com/5418844/7949/v/450/depositphotos_79494998-stock-illustration-open-box-with-the-outgoing.jpg" width="90" alt="ELO">
+
+{% block titulo %}ELO | Detalhes do item{% endblock %}
+
+{% block estilos %}
+    <link rel="stylesheet" href="{% static 'Sprint 4/css/item_perdido.css' %}">
+{% endblock %}
+
+{% block conteudo %}
+    <main class="container">
+
+        <section class="titulo-pagina">
+
+            <h1>Detalhes do item</h1>
+
+            <p>
+                Confira todas as informações sobre este objeto.
+            </p>
+
+        </section>
+
+
+        <section class="card-item">
+
+
+            <div class="apresentacao-item">
+
+                <div class="foto-item">
+
+                    {% if item.foto %}
+
+                        <img
+                            src="{{ item.foto.url }}"
+                            alt="{% if tipo == 'achado' %}{{ item.nome_objeto }}{% else %}{{ item.titulo }}{% endif %}"
+                        >
+
+                    {% else %}
+
+                        <span>📦</span>
+
+                    {% endif %}
+
                 </div>
-                <div class="logo-texto">
-                    <h1>ELO</h1>
-                    <pre><h3><p>Achados e perdidos <br>PUC-RIO </p></h3></pre>
+
+
+                <div class="nome-item">
+
+                    {% if tipo == "achado" %}
+
+                        <h2>{{ item.nome_objeto }}</h2>
+
+                        <span class="status achado">
+                            Item encontrado
+                        </span>
+
+                    {% else %}
+
+                        <h2>{{ item.titulo }}</h2>
+
+                        {% if item.devolvido %}
+
+                            <span class="status devolvido">
+                                Item devolvido
+                            </span>
+
+                        {% else %}
+
+                            <span class="status disponivel">
+                                Item ainda não devolvido
+                            </span>
+
+                        {% endif %}
+
+                    {% endif %}
+
+                    <span class="categoria-item">
+                        {{ item.get_categoria_display }}
+                    </span>
+
                 </div>
+
             </div>
-            <div class="Menu">
-
-                <div class="pagina_inicial">
-                    <h4><a href="/procurar-item/">Pagina inical</a></h4>
-                </div>
-
-                <div class="reportar_item">
-                <h4><a href="/reportar-achado/">Reportar item perdido</a></h4>
-                </div>
-
-                <div class="Perfil">
-                <h4><a href="/perfil/">Perfil</a></h4>
-                </div>
 
 
-            </div>
+            <div class="divisor"></div>
 
-        </header>
-        <main>
-            <div class="linha">
-            <hr>
-            </div>
 
-            <div class="titulo_item">
-                <div class="foto_item">
-                    <img src="https://img.magnific.com/vetores-premium/um-termo-de-metal-azul-que-mantem-a-sua-bebida-quente_98396-148724.jpg?semt=ais_hybrid&w=740&q=80" width="250" alt="Garrafa Termica">
-                </div>
-                <div class="nome_item">
-                    <h1><strong>Garrafa Termica </strong></h1>
-                </div>
-                <div class="linha_2">
-                    <hr>
-                </div>
 
-            </div>
-            <div class="linha_6">
-                    <hr>
-                </div>
-            <div class="descricao">
+            <section class="informacoes-item">
 
-                <div class="fileira_1">
-                    <div class="categoria">
-                        <h3>Categoria:</h4>
-                        <h2>Acessório</h4>
+                <h2>Informações do objeto</h2>
+
+                <div class="grade-informacoes">
+
+                    <div class="informacao">
+
+                        <h3>Categoria</h3>
+
+                        <p>{{ item.get_categoria_display }}</p>
 
                     </div>
 
-                    <div class="local">
-                        <h3>Localizacao:</h2>
-                        <h2>Pastoral, sala 204</h3>
+
+                    {% if tipo == "achado" %}
+
+                        <div class="informacao">
+
+                            <h3>Onde foi encontrado?</h3>
+
+                            <p>{{ item.onde_encontrou }}</p>
+
+                        </div>
+
+
+                        <div class="informacao">
+
+                            <h3>Data em que foi encontrado</h3>
+
+                            <p>
+                                {{ item.data_encontro|date:"d/m/Y"|default:"Não informada" }}
+                            </p>
+
+                        </div>
+
+
+                        <div class="informacao">
+
+                            <h3>Onde o objeto está agora?</h3>
+
+                            <p>{{ item.get_onde_esta_agora_display }}</p>
+
+                        </div>
+
+                    {% else %}
+
+                        <div class="informacao">
+
+                            <h3>Onde foi perdido?</h3>
+
+                            <p>{{ item.local }}</p>
+
+                        </div>
+
+
+                        <div class="informacao">
+
+                            <h3>Quando foi perdido?</h3>
+
+                            <p>
+                                {{ item.data|date:"d/m/Y"|default:"Não informada" }}
+                            </p>
+
+                        </div>
+
+                    {% endif %}
+
+
+                    <div class="informacao descricao">
+
+                        <h3>Descrição</h3>
+
+                        <p>
+                            {{ item.descricao|default:"Nenhuma descrição foi informada." }}
+                        </p>
+
                     </div>
 
                 </div>
 
-                <div class="linha_3">
-                    <hr>
-                </div>
+            </section>
 
-                <div class="fileira_2">
 
-                    <div class="data">
-                        <h3>Quando foi encontrado:</h3>
-                        <h2>12/03/2026 as 09:42</h2>
-                    </div>
+            <div class="divisor"></div>
 
-                    <div class="onde_esta">
-                        <h3>Onde está agora:</h3>
-                        <h2>Secretaria RDC</h2>
-                    </div>
-                </div>
 
-                <div class="linha_4">
 
-                    <hr>
-                </div>
+            <section class="responsavel">
 
+                <h2>Informações de quem cadastrou</h2>
+
+                <p>
+                    <strong>Nome:</strong>
+                    {{ item.usuario.nome }}
+                </p>
+
+                <p>
+                    <strong>Perfil:</strong>
+                    {{ item.usuario.perfil }}
+                </p>
+
+            </section>
+
+
+
+            <div class="area-botao">
+
+            {% if tipo == "achado" %}
+
+                {% if e_dono %}
+
+                    <p>Você cadastrou este item.</p>
+
+                {% else %}
+
+                    <form method="POST" action="{% url 'iniciar_conversa_achado' item.id %}">
+                        {% csrf_token %}
+
+                        <button type="submit" class="botao">
+                            Esse item é meu
+                        </button>
+                    </form>
+
+                {% endif %}
+
+            {% else %}
+
+                {% if item.devolvido %}
+
+                    <button class="botao" disabled>
+                        Item já devolvido
+                    </button>
+
+                {% elif e_dono %}
+
+                    <form method="POST" action="{% url 'marcar_devolvido' item.id %}">
+                        {% csrf_token %}
+
+                        <button type="submit" class="botao">
+                            Marcar como devolvido
+                        </button>
+                    </form>
+
+                {% else %}
+
+                    <form method="POST" action="{% url 'iniciar_conversa' item.id %}">
+                        {% csrf_token %}
+
+                        <button type="submit" class="botao">
+                            Entrar em contato
+                        </button>
+                    </form>
+
+                {% endif %}
+
+            {% endif %}
+        </div>
+
+        {% if e_dono %}
+            <div class="acoes-dono">
+
+                {% if tipo == "achado" %}
+                    <a href="{% url 'editar_achado' item.id %}" class="botao-editar">Editar</a>
+                    <form method="POST" action="{% url 'excluir_achado' item.id %}" onsubmit="return confirm('Tem certeza que quer excluir este item?');">
+                {% else %}
+                    <a href="{% url 'editar_perdido' item.id %}" class="botao-editar">Editar</a>
+                    <form method="POST" action="{% url 'excluir_perdido' item.id %}" onsubmit="return confirm('Tem certeza que quer excluir este item?');">
+                {% endif %}
+                        {% csrf_token %}
+                        <button type="submit" class="botao-excluir">Excluir</button>
+                    </form>
 
             </div>
-
-            <div class="final">
-
-                <div class="linha_5">
-                    <hr>
-                </div>
-
-                <div class="botao">
-
-                    <input type="button" class="boton"  value="Esse objeto é meu">
-                </div>
-            </div>
-        </main>
+        {% endif %}
 
 
+        </section>
 
 
-</body>
-</html>
+        <div class="voltar">
+
+            <a href="{% url 'paginaInicial' %}">
+                ← Voltar para a página inicial
+            </a>
+
+        </div>
+
+    </main>
+{% endblock %}

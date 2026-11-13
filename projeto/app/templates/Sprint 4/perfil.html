@@ -1,45 +1,233 @@
+{% extends "cabecalho.html" %}
 {% load static %}
-<!DOCTYPE html>
-<html>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>perfil</title>
+{% block titulo %}ELO | Perfil{% endblock %}
+
+{% block estilos %}
     <link rel="stylesheet" href="{% static 'Sprint 4/css/perfil.css' %}">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
-</head>
+{% endblock %}
 
-<body>
-    <div class="logo">
-        <img src="https://cdn-icons-png.flaticon.com/512/309/309616.png"  width="100" >
-    </div>
-    <div class="texto_Logo">
-    <h1><b style='color : #111827'>
-        Elo
-    </div>
-    <div class="foto_perfil">
-        <img src= "https://img.magnific.com/vetores-premium/ilustracao-plana-vetorial-em-escala-de-cinza-avatar-perfil-de-usuario-icone-de-pessoa-imagem-de-perfil-de-silhueta-neutra-de-genero-adequado-para-perfis-de-midia-social-icones-protetores-de-tela-e-como-um-modelo-x9xa_719432-2210.jpg?semt=ais_hybrid&w=740&q=80" width="100">
-    </div>
+{% block conteudo %}
+
+    <main class="container">
+
+        <h1>Perfil</h1>
 
 
+        <section class="dados-usuario">
 
-    <h2>Nome do Usuário</h2>
+            <div class="icone-usuario">
+                <span>♙</span>
+            </div>
 
-    <h3> Meus itens reportados</h3>
+            <div class="informacoes-usuario">
+                <h2>{{ usuario.nome }}</h2>
 
-    <h4> Guarda chuva </h4>
-    <div class="Guarda_Chuva">
-        <img src=" https://images.tcdn.com.br/img/img_prod/1335778/guarda_chuva_casual_72cm_gcm51013_1_20250929094353_a6e865283187.jpg" width="100">
-    </div>
-    <h5> Garrafa termica </h5>
-    <div class="Garrafa_termica">
-        <img src="https://lojaibyte.vteximg.com.br/arquivos/ids/430199-1200-1200/garrafa-termica-gt-thermos-lilas-500-ml-001-min.jpg?v=638551946307600000" width="100">
-    </div>
-    <h6> Oculos </h6>
-    <div class="Oculos">
-        <img src="https://assets.sistemawbuy.com.br/arquivos/4f1985ba74662a4afb68be49c1d7fa45/produtos/67461fe5191ec/img-20241126-wa0030-67461fe549617.jpg" width="100">
-    </div>
-</body>
+                <p>
+                    {{ usuario.perfil }}
+                    {% if usuario.curso %}
+                        · {{ usuario.curso }}
+                    {% endif %}
+                </p>
+
+                <p>
+                    Matrícula: {{ usuario.matricula }}
+                </p>
+
+                <p>
+                    E-mail: {{ usuario.email }}
+                </p>
+
+                <a href="{% url 'editar_perfil' %}" class="botao-editar-perfil">Editar perfil</a>
+            </div>
+
+        </section>
+
+
+
+        <section class="secao-itens">
+
+            <h2 class="titulo-itens">Meus itens reportados</h2>
+
+
+            <div class="abas">
+
+                <button class="aba {% if aba == 'achados' %}ativa{% endif %}"
+                        id="botao-achados"
+                        onclick="mostrarAba('achados')">
+                    Achados
+                </button>
+
+                <button class="aba {% if aba == 'perdidos' %}ativa{% endif %}"
+                        id="botao-perdidos"
+                        onclick="mostrarAba('perdidos')">
+                    Perdidos
+                </button>
+
+            </div>
+
+
+
+            <div class="conteudo-aba {% if aba == 'achados' %}ativo{% endif %}" id="achados">
+
+                <div class="lista-itens">
+
+                    {% for item in itens_achados %}
+
+                        <a href="{% url 'item_achado' item.id %}" class="item">
+
+                            <div class="foto-item">
+                                {% if item.foto %}
+                                    <img src="{{ item.foto.url }}" alt="{{ item.nome_objeto }}">
+                                {% else %}
+                                    <span>📦</span>
+                                {% endif %}
+                            </div>
+
+                            <div class="descricao-item">
+                                <h3>{{ item.nome_objeto }}</h3>
+
+                                <p>
+                                    {{ item.onde_encontrou }}
+                                    {% if item.data_encontro %}
+                                        · {{ item.data_encontro|date:"d/m/Y" }}
+                                    {% endif %}
+                                </p>
+                            </div>
+
+                            <span class="categoria-item">
+                                {{ item.get_categoria_display }}
+                            </span>
+
+                        </a>
+
+                    {% empty %}
+
+                        <div class="mensagem-vazia">
+                            <p>Você ainda não publicou nenhum item achado.</p>
+                        </div>
+
+                    {% endfor %}
+
+                </div>
+
+                {% if pagina_achados.paginator.num_pages > 1 %}
+                    <nav class="paginacao" aria-label="Paginação dos meus itens achados">
+                        {% if pagina_achados.has_previous %}
+                            <a class="pagina-link" href="?aba=achados&pagina_achados={{ pagina_achados.previous_page_number }}&pagina_perdidos={{ pagina_perdidos.number }}">Anterior</a>
+                        {% else %}
+                            <span class="pagina-link desativado">Anterior</span>
+                        {% endif %}
+
+                        {% for numero in pagina_achados.paginator.page_range %}
+                            <a class="pagina-link {% if pagina_achados.number == numero %}selecionada{% endif %}" href="?aba=achados&pagina_achados={{ numero }}&pagina_perdidos={{ pagina_perdidos.number }}">{{ numero }}</a>
+                        {% endfor %}
+
+                        {% if pagina_achados.has_next %}
+                            <a class="pagina-link" href="?aba=achados&pagina_achados={{ pagina_achados.next_page_number }}&pagina_perdidos={{ pagina_perdidos.number }}">Próxima</a>
+                        {% else %}
+                            <span class="pagina-link desativado">Próxima</span>
+                        {% endif %}
+                    </nav>
+                {% endif %}
+
+            </div>
+
+
+
+            <div class="conteudo-aba {% if aba == 'perdidos' %}ativo{% endif %}" id="perdidos">
+
+                <div class="lista-itens">
+
+                    {% for item in itens_perdidos %}
+
+                        <a href="{% url 'item_perdido' item.id %}" class="item">
+
+                            <div class="foto-item">
+                                {% if item.foto %}
+                                    <img src="{{ item.foto.url }}" alt="{{ item.titulo }}">
+                                {% else %}
+                                    <span>📦</span>
+                                {% endif %}
+                            </div>
+
+                            <div class="descricao-item">
+                                <h3>{{ item.titulo }}</h3>
+
+                                <p>
+                                    {{ item.local }}
+                                    {% if item.data %}
+                                        · {{ item.data|date:"d/m/Y" }}
+                                    {% endif %}
+                                </p>
+                            </div>
+
+                            <span class="categoria-item">
+                                {{ item.get_categoria_display }}
+                            </span>
+
+                        </a>
+
+                    {% empty %}
+
+                        <div class="mensagem-vazia">
+                            <p>Você ainda não publicou nenhum item perdido.</p>
+                        </div>
+
+                    {% endfor %}
+
+                </div>
+
+                {% if pagina_perdidos.paginator.num_pages > 1 %}
+                    <nav class="paginacao" aria-label="Paginação dos meus itens perdidos">
+                        {% if pagina_perdidos.has_previous %}
+                            <a class="pagina-link" href="?aba=perdidos&pagina_perdidos={{ pagina_perdidos.previous_page_number }}&pagina_achados={{ pagina_achados.number }}">Anterior</a>
+                        {% else %}
+                            <span class="pagina-link desativado">Anterior</span>
+                        {% endif %}
+
+                        {% for numero in pagina_perdidos.paginator.page_range %}
+                            <a class="pagina-link {% if pagina_perdidos.number == numero %}selecionada{% endif %}" href="?aba=perdidos&pagina_perdidos={{ numero }}&pagina_achados={{ pagina_achados.number }}">{{ numero }}</a>
+                        {% endfor %}
+
+                        {% if pagina_perdidos.has_next %}
+                            <a class="pagina-link" href="?aba=perdidos&pagina_perdidos={{ pagina_perdidos.next_page_number }}&pagina_achados={{ pagina_achados.number }}">Próxima</a>
+                        {% else %}
+                            <span class="pagina-link desativado">Próxima</span>
+                        {% endif %}
+                    </nav>
+                {% endif %}
+
+            </div>
+
+        </section>
+
+        <div class="link-itens">
+            <a href="{% url 'paginaInicial' %}">Ver todos os itens</a>
+        </div>
+
+    </main>
+
+
+
+    <script>
+        function mostrarAba(abaSelecionada) {
+
+            const conteudos = document.querySelectorAll(".conteudo-aba");
+            const botoes = document.querySelectorAll(".aba");
+
+            conteudos.forEach(function(conteudo) {
+                conteudo.classList.remove("ativo");
+            });
+
+            botoes.forEach(function(botao) {
+                botao.classList.remove("ativa");
+            });
+
+            document.getElementById(abaSelecionada).classList.add("ativo");
+
+            document.getElementById("botao-" + abaSelecionada)
+                    .classList.add("ativa");
+        }
+    </script>
+{% endblock %}
