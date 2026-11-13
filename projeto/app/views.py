@@ -5,10 +5,13 @@ from .models import ItemAchado, ItemPerdido, Usuario, Conversa, Mensagem
 from .forms import ItemPerdidoForm, ItemAchadoForm, UsuarioForm
 from .notificacoes import avisar_donos
 from django.http import Http404
+from django.core.paginator import Paginator
+
 
 
 # Página inicial
 def pag_inicial(request):
+
     busca_perdidos = request.GET.get("busca_perdidos", "").strip()
     busca_achados = request.GET.get("busca_achados", "").strip()
 
@@ -23,11 +26,27 @@ def pag_inicial(request):
     if busca_achados:
         itens_achados = itens_achados.filter(nome_objeto__icontains=busca_achados)
 
-    aba = "achados" if "busca_achados" in request.GET else "perdidos"
+    # Cada aba possui sua própria paginação, com no máximo 10 itens.
+    paginador_perdidos = Paginator(itens_perdidos, 10)
+    paginador_achados = Paginator(itens_achados, 10)
+
+    pagina_perdidos = paginador_perdidos.get_page(
+        request.GET.get("pagina_perdidos", 1)
+    )
+    pagina_achados = paginador_achados.get_page(
+        request.GET.get("pagina_achados", 1)
+    )
+
+    # Mantém aberta a aba solicitada. Como padrão, abre "perdidos".
+    aba = request.GET.get("aba")
+    if aba not in ("perdidos", "achados"):
+        aba = "achados" if "busca_achados" in request.GET else "perdidos"
 
     return render(request, "Sprint 5/pagina_inicial.html", {
-        "itens_achados": itens_achados,
-        "itens_perdidos": itens_perdidos,
+        "itens_perdidos": pagina_perdidos,
+        "itens_achados": pagina_achados,
+        "pagina_perdidos": pagina_perdidos,
+        "pagina_achados": pagina_achados,
         "busca_perdidos": busca_perdidos,
         "busca_achados": busca_achados,
         "aba": aba
@@ -88,7 +107,7 @@ def esqueceu_senha(request):
 
 # Página de perfil
 def perfil(request):
-    print("SESSÃO RECEBIDA:", request.session.get("email_usuario"))
+
     email = request.session.get("email_usuario")
 
     if not email:
@@ -96,13 +115,31 @@ def perfil(request):
 
     usuario = get_object_or_404(Usuario, email=email)
 
+    # Cada aba do perfil possui paginação independente, com até 10 itens.
     itens_achados = usuario.itens_achados.all().order_by("-id")
     itens_perdidos = usuario.itens_perdidos.all().order_by("-id")
 
+    paginador_achados = Paginator(itens_achados, 10)
+    paginador_perdidos = Paginator(itens_perdidos, 10)
+
+    pagina_achados = paginador_achados.get_page(
+        request.GET.get("pagina_achados", 1)
+    )
+    pagina_perdidos = paginador_perdidos.get_page(
+        request.GET.get("pagina_perdidos", 1)
+    )
+
+    aba = request.GET.get("aba", "achados")
+    if aba not in ("achados", "perdidos"):
+        aba = "achados"
+
     return render(request, "Sprint 4/perfil.html", {
         "usuario": usuario,
-        "itens_achados": itens_achados,
-        "itens_perdidos": itens_perdidos
+        "itens_achados": pagina_achados,
+        "itens_perdidos": pagina_perdidos,
+        "pagina_achados": pagina_achados,
+        "pagina_perdidos": pagina_perdidos,
+        "aba": aba,
     })
 
 

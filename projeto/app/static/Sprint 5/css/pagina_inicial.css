@@ -438,3 +438,66 @@ RESPONSIVIDADE
         height: auto;
     }
 }
+
+
+/* =====================================
+PAGINAÇÃO
+===================================== */
+
+.paginacao {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 22px 0 8px;
+}
+
+.pagina-link {
+    min-width: 38px;
+    min-height: 38px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    padding: 8px 13px;
+
+    border: 1px solid #d8dcd6;
+    border-radius: 20px;
+
+    background-color: #ffffff;
+    color: #08364f;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: bold;
+
+    transition: 0.2s;
+}
+
+a.pagina-link:hover {
+    background-color: #fae7ad;
+    border-color: #dfb333;
+}
+
+.pagina-link.selecionada {
+    background-color: #dfb333;
+    border-color: #dfb333;
+    color: #08364f;
+}
+
+.pagina-link.desativado {
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+
+@media (max-width: 480px) {
+    .paginacao {
+        gap: 5px;
+    }
+
+    .pagina-link {
+        min-width: 34px;
+        min-height: 34px;
+        padding: 7px 10px;
+        font-size: 12px;
+    }
+}

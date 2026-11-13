@@ -57,10 +57,13 @@
             <div class="conteudo-aba {% if aba == 'perdidos' %}ativo{% endif %}" id="perdidos">
 
                 <form method="get" class="barra-pesquisa">
+                    <input type="hidden" name="aba" value="perdidos">
+                    <input type="hidden" name="busca_achados" value="{{ busca_achados }}">
+                    <input type="hidden" name="pagina_achados" value="{{ pagina_achados.number }}">
                     <input type="text"
-                           name="busca_perdidos"
-                           value="{{ busca_perdidos }}"
-                           placeholder="Pesquisar item perdido pelo nome">
+                        name="busca_perdidos"
+                        value="{{ busca_perdidos }}"
+                        placeholder="Pesquisar item perdido pelo nome">
                     <button type="submit">Pesquisar</button>
                 </form>
 
@@ -126,6 +129,31 @@
 
                 </div>
 
+                {% if pagina_perdidos.paginator.num_pages > 1 %}
+                    <nav class="paginacao" aria-label="Paginação de itens perdidos">
+                        {% if pagina_perdidos.has_previous %}
+                            <a class="pagina-link"
+                            href="?aba=perdidos&pagina_perdidos={{ pagina_perdidos.previous_page_number }}&pagina_achados={{ pagina_achados.number }}&busca_perdidos={{ busca_perdidos|urlencode }}&busca_achados={{ busca_achados|urlencode }}">Anterior</a>
+                        {% else %}
+                            <span class="pagina-link desativado">Anterior</span>
+                        {% endif %}
+
+                        {% for numero in pagina_perdidos.paginator.page_range %}
+                            <a class="pagina-link {% if pagina_perdidos.number == numero %}selecionada{% endif %}"
+                            href="?aba=perdidos&pagina_perdidos={{ numero }}&pagina_achados={{ pagina_achados.number }}&busca_perdidos={{ busca_perdidos|urlencode }}&busca_achados={{ busca_achados|urlencode }}">
+                                {{ numero }}
+                            </a>
+                        {% endfor %}
+
+                        {% if pagina_perdidos.has_next %}
+                            <a class="pagina-link"
+                            href="?aba=perdidos&pagina_perdidos={{ pagina_perdidos.next_page_number }}&pagina_achados={{ pagina_achados.number }}&busca_perdidos={{ busca_perdidos|urlencode }}&busca_achados={{ busca_achados|urlencode }}">Próxima</a>
+                        {% else %}
+                            <span class="pagina-link desativado">Próxima</span>
+                        {% endif %}
+                    </nav>
+                {% endif %}
+
             </div>
 
 
@@ -133,10 +161,13 @@
             <div class="conteudo-aba {% if aba == 'achados' %}ativo{% endif %}" id="achados">
 
                 <form method="get" class="barra-pesquisa">
+                    <input type="hidden" name="aba" value="achados">
+                    <input type="hidden" name="busca_perdidos" value="{{ busca_perdidos }}">
+                    <input type="hidden" name="pagina_perdidos" value="{{ pagina_perdidos.number }}">
                     <input type="text"
-                           name="busca_achados"
-                           value="{{ busca_achados }}"
-                           placeholder="Pesquisar item achado pelo nome">
+                        name="busca_achados"
+                        value="{{ busca_achados }}"
+                        placeholder="Pesquisar item achado pelo nome">
                     <button type="submit">Pesquisar</button>
                 </form>
 
@@ -201,6 +232,31 @@
                     {% endfor %}
 
                 </div>
+
+                {% if pagina_achados.paginator.num_pages > 1 %}
+                    <nav class="paginacao" aria-label="Paginação de itens achados">
+                        {% if pagina_achados.has_previous %}
+                            <a class="pagina-link"
+                            href="?aba=achados&pagina_achados={{ pagina_achados.previous_page_number }}&pagina_perdidos={{ pagina_perdidos.number }}&busca_perdidos={{ busca_perdidos|urlencode }}&busca_achados={{ busca_achados|urlencode }}">Anterior</a>
+                        {% else %}
+                            <span class="pagina-link desativado">Anterior</span>
+                        {% endif %}
+
+                        {% for numero in pagina_achados.paginator.page_range %}
+                            <a class="pagina-link {% if pagina_achados.number == numero %}selecionada{% endif %}"
+                            href="?aba=achados&pagina_achados={{ numero }}&pagina_perdidos={{ pagina_perdidos.number }}&busca_perdidos={{ busca_perdidos|urlencode }}&busca_achados={{ busca_achados|urlencode }}">
+                                {{ numero }}
+                            </a>
+                        {% endfor %}
+
+                        {% if pagina_achados.has_next %}
+                            <a class="pagina-link"
+                            href="?aba=achados&pagina_achados={{ pagina_achados.next_page_number }}&pagina_perdidos={{ pagina_perdidos.number }}&busca_perdidos={{ busca_perdidos|urlencode }}&busca_achados={{ busca_achados|urlencode }}">Próxima</a>
+                        {% else %}
+                            <span class="pagina-link desativado">Próxima</span>
+                        {% endif %}
+                    </nav>
+                {% endif %}
 
             </div>
 

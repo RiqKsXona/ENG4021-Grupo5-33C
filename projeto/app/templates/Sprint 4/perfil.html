@@ -52,13 +52,13 @@
 
             <div class="abas">
 
-                <button class="aba ativa"
+                <button class="aba {% if aba == 'achados' %}ativa{% endif %}"
                         id="botao-achados"
                         onclick="mostrarAba('achados')">
                     Achados
                 </button>
 
-                <button class="aba"
+                <button class="aba {% if aba == 'perdidos' %}ativa{% endif %}"
                         id="botao-perdidos"
                         onclick="mostrarAba('perdidos')">
                     Perdidos
@@ -68,13 +68,13 @@
 
 
 
-            <div class="conteudo-aba ativo" id="achados">
+            <div class="conteudo-aba {% if aba == 'achados' %}ativo{% endif %}" id="achados">
 
                 <div class="lista-itens">
 
                     {% for item in itens_achados %}
 
-                        <article class="item">
+                        <a href="{% url 'item_achado' item.id %}" class="item">
 
                             <div class="foto-item">
                                 {% if item.foto %}
@@ -99,7 +99,7 @@
                                 {{ item.get_categoria_display }}
                             </span>
 
-                        </article>
+                        </a>
 
                     {% empty %}
 
@@ -111,17 +111,37 @@
 
                 </div>
 
+                {% if pagina_achados.paginator.num_pages > 1 %}
+                    <nav class="paginacao" aria-label="Paginação dos meus itens achados">
+                        {% if pagina_achados.has_previous %}
+                            <a class="pagina-link" href="?aba=achados&pagina_achados={{ pagina_achados.previous_page_number }}&pagina_perdidos={{ pagina_perdidos.number }}">Anterior</a>
+                        {% else %}
+                            <span class="pagina-link desativado">Anterior</span>
+                        {% endif %}
+
+                        {% for numero in pagina_achados.paginator.page_range %}
+                            <a class="pagina-link {% if pagina_achados.number == numero %}selecionada{% endif %}" href="?aba=achados&pagina_achados={{ numero }}&pagina_perdidos={{ pagina_perdidos.number }}">{{ numero }}</a>
+                        {% endfor %}
+
+                        {% if pagina_achados.has_next %}
+                            <a class="pagina-link" href="?aba=achados&pagina_achados={{ pagina_achados.next_page_number }}&pagina_perdidos={{ pagina_perdidos.number }}">Próxima</a>
+                        {% else %}
+                            <span class="pagina-link desativado">Próxima</span>
+                        {% endif %}
+                    </nav>
+                {% endif %}
+
             </div>
 
 
 
-            <div class="conteudo-aba" id="perdidos">
+            <div class="conteudo-aba {% if aba == 'perdidos' %}ativo{% endif %}" id="perdidos">
 
                 <div class="lista-itens">
 
                     {% for item in itens_perdidos %}
 
-                        <article class="item">
+                        <a href="{% url 'item_perdido' item.id %}" class="item">
 
                             <div class="foto-item">
                                 {% if item.foto %}
@@ -146,7 +166,7 @@
                                 {{ item.get_categoria_display }}
                             </span>
 
-                        </article>
+                        </a>
 
                     {% empty %}
 
@@ -157,6 +177,26 @@
                     {% endfor %}
 
                 </div>
+
+                {% if pagina_perdidos.paginator.num_pages > 1 %}
+                    <nav class="paginacao" aria-label="Paginação dos meus itens perdidos">
+                        {% if pagina_perdidos.has_previous %}
+                            <a class="pagina-link" href="?aba=perdidos&pagina_perdidos={{ pagina_perdidos.previous_page_number }}&pagina_achados={{ pagina_achados.number }}">Anterior</a>
+                        {% else %}
+                            <span class="pagina-link desativado">Anterior</span>
+                        {% endif %}
+
+                        {% for numero in pagina_perdidos.paginator.page_range %}
+                            <a class="pagina-link {% if pagina_perdidos.number == numero %}selecionada{% endif %}" href="?aba=perdidos&pagina_perdidos={{ numero }}&pagina_achados={{ pagina_achados.number }}">{{ numero }}</a>
+                        {% endfor %}
+
+                        {% if pagina_perdidos.has_next %}
+                            <a class="pagina-link" href="?aba=perdidos&pagina_perdidos={{ pagina_perdidos.next_page_number }}&pagina_achados={{ pagina_achados.number }}">Próxima</a>
+                        {% else %}
+                            <span class="pagina-link desativado">Próxima</span>
+                        {% endif %}
+                    </nav>
+                {% endif %}
 
             </div>
 
