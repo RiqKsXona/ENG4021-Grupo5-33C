@@ -25,12 +25,27 @@ class ItemPerdidoForm(forms.ModelForm):
 
         widgets = {
             "foto": forms.FileInput(attrs={
-                "accept": "image/*"
+                "accept": "image/*",
+                "hidden": True
             }),
-            "data": forms.DateInput(attrs={
-                "type": "date"
+
+            "titulo": forms.TextInput(attrs={
+                "placeholder": "Ex: garrafa térmica amarela"
             }),
+
+            "categoria": forms.Select(),
+
+            "local": forms.TextInput(attrs={
+                "placeholder": "Ex: L110, sala 204"
+            }),
+            
+            "data": forms.DateInput(
+                attrs={"type": "datetime-local"},
+                format="%Y-%m-%dT%H:%M"
+            ),
+
             "descricao": forms.Textarea(attrs={
+                "placeholder": "Detalhes sobre o objeto achado",
                 "rows": 4
             }),
         }

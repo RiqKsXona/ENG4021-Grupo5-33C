@@ -1,22 +1,20 @@
 {% extends "cabecalho.html" %}
 {% load static %}
-
+ 
 {% block titulo %}Contatos - ELO{% endblock %}
-
+ 
 {% block estilos %}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'Sprint 4/css/contatos.css' %}">
 {% endblock %}
-
+ 
 {% block classe_body %}pagina-contatos{% endblock %}
-
+ 
 {% block conteudo %}
     <div class="app">
-
-
-
+ 
         <div class="title-row">
             <h1 class="title">Contatos</h1>
             <div class="actions">
@@ -25,16 +23,14 @@
                 </a>
             </div>
         </div>
-
-
+ 
         <form class="search" method="get" action="{% url 'contatos' %}" role="search">
             <button type="submit" class="search__btn" aria-label="Buscar">
                 <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.8-3.8"/></svg>
             </button>
             <input id="busca" type="search" name="q" value="{{ q }}" placeholder="Buscar contato" aria-label="Buscar contato">
         </form>
-
-
+ 
         <nav class="list" aria-label="Lista de contatos">
             {% for c in contatos %}
                 <a href="{% url 'conversa' id=c.conversa_id %}" class="row">
@@ -57,21 +53,7 @@
                 </p>
             {% endfor %}
         </nav>
-
-
-        <nav class="tabs" aria-label="Navegação principal">
-            <a href="{% url 'paginaInicial' %}" class="tab">
-                <svg viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" aria-hidden="true"><path d="M4 11l8-7 8 7v9H4z"/><path d="M10 20v-6h4v6"/></svg>
-                <span>Início</span>
-            </a>
-            <a href="{% url 'contatos' %}" class="tab tab--active" aria-current="page">
-                <svg viewBox="0 0 24 24" width="34" height="34" fill="#F7C948" aria-hidden="true"><circle cx="12" cy="8" r="4.2"/><path d="M4 20c0-3.6 3.6-5.5 8-5.5s8 1.9 8 5.5z"/></svg>
-                <span>Contatos</span>
-            </a>
-            <a href="{% url 'perfil' %}" class="tab">
-                <svg viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4.5 20.5c0-3.7 3.3-6 7.5-6s7.5 2.3 7.5 6z"/></svg>
-                <span>Perfil</span>
-            </a>
-        </nav>
+ 
     </div>
 {% endblock %}
+ 

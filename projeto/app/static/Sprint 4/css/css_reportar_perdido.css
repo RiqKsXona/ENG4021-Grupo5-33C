@@ -1,3 +1,4 @@
+/* ===== ELO · Reportar item perdido — layout alargado para web ===== */
 :root {
     --fundo: #d3d3d3;
     --azul: #0b2a52;
@@ -5,7 +6,7 @@
     --texto: #1a1a1a;
     --placeholder: #8a8f98;
     --branco: #ffffff;
-    --raio: 20px;
+    --raio: 22px;
 }
  
 * {
@@ -19,68 +20,39 @@ body {
     font-family: "Inter", system-ui, sans-serif;
 }
  
+/* ---------- Página: coluna larga e centralizada ---------- */
 .pagina {
-    max-width: 420px;
+    width: 100%;
+    max-width: 860px;
     margin: 0 auto;
-    padding: 24px 20px 32px;
-}
- 
-.topo {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 64px;
-}
- 
-.topo_voltar {
-    position: absolute;
-    left: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    color: var(--azul);
-    display: flex;
-}
- 
-.topo_voltar img {
-    display: block;
-    width: 28px;
-    height: 28px;
-}
- 
-.icone_camera {
-    width: 40px;
-    height: 40px;
-    opacity: 0.7;
-}
- 
-.topo_logo {
-    height: 60px;
-    width: auto;
+    padding: 36px 32px 64px;
 }
  
 .titulo {
-    margin: 20px 0 18px;
-    font-size: 1.9rem;
+    margin: 8px 0 26px;
+    font-size: 2.4rem;
     font-weight: 800;
     line-height: 1.1;
     letter-spacing: -0.02em;
     color: var(--azul);
 }
  
+/* ---------- Foto ---------- */
 .foto_item_perdido {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 12px;
-    height: 124px;
-    margin-bottom: 16px;
+    gap: 14px;
+    min-height: 190px;
+    margin-bottom: 20px;
+    padding: 20px;
     border: 2px dashed #a8a8a8;
     border-radius: var(--raio);
     background: #e8e8e8;
     color: #4a4f57;
-    font-size: 1rem;
+    font-size: 1.1rem;
+    text-align: center;
     cursor: pointer;
 }
  
@@ -88,14 +60,25 @@ body {
     background: #eeeeee;
 }
  
+.foto_item_perdido input[type="file"] {
+    max-width: 100%;
+    font-size: 0.9rem;
+}
  
+.icone_camera {
+    width: 56px;
+    height: 56px;
+    opacity: 0.7;
+}
+ 
+/* ---------- Campos ---------- */
 .campo {
     display: flex;
     flex-direction: column;
-    gap: 2px;
+    gap: 4px;
     position: relative;
-    margin-bottom: 11px;
-    padding: 12px 18px 10px;
+    margin-bottom: 16px;
+    padding: 16px 26px 14px;
     border-radius: var(--raio);
     background: var(--branco);
 }
@@ -105,7 +88,7 @@ body {
 }
  
 .campo label {
-    font-size: 0.82rem;
+    font-size: 0.9rem;
     font-weight: 600;
     color: var(--azul);
 }
@@ -119,7 +102,7 @@ body {
     background: transparent;
     padding: 0;
     font-family: inherit;
-    font-size: 1.05rem;
+    font-size: 1.15rem;
     color: var(--texto);
 }
  
@@ -128,35 +111,42 @@ body {
     color: var(--placeholder);
 }
  
+.campo textarea {
+    resize: vertical;
+    min-height: 110px;
+}
  
 .campo select {
     appearance: none;
     -webkit-appearance: none;
     cursor: pointer;
-    padding-right: 28px;
+    padding-right: 32px;
 }
  
 .campo select:invalid {
     color: var(--placeholder);
 }
  
-.categoria::after {
+.categoria::after,
+.onde_esta_agora::after {
     content: "";
     position: absolute;
-    right: 22px;
+    right: 28px;
     top: 50%;
-    width: 8px;
-    height: 8px;
+    width: 9px;
+    height: 9px;
     border-right: 2.5px solid var(--azul);
     border-bottom: 2.5px solid var(--azul);
     transform: translateY(-70%) rotate(45deg);
     pointer-events: none;
 }
  
+/* ---------- Botões: lado a lado ---------- */
 .botoes {
     display: flex;
-    flex-direction: column;
-    gap: 11px;
+    flex-direction: row;
+    gap: 16px;
+    margin-top: 8px;
 }
  
 .botao_reportar,
@@ -164,10 +154,10 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 56px;
+    height: 62px;
     border-radius: var(--raio);
     font-family: inherit;
-    font-size: 1.05rem;
+    font-size: 1.15rem;
     font-weight: 700;
     color: var(--texto);
     text-decoration: none;
@@ -175,6 +165,7 @@ body {
 }
  
 .botao_reportar {
+    flex: 2;
     border: 2px solid var(--amarelo);
     background: var(--amarelo);
 }
@@ -184,6 +175,7 @@ body {
 }
  
 .botao_voltar {
+    flex: 1;
     border: 2px solid var(--amarelo);
     background: transparent;
 }
@@ -192,16 +184,10 @@ body {
     background: rgba(234, 179, 8, 0.15);
 }
  
-.campo textarea {
-    resize: none;
-    min-height: 56px;
-}
- 
 /* ---------- Mensagens ---------- */
 .sucesso {
-    max-width: 420px;
-    margin: 0 auto 14px;
-    padding: 12px 16px;
+    margin: 0 0 20px;
+    padding: 14px 18px;
     border-radius: 14px;
     background: #d9f2dd;
     color: #17602a;
@@ -212,11 +198,32 @@ body {
     margin: 0;
 }
  
+.erro {
+    margin: -8px 0 16px;
+    padding-left: 26px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #b91c1c;
+}
+ 
 .errorlist {
     list-style: none;
     margin: 4px 0 0;
     padding: 0;
-    font-size: 0.8rem;
+    font-size: 0.85rem;
     font-weight: 600;
-    color: #8a1c1c;
+    color: #b91c1c;
 }
+ 
+/* ---------- Celular: tamanhos compactos ---------- */
+@media (max-width: 560px) {
+    .pagina { padding: 24px 20px 32px; }
+    .titulo { font-size: 1.9rem; margin: 4px 0 18px; }
+    .foto_item_perdido { min-height: 124px; margin-bottom: 16px; }
+    .icone_camera { width: 40px; height: 40px; }
+    .campo { margin-bottom: 11px; padding: 12px 18px 10px; }
+    .campo input, .campo select, .campo textarea { font-size: 1.05rem; }
+    .botoes { flex-direction: column; gap: 11px; }
+    .botao_reportar, .botao_voltar { flex: none; height: 56px; }
+}
+ 
