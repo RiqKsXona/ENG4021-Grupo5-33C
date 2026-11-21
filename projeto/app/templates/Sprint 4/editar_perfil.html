@@ -13,6 +13,7 @@
 
     <link rel="stylesheet" href="{% static 'Sprint 4/css/base.css' %}">
     <link rel="stylesheet" href="{% static 'Sprint 4/css/cadastro.css' %}">
+    <script src="{% static 'js/voltar.js' %}" defer></script>
 </head>
 
 <body class="pagina-cadastro">
@@ -21,7 +22,7 @@
 
         <header class="topo-cadastro">
 
-            <a href="{% url 'paginaInicial' %}" class="voltar" aria-label="Voltar para a tela inicial">
+            <a href="{% url 'paginaInicial' %}" class="voltar" data-elo-voltar aria-label="Voltar">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M15 5l-7 7 7 7"/>
