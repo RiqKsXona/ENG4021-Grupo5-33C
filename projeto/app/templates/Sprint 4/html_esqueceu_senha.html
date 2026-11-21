@@ -11,6 +11,7 @@
 
     <link rel="stylesheet" href="{% static 'Sprint 4/css/base.css' %}">
     <link rel="stylesheet" href="{% static 'Sprint 4/css/css_esquece_a_senha.css' %}">
+    <script src="{% static 'js/voltar.js' %}" defer></script>
 </head>
 
 <body class="pagina-recuperacao">
@@ -19,7 +20,7 @@
 
         <header class="topo-recuperacao">
 
-            <a href="{% url 'login' %}" class="voltar">
+            <a href="{% url 'login' %}" class="voltar" data-elo-voltar>
                 Voltar
             </a>
 
