@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% block titulo %}ELO{% endblock %}</title>
     {% block estilos %}{% endblock %}
-    <link rel="stylesheet" href="{% static 'css/cabecalho.css' %}?v=5">
+    <link rel="stylesheet" href="{% static 'css/cabecalho.css' %}?v=6">
     <script src="{% static 'js/voltar.js' %}" defer></script>
 </head>
 <body class="{% block classe_body %}{% endblock %}">
@@ -28,6 +28,14 @@
             </nav>
         {% endif %}
     </header>
+
+    {% if messages %}
+        <div class="elo-mensagens">
+            {% for mensagem in messages %}
+                <p class="elo-mensagem" role="status">{{ mensagem }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
 
     {% block conteudo %}{% endblock %}
 </body>
