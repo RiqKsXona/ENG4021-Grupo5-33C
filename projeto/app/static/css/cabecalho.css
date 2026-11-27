@@ -86,3 +86,19 @@ body.pagina-contatos {
     height: auto;
     min-height: 0;
 }
+
+.elo-mensagens {
+    box-sizing: border-box;
+    width: min(100% - 32px, 720px);
+    margin: 16px auto 0;
+}
+
+.elo-mensagem {
+    margin: 0 0 8px;
+    padding: 12px 16px;
+    background-color: #fff4d6;
+    border-left: 4px solid #fdb913;
+    border-radius: 8px;
+    color: #0f2a4f;
+    font: 500 15px/1.4 system-ui, sans-serif;
+}
