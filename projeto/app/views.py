@@ -427,7 +427,7 @@ def cadastro(request):
     if request.method == "POST":
 
         nome = request.POST.get("nomeUsuario")
-        email = request.POST.get("emailUsuario")
+        email = request.POST.get("emailUsuario", "").strip().lower()
         senha = request.POST.get("senhaUsuario")
         confirma_senha = request.POST.get("confirmaSenhaUsuario", "")
         curso = request.POST.get("cursoUsuario")
@@ -437,7 +437,7 @@ def cadastro(request):
         if senha != confirma_senha:
             erro = "As senhas não coincidem."
 
-        elif Usuario.objects.filter(email=email).exists():
+        elif Usuario.objects.filter(email__iexact=email).exists():
 
             erro = "Este e-mail já está cadastrado."
 
@@ -474,7 +474,7 @@ def login(request):
 
         print("EMAIL RECEBIDO:", email)
 
-        usuario = Usuario.objects.filter(email=email).first()
+        usuario = Usuario.objects.filter(email__iexact=email).first()
 
         if usuario is not None and usuario.verificar_senha(senha):
             request.session["email_usuario"] = usuario.email
